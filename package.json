@@ -1,9 +1,9 @@
 {
-  "name": "react-game",
+  "name": "Tomplania",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://laurablei.github.io/reactGame",
+  "homepage": "https://laurablei.github.io/Tomplania",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -19,7 +19,7 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.24.1",
     "reactjs-popup": "^2.0.6",
-    "tailwind": "^4.0.0"
+    "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.11",
