@@ -135,7 +135,8 @@ export const ArmorShopInventory = [
       src: "./assets/items/weapons/daggers/dagger1.png",
       alt: "Sword",
     },
-    description: "",
+    description:
+      "This is a fine sword for the beginner! be careful not to cut you self!",
   },
 
   {
@@ -148,7 +149,8 @@ export const ArmorShopInventory = [
       src: "./assets/items/weapons/daggers/dagger2.png",
       alt: "Sword",
     },
-    description: "",
+    description:
+      "This one is made with the essence of wraiths! Just to give it that extra bit of fine edge!",
   },
   {
     name: "Dragons bane",
@@ -160,6 +162,7 @@ export const ArmorShopInventory = [
       src: "./assets/items/weapons/daggers/dagger3.png",
       alt: "Dagger",
     },
-    description: "",
+    description:
+      "This one.. I gotta admit, this is my pride and joy! Made from dragons fire, back when they were our allies.. Good times they were..",
   },
 ];

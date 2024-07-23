@@ -25,6 +25,8 @@ export const Inventory = () => {
     setMaxHP,
     maxHP,
     setChest,
+    setCurrentHP,
+    currentHP,
   } = useContext(CharacterContext);
   const { location } = useContext(GameContext);
 
@@ -85,6 +87,14 @@ export const Inventory = () => {
     }
   };
 
+  const handleConsume = (item: PotionType) => {
+    const newHp = currentHP + item.currentHP;
+    setCurrentHP(newHp <= maxHP ? newHp : maxHP);
+    setCharacterAttack(characterAttack + item.attack);
+    setInventory((prevInventory) =>
+      prevInventory.filter((invItem) => invItem.name !== item.name)
+    );
+  };
   return (
     <div>
       <div className="flex mb-6">
@@ -226,14 +236,26 @@ export const Inventory = () => {
                       sell
                     </button>
                   )}
-                  {"attack" in item && "hp" in item && (
+                  {item.type ===
+                    ("Weapon" || "Gauntlet" || "Chest" || "Boot") &&
+                    "attack" in item && (
+                      <button
+                        className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-2xl"
+                        onClick={() => {
+                          handleEquip(item);
+                        }}
+                      >
+                        Equip
+                      </button>
+                    )}
+                  {item.type === "Potion" && "currentHP" in item && (
                     <button
                       className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-2xl"
                       onClick={() => {
-                        handleEquip(item);
+                        handleConsume(item);
                       }}
                     >
-                      Equip
+                      Drink
                     </button>
                   )}
                 </div>

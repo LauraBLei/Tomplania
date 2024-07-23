@@ -22,7 +22,7 @@ export enum Loot {
 export const MonsterLootList: MonsterLootListType = {
   "Feather Leaf Skeleton": {
     name: "Feather Leaf Skeleton",
-    type: "common",
+    type: "loot",
     cost: 2,
     dropChance: 1,
     media: {
@@ -32,7 +32,7 @@ export const MonsterLootList: MonsterLootListType = {
   },
   "Feather Leaf Fluid": {
     name: "Feather Leaf Fluid",
-    type: "uncommon",
+    type: "loot",
     cost: 5,
     dropChance: 0.5,
     media: {
@@ -42,7 +42,7 @@ export const MonsterLootList: MonsterLootListType = {
   },
   "Siren Skull": {
     name: "Siren Skull",
-    type: "uncommon",
+    type: "loot",
     cost: 30,
     dropChance: 0.7,
     media: {
@@ -52,7 +52,7 @@ export const MonsterLootList: MonsterLootListType = {
   },
   "Siren Scale": {
     name: "Siren Scale",
-    type: "rare",
+    type: "loot",
     cost: 50,
     dropChance: 0.3,
     media: {

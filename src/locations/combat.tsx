@@ -74,7 +74,7 @@ export const EnemyDefeated = () => {
     }
 
     setInventory([...Inventory, ...droppedItems]);
-  }, [Inventory, loot, setInventory]);
+  }, []);
 
   return (
     <div
