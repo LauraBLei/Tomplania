@@ -1,4 +1,4 @@
-import { characters } from "../gameData/characters";
+import { characters } from "../gameData/character/characters";
 import { useContext } from "react";
 import {
   CarouselProvider,

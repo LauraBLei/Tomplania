@@ -2,99 +2,28 @@ import { useContext } from "react";
 import { CharacterContext } from "../hooks/characterContext";
 import Popup from "reactjs-popup";
 import { GameContext } from "../hooks/gameContext";
-import { ArmorType } from "../gameData/armorShop";
-import { MonsterLoot } from "../gameData/loot";
-import { Item } from "../gameData/questItems";
 import { PotionType } from "../gameData/potionShop";
 
 export const Inventory = () => {
   const {
     characterAttack,
-    setWeapon,
     weapon,
     setCharacterAttack,
     Inventory,
     setInventory,
-    setGold,
     gold,
     gauntlet,
     boots,
     chest,
-    setGauntlet,
-    setBoots,
-    setMaxHP,
     maxHP,
-    setChest,
     setCurrentHP,
     currentHP,
+    sellItem,
+    equipItem,
+    unEquipItem,
   } = useContext(CharacterContext);
   const { location } = useContext(GameContext);
 
-  const handleSelling = (item: ArmorType | MonsterLoot | Item | PotionType) => {
-    setGold(gold + item.cost);
-    setInventory(Inventory.filter((invItem) => invItem.name !== item.name));
-  };
-
-  const handleEquip = (item: ArmorType) => {
-    handleUnequip(item);
-
-    if (item.type === "Gauntlet") {
-      setGauntlet(item);
-      setMaxHP(maxHP + item.hp);
-    } else if (item.type === "Boot") {
-      setBoots(item);
-      setMaxHP(maxHP + item.hp);
-    } else if (item.type === "Chest") {
-      setChest(item);
-      setMaxHP(maxHP + item.hp);
-    } else if (item.type === "weapon") {
-      setWeapon(item);
-      setCharacterAttack(characterAttack + item.attack);
-    }
-
-    setInventory((prevInventory) =>
-      prevInventory.filter((invItem) => invItem.name !== item.name)
-    );
-  };
-
-  const handleUnequip = (item: ArmorType | null) => {
-    if (item === null) {
-      return;
-    }
-    if (weapon) {
-      setInventory([...Inventory, weapon]);
-      setCharacterAttack(characterAttack + item.attack);
-    }
-    if ("Gauntlet" in item && gauntlet) {
-      setInventory([...Inventory, gauntlet]);
-      setMaxHP(maxHP - item.hp);
-    } else if (item.type === "Boot" && boots) {
-      setInventory([...Inventory, boots]);
-      setMaxHP(maxHP - item.hp);
-    } else if (item.type === "Chest" && chest) {
-      setInventory([...Inventory, chest]);
-      setMaxHP(maxHP - item.hp);
-    }
-
-    if (item.type === "Gauntlet") {
-      setGauntlet(null);
-    } else if (item.type === "Boot") {
-      setBoots(null);
-    } else if (item.type === "Chest") {
-      setChest(null);
-    } else if (item.type === "weapon") {
-      setWeapon(null);
-    }
-  };
-
-  const handleConsume = (item: PotionType) => {
-    const newHp = currentHP + item.currentHP;
-    setCurrentHP(newHp <= maxHP ? newHp : maxHP);
-    setCharacterAttack(characterAttack + item.attack);
-    setInventory((prevInventory) =>
-      prevInventory.filter((invItem) => invItem.name !== item.name)
-    );
-  };
   return (
     <div>
       <div className="flex mb-6">
@@ -121,7 +50,7 @@ export const Inventory = () => {
               <button
                 className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-2xl"
                 onClick={() => {
-                  handleUnequip(chest);
+                  equipItem(chest);
                 }}
               >
                 Unequip
@@ -141,7 +70,7 @@ export const Inventory = () => {
               <button
                 className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-2xl"
                 onClick={() => {
-                  handleUnequip(gauntlet);
+                  unEquipItem(gauntlet);
                 }}
               >
                 Unequip
@@ -161,7 +90,7 @@ export const Inventory = () => {
               <button
                 className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-2xl"
                 onClick={() => {
-                  handleUnequip(boots);
+                  unEquipItem(boots);
                 }}
               >
                 Unequip
@@ -181,7 +110,7 @@ export const Inventory = () => {
               <button
                 className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-2xl"
                 onClick={() => {
-                  handleUnequip(weapon);
+                  unEquipItem(weapon);
                 }}
               >
                 Unequip
@@ -230,19 +159,20 @@ export const Inventory = () => {
                     <button
                       className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-2xl"
                       onClick={() => {
-                        handleSelling(item);
+                        sellItem(item);
                       }}
                     >
                       sell
                     </button>
                   )}
-                  {item.type ===
-                    ("Weapon" || "Gauntlet" || "Chest" || "Boot") &&
+                  {["Weapon", "Gauntlet", "Chest", "Boot"].includes(
+                    item.type
+                  ) &&
                     "attack" in item && (
                       <button
                         className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-2xl"
                         onClick={() => {
-                          handleEquip(item);
+                          equipItem(item);
                         }}
                       >
                         Equip

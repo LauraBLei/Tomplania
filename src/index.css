@@ -6,12 +6,16 @@
   .button {
     @apply border-2 border-black px-4 py-1 cursor-pointer font-uncial text-2xl;
   }
+
+  .button2 {
+    @apply border-2 border-beige px-4 py-1 cursor-pointer font-uncial text-2xl text-beige;
+  }
 }
 
 .hp-bar {
   width: 100%;
-  height: 20px;
-  background-color: #ccc;
+  height: 30px;
+  background-color: black;
   border: 1px solid #000;
   border-radius: 5px;
   overflow: hidden;

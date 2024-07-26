@@ -1,4 +1,4 @@
-import { Media } from "./characters";
+import { Media } from "../character/characters";
 
 export type MonsterLoot = {
   name: string;
@@ -11,13 +11,6 @@ export type MonsterLoot = {
 export type MonsterLootListType = {
   [key: string]: MonsterLoot;
 };
-
-export enum Loot {
-  FeatherLeafSkeleton = "Feather Leaf Skeleton",
-  FeatherLeafFluid = "Feather Leaf Fluid",
-  SirenSkull = "Siren Skull",
-  SirenScale = "Siren Scale",
-}
 
 export const MonsterLootList: MonsterLootListType = {
   "Feather Leaf Skeleton": {

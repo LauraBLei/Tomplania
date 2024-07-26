@@ -6,6 +6,14 @@ export type Media = {
 export type Character = {
   class: string;
   media: Media;
+  gear?: Gear;
+};
+
+export type Gear = {
+  weapon?: string;
+  chest?: string;
+  gauntlet?: string;
+  boot?: string;
 };
 
 export const characters: Character[] = [
@@ -34,21 +42,21 @@ export const characters: Character[] = [
     class: "Knight",
     media: {
       src: "./assets/characters/sirPog.png",
-      alt: "Image of a pug in knights armor",
+      alt: "Image of a pug in knight's armor",
     },
   },
   {
     class: "Knight",
     media: {
       src: "./assets/characters/womanKnight.png",
-      alt: "Image of a female in knight armor",
+      alt: "Image of a female in knight's armor",
     },
   },
   {
     class: "Knight",
     media: {
       src: "./assets/characters/maleDarkKnight.png",
-      alt: "Image of a male in knight armor",
+      alt: "Image of a male in knight's armor",
     },
   },
   {
@@ -62,7 +70,27 @@ export const characters: Character[] = [
     class: "Knight",
     media: {
       src: "./assets/characters/catKnight.png",
-      alt: "Image of a kat in knight armor",
+      alt: "Image of a kat in knight's armor",
     },
   },
 ];
+
+export class Character2 {
+  class: string;
+  media: Media;
+  gear: Gear;
+  gold: number;
+  maxHealth: number;
+  currentHealth: number;
+  level: number;
+
+  constructor(characterClass: string, media: Media, gear?: Gear) {
+    this.class = characterClass;
+    this.media = media;
+    this.gear = gear ?? {};
+    this.gold = 10;
+    this.maxHealth = 100;
+    this.currentHealth = this.maxHealth;
+    this.level = 1;
+  }
+}

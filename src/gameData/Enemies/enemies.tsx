@@ -1,12 +1,13 @@
-import { Media } from "./characters";
-import { Loot } from "./loot";
-import { QuestItemNames } from "./questItems";
+import { Media } from "../character/characters";
+import { Loot } from "../enum";
+import { QuestItemNames } from "../quests/questItems";
 
 export type Monster = {
   hp: number;
   attack: number;
   media: Media;
   loot: (Loot | QuestItemNames)[];
+  xp: number;
 };
 
 export type MonstersList = {
@@ -31,6 +32,7 @@ export const MonstersList: MonstersList = {
       Loot.FeatherLeafFluid,
       QuestItemNames.FeatherLeafMeat,
     ],
+    xp: 5,
   },
   Siren: {
     hp: 250,
@@ -40,5 +42,6 @@ export const MonstersList: MonstersList = {
       alt: "Image of a siren",
     },
     loot: [Loot.SirenSkull, Loot.SirenScale],
+    xp: 10,
   },
 };

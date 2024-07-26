@@ -2,16 +2,19 @@ import { useContext } from "react";
 import { useEffect } from "react";
 import { CharacterContext } from "../hooks/characterContext";
 import { GameContext } from "../hooks/gameContext";
-import { MonstersList } from "../gameData/enemies";
-import { LocationList, Locations } from "../gameData/locations";
-import { HpBarCharacter, HpBarEnemy } from "../components/hpBar";
-import { MonsterLootList } from "../gameData/loot";
-import { MonsterLoot } from "../gameData/loot";
-import { QuestItems } from "../gameData/questItems";
+import { MonstersList } from "../gameData/Enemies/enemies";
+import { LocationList } from "../gameData/locations";
+import { Locations } from "../gameData/enum";
+import { HpBarEnemy } from "../gameData/Enemies/hpBar";
+import { MonsterLootList } from "../gameData/Enemies/loot";
+import { MonsterLoot } from "../gameData/Enemies/loot";
+import { QuestItems } from "../gameData/quests/questItems";
+import { HpBarCharacter } from "../gameData/character/hpBar";
+import { InventoryContext } from "../hooks/inventoryContext";
 
 export const EnemyLocation = () => {
   const { MonsterHP, PrevLocation } = useContext(GameContext);
-  const { character } = useContext(CharacterContext);
+  const { character, currentHP } = useContext(CharacterContext);
 
   const prevLocation = LocationList[PrevLocation];
   const enemy = MonstersList[prevLocation.enemy[0]];
@@ -19,7 +22,7 @@ export const EnemyLocation = () => {
     <div>
       <div></div>
       <div className="w-full flex mt-10">
-        <div className="flex justify-between w-full">
+        <div className="flex justify-between w-full relative z-10 mt-[-600px]">
           <div className="flex flex-col max-w-[400px] ml-10">
             <img
               className="border-double border-spacing-5 border-8 border-s-4 border-green-600"
@@ -38,23 +41,21 @@ export const EnemyLocation = () => {
           </div>
         </div>
       </div>
-      {MonsterHP <= 0 ? <EnemyDefeated /> : <Fighting />}
+      {MonsterHP <= 0 && currentHP > 0 ? <EnemyDefeated /> : <Fighting />}
     </div>
   );
 };
 
 export const EnemyDefeated = () => {
   const { PrevLocation, setLocation, setFighting } = useContext(GameContext);
-  const { setInventory, Inventory } = useContext(CharacterContext);
+  const { GainXP } = useContext(CharacterContext);
+  const { addItem } = useContext(InventoryContext);
   const prevLocation = LocationList[PrevLocation];
   const enemy = MonstersList[prevLocation.enemy[0]];
   const loot = enemy.loot;
 
-  const bgText = {
-    backgroundImage: `url("./assets/bg-images/textbg.png")`,
-  };
-
   useEffect(() => {
+    GainXP(enemy.xp);
     const droppedItems = [];
     for (let i = 0; i < loot.length; i++) {
       const droppedItem = loot[i];
@@ -72,26 +73,29 @@ export const EnemyDefeated = () => {
         }
       }
     }
-
-    setInventory([...Inventory, ...droppedItems]);
+    addItem(droppedItems);
   }, []);
 
   return (
-    <div
-      className="bg-no-repeat bg-cover w-full h-auto px-[60px] py-10 pt-[100px] flex flex-col items-center gap-6 absolute bottom-0 mb-[-100px]"
-      style={bgText}
-    >
-      <h2 className="font-uncial text-5xl">Enemy Defeated</h2>
-      <div className=" flex gap-10">
-        <button
-          className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-4xl"
-          onClick={() => {
-            setLocation(PrevLocation);
-            setFighting(false);
-          }}
-        >
-          Return
-        </button>
+    <div>
+      <img
+        className="w-[1200px] z-10 relative"
+        src="./assets/bg-images/TextField.png"
+        alt="Decoration for text field"
+      />
+      <div className="bg-beige border-8 border-blue max-w-[800px] w-full mt-[-130px] z-0 ">
+        <h2 className="font-uncial text-5xl">Enemy Defeated</h2>
+        <div className=" flex gap-10">
+          <button
+            className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-4xl"
+            onClick={() => {
+              setLocation(PrevLocation);
+              setFighting(false);
+            }}
+          >
+            Return
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -101,9 +105,6 @@ export const Fighting = () => {
   const CContext = useContext(CharacterContext);
   const context = useContext(GameContext);
   const characterAttack = CContext.characterAttack;
-  const bgText = {
-    backgroundImage: `url("./assets/bg-images/textbg.png")`,
-  };
   const prevLocation = LocationList[context.PrevLocation];
 
   const enemy = MonstersList[prevLocation.enemy[0]];
@@ -116,56 +117,60 @@ export const Fighting = () => {
   };
 
   return (
-    <div
-      className="bg-no-repeat bg-cover w-full h-auto px-[60px] py-10 pt-[100px] flex flex-col items-center gap-6 absolute bottom-0 mb-[-100px]"
-      style={bgText}
-    >
-      {CContext.currentHP === 0 ? (
-        <div>
-          <h2>You died!</h2>
-          <button
-            className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-4xl"
-            onClick={HandleRespawn}
-          >
-            Respawn
-          </button>
+    <div className="flex flex-col items-center mt-[-100px] ">
+      <img
+        className="w-[1200px] z-10 relative"
+        src="./assets/bg-images/TextField.png"
+        alt="Decoration for text field"
+      />
+      <div className="bg-beige border-8 border-blue max-w-[800px] w-full mt-[-130px] z-0 ">
+        <div className="mt-28 mb-5 flex justify-center">
+          {CContext.currentHP === 0 ? (
+            <div>
+              <h2>You died!</h2>
+              <button
+                className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-4xl"
+                onClick={HandleRespawn}
+              >
+                Respawn
+              </button>
+            </div>
+          ) : (
+            <div className=" flex gap-10">
+              <button
+                className="button"
+                onClick={() => {
+                  const MonsterHP = context.MonsterHP - characterAttack;
+                  const PlayerHP = CContext.currentHP - enemy.attack;
+                  context.setMonsterHP(MonsterHP < 0 ? 0 : MonsterHP);
+                  CContext.setCurrentHP(PlayerHP < 0 ? 0 : PlayerHP);
+                }}
+              >
+                Attack
+              </button>
+              <button
+                className="button"
+                onClick={() => {
+                  context.setLocation(context.PrevLocation);
+                  context.setFighting(false);
+                }}
+              >
+                Run
+              </button>
+            </div>
+          )}
         </div>
-      ) : (
-        <div className=" flex gap-10">
-          <button
-            className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-4xl"
-            onClick={() => {
-              const MonsterHP = context.MonsterHP - characterAttack;
-              const PlayerHP = CContext.currentHP - enemy.attack;
-              context.setMonsterHP(MonsterHP < 0 ? 0 : MonsterHP);
-              CContext.setCurrentHP(PlayerHP < 0 ? 0 : PlayerHP);
-            }}
-          >
-            Attack
-          </button>
-          <button
-            className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-4xl"
-            onClick={() => {
-              context.setLocation(context.PrevLocation);
-              context.setFighting(false);
-            }}
-          >
-            Run
-          </button>
-        </div>
-      )}
+      </div>
     </div>
   );
 };
 
 export const LootEnemy = () => {
   const context = useContext(GameContext);
-  const CContext = useContext(CharacterContext);
   const prevLocation = LocationList[context.PrevLocation];
   const enemy = MonstersList[prevLocation.enemy[0]];
+  const { addItem } = useContext(InventoryContext);
 
   const loot = enemy.loot;
-  loot.map((e) =>
-    CContext.setInventory([...CContext.Inventory, MonsterLootList[e]])
-  );
+  loot.map((e) => addItem(MonsterLootList[e]));
 };

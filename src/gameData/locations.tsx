@@ -1,6 +1,6 @@
-import { Media } from "./characters";
-import { MonsterNames } from "./enemies";
-import { NPCNames } from "./NPC";
+import { Media } from "./character/characters";
+import { MonsterNames } from "./Enemies/enemies";
+import { NPCNames, Locations } from "./enum";
 
 export type Location = {
   text: string;
@@ -13,28 +13,6 @@ export type Location = {
 export type LocationType = {
   [key: string]: Location;
 };
-
-export enum Locations {
-  Tavern = "Tavern",
-  outsideTavern = "Ironwood Avenue",
-  BackGate = "Ironwood Gate",
-  EmeraldPlaza = "Emerald Plaza",
-  CityGates = "Arcanthria City Gates",
-  EvershadeForest = "Evershade Forest",
-  TheCrystalCaves = "Crystal Caves",
-  ElderglowLake = "Elderglow Lake",
-  Eldervale = "Eldervale",
-  CircleOfTheGods = "Circle Of The Gods",
-  AetherPeak = "Aether Peak",
-  EaglesPeak = "Eagles Peak",
-  ArmorShop = "Armor Shop",
-  tavernRoom = "Tavern Room",
-  WhisperingWoods = "Whispering Woods",
-  RiverbendHarbor = "Riverbend Harbor",
-  harbor = "Harbor",
-  BlackVoid = "Black Void",
-  PotionShop = "Potion Shop",
-}
 
 export const LocationList: LocationType = {
   "Armor Shop": {

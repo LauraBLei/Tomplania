@@ -10,6 +10,10 @@ export default {
         uncial: ['"Uncial Antiqua"', "system-ui"],
         Courier: ['"Courier Prime"', "system-ui"],
       },
+      colors: {
+        beige: "#D7CDC6",
+        blue: "#253644",
+      },
     },
   },
   plugins: [],

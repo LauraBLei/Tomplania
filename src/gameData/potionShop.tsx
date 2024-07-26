@@ -1,23 +1,25 @@
-import { Media } from "./characters";
+// import { Media } from "./character/characters";
 
-export type PotionType = {
-  name: string;
-  type: string;
-  cost: number;
-  hp: number;
-  currentHP: number;
-  attack: number;
-  media: Media;
-  description: string;
-};
+import { ItemClass } from "./objects/Item";
 
-export const PotionShopInventory: PotionType[] = [
+// export type PotionType = {
+//   name: string;
+//   type: string;
+//   cost: number;
+//   hp: number;
+//   heal: number;
+//   attack: number;
+//   media: Media;
+//   description: string;
+// };
+
+export const PotionShopInventory: ItemClass[] = [
   {
     name: "Healing",
     type: "Potion",
     cost: 10,
     hp: 0,
-    currentHP: 100,
+    heal: 100,
     attack: 0,
     media: {
       src: "./assets/items/potions/healing.png",
@@ -30,7 +32,7 @@ export const PotionShopInventory: PotionType[] = [
     type: "Potion",
     cost: 30,
     hp: 10,
-    currentHP: 100,
+    heal: 100,
     attack: 10,
     media: {
       src: "./assets/items/potions/Elixir.png",
@@ -44,7 +46,7 @@ export const PotionShopInventory: PotionType[] = [
     type: "Potion",
     cost: 50,
     hp: -50,
-    currentHP: -20,
+    heal: -20,
     attack: 50,
     media: {
       src: "./assets/items/potions/greenPotion.png",
@@ -58,7 +60,7 @@ export const PotionShopInventory: PotionType[] = [
     type: "Potion",
     cost: 50,
     hp: 20,
-    currentHP: 200,
+    heal: 200,
     attack: 0,
     media: {
       src: "./assets/items/potions/doubleHealing.png",

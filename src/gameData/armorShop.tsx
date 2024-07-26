@@ -1,16 +1,16 @@
-import { Media } from "./characters";
+import { ItemClass } from "./objects/Item";
 
-export type ArmorType = {
-  name: string;
-  type: string;
-  hp: number;
-  attack: number;
-  cost: number;
-  media: Media;
-  description: string;
-};
+// export type ArmorType = {
+//   name: string;
+//   type: string;
+//   hp: number;
+//   attack: number;
+//   cost: number;
+//   media: Media;
+//   description: string;
+// };
 
-export const ArmorShopInventory = [
+export const ArmorShopInventory: ItemClass[] = [
   {
     name: "Sentry's Mail",
     type: "Chest",

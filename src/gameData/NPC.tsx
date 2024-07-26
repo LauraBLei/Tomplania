@@ -1,5 +1,5 @@
-import { Media } from "./characters";
-import { QuestNames } from "./quests";
+import { Media } from "./character/characters";
+import { QuestNames } from "./enum";
 
 export type NPCText = {
   startText: string;
@@ -16,11 +16,6 @@ export type NPCtype = {
   quests: QuestNames[];
   media: Media;
 };
-
-export enum NPCNames {
-  OldLady = "Old Lady",
-  Bartender = "Bartender",
-}
 
 export const NPCList2: NPCtype[] = [
   {
@@ -44,8 +39,10 @@ export const NPCList2: NPCtype[] = [
     type: "Bartender",
     name: "Dorian Blackwood",
     text: {
-      startText: "",
-      hasVisitedText: "",
+      startText:
+        "Hello there pal! My name is Dorian Blackwood. You look like someone who knows how to handle themselves! Could you be up for a task?",
+      hasVisitedText:
+        "Hello Again! What do you say, are you ready to help me out?",
       QuestInProgress: "",
       QuestAccepted: "",
       QuestDelivered: "",

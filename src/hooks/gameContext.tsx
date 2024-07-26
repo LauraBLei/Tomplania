@@ -1,8 +1,8 @@
 import { createContext, useState } from "react";
-import { LocationList, Locations } from "../gameData/locations";
-import { NPCNames } from "../gameData/NPC";
-import { Quest } from "../gameData/quests";
-import { Media } from "../gameData/characters";
+import { LocationList } from "../gameData/locations";
+import { NPCNames, Locations } from "../gameData/enum";
+import { Quest } from "../gameData/quests/quests";
+import { Media } from "../gameData/character/characters";
 import { ArmorType } from "../gameData/armorShop";
 import { PotionType } from "../gameData/potionShop";
 
