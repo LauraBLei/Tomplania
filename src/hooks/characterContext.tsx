@@ -1,12 +1,12 @@
 import { createContext, useContext, useState } from "react";
 import { Character, characters } from "../gameData/character/characters";
-import { ArmorType } from "../gameData/armorShop";
-import { MonsterLoot } from "../gameData/Enemies/loot";
-import { Item } from "../gameData/quests/questItems";
-import { PotionType } from "../gameData/potionShop";
 import { InventoryContext } from "./inventoryContext";
+import { Item } from "../gameData/objects/Item";
+import { Monster } from "../gameData/Enemies/enemies";
+import { MonsterLootList } from "../gameData/Enemies/loot";
+import { NewQuestItems } from "../gameData/quests/questItems";
 
-const xpThresholds = [100, 250, 450, 650, 900, 1300];
+const xpThresholds = [10, 250, 450, 650, 900, 1300];
 
 type characterContextType = {
   name: string;
@@ -15,10 +15,10 @@ type characterContextType = {
   character: Character;
   maxHP: number;
   gold: number;
-  chest: ArmorType | null;
-  gauntlet: ArmorType | null;
-  boots: ArmorType | null;
-  weapon: ArmorType | null;
+  chest: Item | null;
+  gauntlet: Item | null;
+  boots: Item | null;
+  weapon: Item | null;
   xp: number;
   MaxXP: number;
   lvl: number;
@@ -29,20 +29,21 @@ type characterContextType = {
   setCurrentHP: React.Dispatch<React.SetStateAction<number>>;
   setMaxHP: React.Dispatch<React.SetStateAction<number>>;
   setGold: React.Dispatch<React.SetStateAction<number>>;
-  setChest: React.Dispatch<React.SetStateAction<ArmorType | null>>;
-  setGauntlet: React.Dispatch<React.SetStateAction<ArmorType | null>>;
-  setBoots: React.Dispatch<React.SetStateAction<ArmorType | null>>;
-  setWeapon: React.Dispatch<React.SetStateAction<ArmorType | null>>;
+  setChest: React.Dispatch<React.SetStateAction<Item | null>>;
+  setGauntlet: React.Dispatch<React.SetStateAction<Item | null>>;
+  setBoots: React.Dispatch<React.SetStateAction<Item | null>>;
+  setWeapon: React.Dispatch<React.SetStateAction<Item | null>>;
   setXP: React.Dispatch<React.SetStateAction<number>>;
   setMaxXP: React.Dispatch<React.SetStateAction<number>>;
   setLvl: React.Dispatch<React.SetStateAction<number>>;
-  sellItem: (item: ArmorType | MonsterLoot | Item | PotionType) => void;
-  equipItem: (item: ArmorType) => void;
-  unEquipItem: (item: ArmorType) => void;
-  consumeItem: (item: PotionType) => void;
+  sellItem: (item: Item) => void;
+  equipItem: (item: Item) => void;
+  unEquipItem: (item: Item) => void;
+  consumeItem: (item: Item) => void;
+  changeGold: (amount: number) => void;
 
   GainXP: (amount: number) => void;
-  LevelUp: () => void;
+  enemyDefeated: (enemy: Monster) => void;
 };
 
 export const CharacterContext = createContext<characterContextType>(
@@ -56,100 +57,147 @@ type ContextProviderProps = {
 export const CharacterProvider = ({ children }: ContextProviderProps) => {
   const [name, setName] = useState("Tompe");
   const [character, setCharacter] = useState(characters[0]);
-  const [currentHP, setCurrentHP] = useState(100);
+  const [currentHP, setCurrentHP] = useState(1000);
   const [characterAttack, setCharacterAttack] = useState(10);
-  const [maxHP, setMaxHP] = useState(100);
+  const [maxHP, setMaxHP] = useState(1000);
   const [gold, setGold] = useState(10000);
-  const [chest, setChest] = useState<ArmorType | null>(null);
-  const [gauntlet, setGauntlet] = useState<ArmorType | null>(null);
-  const [boots, setBoots] = useState<ArmorType | null>(null);
-  const [weapon, setWeapon] = useState<ArmorType | null>(null);
+  const [chest, setChest] = useState<Item | null>(null);
+  const [gauntlet, setGauntlet] = useState<Item | null>(null);
+  const [boots, setBoots] = useState<Item | null>(null);
+  const [weapon, setWeapon] = useState<Item | null>(null);
   const [xp, setXP] = useState(0);
-  const [MaxXP, setMaxXP] = useState(100);
+  const [MaxXP, setMaxXP] = useState(10);
   const [lvl, setLvl] = useState(1);
   const { removeItem, addItem } = useContext(InventoryContext);
-  // const [x, setX] = useState(new Character2("Knight", ))
 
-  const sellItem = (
-    item: ArmorType | MonsterLoot | Item | PotionType,
-    quantity: number = 1
-  ) => {
-    setGold(gold + item.cost);
-    removeItem(item, quantity);
-  };
-
-  const equipItem = (item: ArmorType, quantity: number = 1) => {
-    console.log("equipping item", item);
-
-    unEquipItem(item);
-
-    if (item.type === "Gauntlet") {
-      setGauntlet(item);
-      setMaxHP(maxHP + item.hp);
-    } else if (item.type === "Boot") {
-      setBoots(item);
-      setMaxHP(maxHP + item.hp);
-    } else if (item.type === "Chest") {
-      setChest(item);
-      setMaxHP(maxHP + item.hp);
-    } else if (item.type === "Weapon") {
-      setWeapon(item);
-      setCharacterAttack(characterAttack + item.attack);
+  const sellItem = (item: Item, quantity: number = 1) => {
+    if (item.cost) {
+      changeGold(-item.cost);
+      removeItem(item, quantity);
     }
-
-    removeItem(item, quantity);
-
-    console.log("current weapon", weapon);
   };
 
-  const consumeItem = (item: PotionType) => {
-    const newHp = currentHP + item.heal;
-    setCurrentHP(newHp <= maxHP ? newHp : maxHP);
-    setCharacterAttack(characterAttack + item.attack);
+  const changeGold = (amount: number) => {
+    setGold(gold + amount);
+  };
+
+  const equipItem = (item: Item) => {
+    const hpBoost = item.hp ? item.hp : 0;
+    const attackBoost = item.attack ? item.attack : 0;
+    switch (item.type) {
+      case "Gauntlet":
+        unEquipItem(gauntlet);
+        setGauntlet(item);
+        break;
+      case "Boot":
+        unEquipItem(boots);
+        setBoots(item);
+        break;
+      case "Chest":
+        unEquipItem(chest);
+        setChest(item);
+        break;
+      case "Weapon":
+        unEquipItem(weapon);
+        setWeapon(item);
+        break;
+      default:
+        console.error("Item type not found: ", item);
+    }
+    setMaxHP(maxHP + hpBoost);
+    setCharacterAttack(characterAttack + attackBoost);
     removeItem(item);
   };
 
-  const unEquipItem = (item: ArmorType | null) => {
-    console.log("Unequipping item", item);
+  const consumeItem = (item: Item) => {
+    // Check that the properties exists, and if not use a default value (0)
+    const attackBoost = item.attack ? item.attack : 0;
+    const MaxHpBoost = item.hp ? item.hp : 0;
+    const heal = item.heal ? item.heal : 0;
 
+    const newHp = currentHP + heal;
+    const newMaxHp = maxHP + MaxHpBoost;
+
+    setMaxHP(newMaxHp);
+    setCurrentHP(newHp >= newMaxHp ? newMaxHp : newHp);
+    setCharacterAttack(characterAttack + attackBoost);
+    removeItem(item);
+  };
+
+  const unEquipItem = (item: Item | null) => {
+    // If no item is equipped, just return
     if (item === null) {
+      console.log("No item to unequip. Returning");
       return;
     }
-    if (item.type === "Weapon") {
-      setCharacterAttack(characterAttack + item.attack);
-      setWeapon(null);
-    } else if (item.type === "Gauntlet") {
-      setMaxHP(maxHP - item.hp);
-      setGauntlet(null);
-    } else if (item.type === "Boot") {
-      setMaxHP(maxHP - item.hp);
-      setBoots(null);
-    } else if (item.type === "Chest") {
-      setMaxHP(maxHP - item.hp);
-      setChest(null);
+
+    const hpBoost = item.hp ? item.hp : 0;
+    const attackBoost = item.attack ? item.attack : 0;
+
+    switch (item.type) {
+      case "Gauntlet":
+        setGauntlet(null);
+        break;
+      case "Boot":
+        setBoots(null);
+        break;
+      case "Chest":
+        setChest(null);
+        break;
+      case "Weapon":
+        setWeapon(null);
+        break;
+      default:
+        console.error("Could not find item type: ", item);
     }
+    setCharacterAttack(characterAttack - attackBoost);
+    setMaxHP(maxHP - hpBoost);
     addItem(item);
   };
 
-  const LevelUp = () => {
-    const newLvl = lvl + 1;
-    const newMaxXP = xpThresholds[newLvl - 1] || MaxXP;
+  const GainXP = (amount: number) => {
+    const newXp = xp + amount;
+    setXP(newXp);
+    console.log(`Exp was increased from ${xp} to ${xp + amount}`);
 
-    setLvl(newLvl);
-    setMaxXP(newMaxXP);
-    setXP(xp - MaxXP); // Reset XP to the overflow value
+    if (newXp >= MaxXP) {
+      console.log("Level up");
+      const newLvl = lvl + 1;
+      const overFlowXp = newXp - MaxXP;
+
+      const newMaxXP = xpThresholds[newLvl - 1] || MaxXP;
+
+      setLvl(newLvl);
+      setMaxXP(newMaxXP);
+      setXP(overFlowXp); // Reset XP to the overflow value
+    }
   };
 
-  const GainXP = (amount: number) => {
-    setXP(xp + amount);
-    if (xp >= MaxXP) {
-      LevelUp();
+  const enemyDefeated = (enemy: Monster) => {
+    GainXP(enemy.xp);
+
+    for (let i = 0; i < enemy.loot.length; i++) {
+      const droppedItems = enemy.loot[i];
+      const monsterLootItem = [...MonsterLootList, ...NewQuestItems].find(
+        (item) => item.name == droppedItems
+      );
+
+      if (!monsterLootItem || !monsterLootItem.dropChance) {
+        continue;
+      }
+
+      const dropRoll = Math.random();
+
+      if (dropRoll <= monsterLootItem.dropChance) {
+        addItem(monsterLootItem);
+      }
     }
   };
 
   return (
     <CharacterContext.Provider
       value={{
+        changeGold,
         currentHP,
         setCurrentHP,
         characterAttack,
@@ -180,8 +228,8 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
         lvl,
         setLvl,
         GainXP,
-        LevelUp,
         consumeItem,
+        enemyDefeated,
       }}
     >
       {children}

@@ -1,13 +1,12 @@
-import { Media } from "../character/characters";
-import { ItemClass } from "../objects/Item";
+import { Item } from "../objects/Item";
 
-export type Item = {
-  name: string;
-  type: string;
-  cost: number;
-  dropChance: number;
-  media: Media;
-};
+// export type Item = {
+//   name: string;
+//   type: string;
+//   cost: number;
+//   dropChance: number;
+//   media: Media;
+// };
 
 export type QuestItemsType = {
   [key: string]: Item;
@@ -23,14 +22,15 @@ export const QuestItems: QuestItemsType = {
     type: "QuestItem",
     cost: 1,
     dropChance: 1,
+    description: "description",
     media: {
-      src: "./assets/items/monsterLoot/icon25.png",
+      src: "./assets/items/monsterLoot/featherLeafMeat.png",
       alt: "Feather Leaf Meat",
     },
   },
 };
 
-export const NewQuestItems: ItemClass[] = [
+export const NewQuestItems: Item[] = [
   {
     name: "Feather Leaf Meat",
     type: "QuestItem",
@@ -38,7 +38,7 @@ export const NewQuestItems: ItemClass[] = [
     cost: 1,
     dropChance: 1,
     media: {
-      src: "./assets/items/monsterLoot/icon25.png",
+      src: "./assets/items/monsterLoot/featherLeafMeat.png",
       alt: "Feather Leaf Meat",
     },
   },

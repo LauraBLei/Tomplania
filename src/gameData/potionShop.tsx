@@ -1,6 +1,6 @@
 // import { Media } from "./character/characters";
 
-import { ItemClass } from "./objects/Item";
+import { Item } from "./objects/Item";
 
 // export type PotionType = {
 //   name: string;
@@ -13,7 +13,7 @@ import { ItemClass } from "./objects/Item";
 //   description: string;
 // };
 
-export const PotionShopInventory: ItemClass[] = [
+export const PotionShopInventory: Item[] = [
   {
     name: "Healing",
     type: "Potion",

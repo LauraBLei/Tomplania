@@ -1,12 +1,14 @@
 import { GameContext } from "../hooks/gameContext";
 import { useContext } from "react";
 import { LocationList } from "../gameData/locations";
-import { ArmorShopInventory, ArmorType } from "../gameData/armorShop";
-import { PotionShopInventory, PotionType } from "../gameData/potionShop";
-import { Locations } from "../gameData/enum";
-// import Popup from "reactjs-popup";
+// import { ArmorShopInventory, ArmorType } from "../gameData/armorShop";
+// import { PotionShopInventory, PotionType } from "../gameData/potionShop";
+import { Locations } from "../gameData/Enums";
 import { InventoryContext } from "../hooks/inventoryContext";
 import { CharacterContext } from "../hooks/characterContext";
+import { ArmorShopInventory } from "../gameData/armorShop";
+import { PotionShopInventory } from "../gameData/potionShop";
+import { Item } from "../gameData/objects/Item";
 
 export const Shop = () => {
   const { location, PrevLocation, setLocation, setBgImg, item } =
@@ -17,7 +19,7 @@ export const Shop = () => {
   return (
     <div className="flex flex-col items-center mt-[-70px]">
       {item && (
-        <div className="absolute bg-[#d9bf9e] place-self-center mt-[-400px] px-5 py-3 rounded-md max-w-[600px] z-10">
+        <div className="absolute bg-beige border-2 border-blue place-self-center mt-[-400px] px-5 py-3 rounded-md max-w-[600px] z-10">
           <h3 className="font-Courier text-2xl">{`${item.name}`}</h3>
           <h3 className="font-Courier text-2xl">Price: {`${item.cost}`}</h3>
           <h3 className="font-Courier text-2xl">HP Bonus: {`${item.hp}`}</h3>
@@ -32,39 +34,33 @@ export const Shop = () => {
           <p className="font-Courier text-2xl border-2 border-black p-2">{`${item.description}`}</p>
         </div>
       )}
-      <img
-        className="w-[1200px] z-10 relative"
-        src="./assets/bg-images/TextField.png"
-        alt="Decoration for text field"
-      />
-      <div className="flex flex-col gap-3 items-center bg-beige border-8 border-blue max-w-[800px] w-full mt-[-130px] z-0 ">
-        <div className="place-self-start ml-4 mt-28 flex gap-2">
-          <img
-            className="h-auto"
-            src="./assets/bg-images/locationDot.png"
-            alt="location dot"
-          />
-          <button
-            className="font-Courier text-2xl"
-            onClick={() => {
-              setLocation(PrevLocation);
-              setBgImg(LocationList[PrevLocation].media);
-            }}
-          >
-            Go Back
-          </button>
-        </div>
-        <div className="flex ml-4 flex-col justify-center items-center w-full max-h-[500px]">
-          <p className="font-Courier text-3xl text-center">
-            {currentLocation.text}
-          </p>
-          <div className="flex gap-4 mb-8 mt-4 flex-wrap px-9 py-4 overflow-y-auto border-2 border-black max-w-[850px] ">
-            {location === Locations.ArmorShop ? (
-              <MakeInventoryItems list={ArmorShopInventory} />
-            ) : (
-              <MakeInventoryItems list={PotionShopInventory} />
-            )}
-          </div>
+
+      <div className="place-self-start ml-4 mt-28 flex gap-2">
+        <img
+          className="h-auto"
+          src="./assets/bg-images/locationDot.png"
+          alt="location dot"
+        />
+        <button
+          className="font-Courier text-2xl"
+          onClick={() => {
+            setLocation(PrevLocation);
+            setBgImg(LocationList[PrevLocation].media);
+          }}
+        >
+          Go Back
+        </button>
+      </div>
+      <div className="flex ml-4 flex-col justify-center items-center w-full max-h-[500px]">
+        <p className="font-Courier text-3xl text-center">
+          {currentLocation.text}
+        </p>
+        <div className="flex gap-4 mb-8 mt-4 flex-wrap px-9 py-4 overflow-y-auto border-2 border-black max-w-[850px] ">
+          {location === Locations.ArmorShop ? (
+            <MakeInventoryItems list={ArmorShopInventory} />
+          ) : (
+            <MakeInventoryItems list={PotionShopInventory} />
+          )}
         </div>
       </div>
     </div>
@@ -72,7 +68,7 @@ export const Shop = () => {
 };
 
 type MakeInventoryItemsProps = {
-  list: ArmorType[] | PotionType[];
+  list: Item[];
 };
 
 const MakeInventoryItems = ({ list }: MakeInventoryItemsProps) => {
@@ -82,14 +78,18 @@ const MakeInventoryItems = ({ list }: MakeInventoryItemsProps) => {
 
   const { setItem } = useContext(GameContext);
 
-  const handlePurchase = (e: ArmorType | PotionType) => {
-    if (e.cost > gold) {
+  const handlePurchase = (item: Item) => {
+    if (!item.cost) {
+      console.error("Item has no cost attribute: ", item);
+      return;
+    }
+    if (item.cost > gold) {
       alert("You do not have enough gold to purchase this item!");
       return;
     }
     if (confirm("are you sure you wanna buy this?") == true) {
-      setGold(gold - e.cost);
-      addItem(e);
+      setGold(gold - item.cost);
+      addItem(item);
     }
   };
 

@@ -1,5 +1,5 @@
 import { Media } from "../character/characters";
-import { Loot } from "../enum";
+import { Loot } from "../Enums";
 import { QuestItemNames } from "../quests/questItems";
 
 export type Monster = {

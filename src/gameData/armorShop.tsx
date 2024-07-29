@@ -1,4 +1,4 @@
-import { ItemClass } from "./objects/Item";
+import { Item } from "./objects/Item";
 
 // export type ArmorType = {
 //   name: string;
@@ -10,7 +10,7 @@ import { ItemClass } from "./objects/Item";
 //   description: string;
 // };
 
-export const ArmorShopInventory: ItemClass[] = [
+export const ArmorShopInventory: Item[] = [
   {
     name: "Sentry's Mail",
     type: "Chest",

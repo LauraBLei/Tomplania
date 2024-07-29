@@ -5,8 +5,6 @@ type ImageProps = {
 };
 
 export const ImageButton = ({ key2: key, src, alt }: ImageProps) => {
-  console.log(key);
-
   return (
     <button className="h-[80px] w-[80px] bg-[#d9bf9e]">
       <img key={key} src={src} alt={alt} />;

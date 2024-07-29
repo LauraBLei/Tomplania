@@ -1,176 +1,77 @@
 import { useContext } from "react";
+import { InventoryContext } from "../hooks/inventoryContext";
 import { CharacterContext } from "../hooks/characterContext";
 import Popup from "reactjs-popup";
 import { GameContext } from "../hooks/gameContext";
-import { PotionType } from "../gameData/potionShop";
 
 export const Inventory = () => {
+  const { inventory } = useContext(InventoryContext);
   const {
-    characterAttack,
-    weapon,
-    setCharacterAttack,
-    Inventory,
-    setInventory,
-    gold,
-    gauntlet,
-    boots,
-    chest,
-    maxHP,
-    setCurrentHP,
-    currentHP,
+    character,
     sellItem,
     equipItem,
+    boots,
+    gauntlet,
+    chest,
     unEquipItem,
+    weapon,
+    gold,
+    consumeItem,
   } = useContext(CharacterContext);
   const { location } = useContext(GameContext);
 
   return (
-    <div>
-      <div className="flex mb-6">
-        <div className="flex">
-          <img
-            className="w-[50px] h-[50px]"
-            src="./assets/items/coins/gold.png"
-            alt="Image og gold coins"
-          />
-          <h2 className="text-white font-uncial text-2xl">{gold}</h2>
-        </div>
+    <div className="w-full">
+      <div className="h-[50] ">
+        <img
+          className="absolute z-30 mt-[-50px] ml-[-20px]"
+          src="./assets/bg-images/TopFrame.png"
+          alt="Frame"
+        />
       </div>
-
-      <div className="flex gap-6 mb-8">
-        <Popup
-          trigger={
-            <button className="h-[90px] w-[90px] bg-[#d9bf9e]">
-              <img src={chest?.media.src} alt={chest?.media.alt} />
-            </button>
-          }
-        >
-          {chest && (
-            <div className="bg-[#d9bf9e] border-2 border-black p-2">
-              <button
-                className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-2xl"
-                onClick={() => {
-                  equipItem(chest);
-                }}
-              >
-                Unequip
-              </button>
-            </div>
-          )}
-        </Popup>
-        <Popup
-          trigger={
-            <button className="h-[90px] w-[90px] bg-[#d9bf9e]">
-              <img src={gauntlet?.media.src} alt={gauntlet?.media.alt} />
-            </button>
-          }
-        >
-          {gauntlet && (
-            <div className="bg-[#d9bf9e] border-2 border-black p-2">
-              <button
-                className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-2xl"
-                onClick={() => {
-                  unEquipItem(gauntlet);
-                }}
-              >
-                Unequip
-              </button>
-            </div>
-          )}
-        </Popup>
-        <Popup
-          trigger={
-            <button className="h-[90px] w-[90px] bg-[#d9bf9e]">
-              <img src={boots?.media.src} alt={boots?.media.alt} />
-            </button>
-          }
-        >
-          {boots && (
-            <div className="bg-[#d9bf9e] border-2 border-black p-2">
-              <button
-                className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-2xl"
-                onClick={() => {
-                  unEquipItem(boots);
-                }}
-              >
-                Unequip
-              </button>
-            </div>
-          )}
-        </Popup>
-        <Popup
-          trigger={
-            <button className="h-[90px] w-[90px] bg-[#d9bf9e]">
-              <img src={weapon?.media.src} alt={weapon?.media.alt} />
-            </button>
-          }
-        >
-          {weapon && (
-            <div className="bg-[#d9bf9e] border-2 border-black p-2">
-              <button
-                className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-2xl"
-                onClick={() => {
-                  unEquipItem(weapon);
-                }}
-              >
-                Unequip
-              </button>
-            </div>
-          )}
-        </Popup>
-      </div>
-      <div className="overflow-y-auto max-h-[300px]  flex gap-6">
-        {Inventory.length > 0 ? (
-          Inventory.map((item, i) => (
-            <Popup
-              trigger={
-                <button className="h-[80px] w-[80px] bg-[#d9bf9e]">
-                  <img key={i} src={item.media.src} alt={item.media.alt} />;
-                </button>
-              }
-            >
-              <div className="bg-[#d9bf9e] border-2 border-black p-2">
-                <h3 className="font-uncial text-2xl">
-                  Price: {`${item.name}`}
-                </h3>
-
-                <h3 className="font-uncial text-2xl">
-                  Price: {`${item.cost}`}
-                </h3>
-                {"hp" in item && (
-                  <>
-                    <h3 className="font-uncial text-2xl">
-                      HP Bonus: {`${item.hp}`}
+      <div className="bg-beige border-8 border-blue ml-[66px] w-[550px] h-[800px] mt-[20px] relative z-20 flex justify-between">
+        <div className="h-auto max-w-[285px]">
+          <div className="mt-20 ml-3 flex flex-wrap gap-4">
+            {Array.from(inventory).map(([item, quantity], i) => (
+              <Popup
+                key={i * 3}
+                trigger={
+                  <button key={i} className="h-[80px] w-[80px] bg-blue mt-5">
+                    <img
+                      className="w-full"
+                      key={i + 10}
+                      src={item.media.src}
+                      alt={item.media.alt}
+                    />
+                    <h3 key={i + 100} className="font-uncial text-2xl">
+                      {quantity}
                     </h3>
-                  </>
-                )}
-                {"attack" in item && (
-                  <>
-                    <h3 className="font-uncial text-2xl">
-                      Type: {`${item.type}`}
-                    </h3>
-                    <h3 className="font-uncial text-2xl">
-                      Attack Bonus: {`${item.attack}`}
-                    </h3>
-                  </>
-                )}
-                <div className="flex gap-6">
-                  {location.includes("Shop") && (
-                    <button
-                      className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-2xl"
-                      onClick={() => {
-                        sellItem(item);
-                      }}
-                    >
-                      sell
-                    </button>
-                  )}
-                  {["Weapon", "Gauntlet", "Chest", "Boot"].includes(
-                    item.type
-                  ) &&
-                    "attack" in item && (
+                  </button>
+                }
+              >
+                <div key={i + 23} className="bg-blue border-2 border-black p-2">
+                  <ShowStat text="Name" stats={item.name} />
+                  <ShowStat text="HP Bonus" stats={item.hp} />
+                  <ShowStat text="Attack bonus" stats={item.attack} />
+                  <ShowStat text="Healing" stats={item.heal} />
+                  <div key={i + 21} className="flex gap-6">
+                    {location.includes("Shop") && (
                       <button
-                        className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-2xl"
+                        key={i + 6}
+                        className="button2"
+                        onClick={() => {
+                          sellItem(item);
+                        }}
+                      >
+                        sell
+                      </button>
+                    )}
+                    {["Weapon", "Gauntlet", "Chest", "Boot"].includes(
+                      item.type
+                    ) && (
+                      <button
+                        key={i + 97}
+                        className="button2"
                         onClick={() => {
                           equipItem(item);
                         }}
@@ -178,29 +79,137 @@ export const Inventory = () => {
                         Equip
                       </button>
                     )}
-                  {item.type === "Potion" && "currentHP" in item && (
-                    <button
-                      className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-2xl"
-                      onClick={() => {
-                        handleConsume(item);
-                      }}
-                    >
-                      Drink
-                    </button>
-                  )}
+                    {item.type === "Potion" && (
+                      <button
+                        key={i + 76}
+                        className="button2"
+                        onClick={() => {
+                          consumeItem(item);
+                        }}
+                      >
+                        Drink
+                      </button>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </Popup>
-          ))
-        ) : (
-          <div>
-            <h2 className="text-center text-2xl font-uncial text-white bg-black">
-              Your Inventory Is Empty!
-            </h2>
+              </Popup>
+            ))}
           </div>
-        )}
-        {}
+        </div>
+        <div className="mt-16 mr-2">
+          <div className="max-w-[200px] z-0">
+            <img
+              className="w-full z-0 border-4 border-blue"
+              src={character.media.src}
+              alt={character.media.src}
+            />
+          </div>
+          <div className="flex flex-col gap-5 mt-5 items-center">
+            <Popup
+              trigger={
+                <button className="h-[90px] w-[90px] bg-blue">
+                  <img src={chest?.media.src} alt={chest?.media.alt} />
+                </button>
+              }
+            >
+              {chest && (
+                <div className="bg-blue border-2 border-black p-2">
+                  <button
+                    className="button2"
+                    onClick={() => {
+                      unEquipItem(chest);
+                    }}
+                  >
+                    Unequip
+                  </button>
+                </div>
+              )}
+            </Popup>
+            <Popup
+              trigger={
+                <button className="h-[90px] w-[90px] bg-blue">
+                  <img src={gauntlet?.media.src} alt={gauntlet?.media.alt} />
+                </button>
+              }
+            >
+              {gauntlet && (
+                <div className="bg-blue border-2 border-black p-2">
+                  <button
+                    className="button2"
+                    onClick={() => {
+                      unEquipItem(gauntlet);
+                    }}
+                  >
+                    Unequip
+                  </button>
+                </div>
+              )}
+            </Popup>
+            <Popup
+              trigger={
+                <button className="h-[90px] w-[90px] bg-blue">
+                  <img src={boots?.media.src} alt={boots?.media.alt} />
+                </button>
+              }
+            >
+              {boots && (
+                <div className="bg-blue border-2 border-black p-2">
+                  <button
+                    className="button2"
+                    onClick={() => {
+                      unEquipItem(boots);
+                    }}
+                  >
+                    Unequip
+                  </button>
+                </div>
+              )}
+            </Popup>
+            <Popup
+              trigger={
+                <button className="h-[90px] w-[90px] bg-blue">
+                  <img src={weapon?.media.src} alt={weapon?.media.alt} />
+                </button>
+              }
+            >
+              {weapon && (
+                <div className="bg-blue border-2 border-black p-2">
+                  <button
+                    className="button2"
+                    onClick={() => {
+                      unEquipItem(weapon);
+                    }}
+                  >
+                    UnEquip
+                  </button>
+                </div>
+              )}
+            </Popup>
+          </div>
+          <div className="flex justify-center items-center">
+            <p className="font-uncial text-2xl">{gold}</p>
+            <img
+              className="w-[50px]"
+              src="./assets/items/coins/gold.png"
+              alt="gold coins"
+            />
+          </div>
+        </div>
       </div>
     </div>
+  );
+};
+
+interface ShowStatProps {
+  text: string;
+  stats: number | undefined | string;
+}
+
+const ShowStat = ({ text, stats }: ShowStatProps) => {
+  if (!stats) {
+    return <></>;
+  }
+  return (
+    <h3 className="font-uncial text-2xl text-beige">{`${text}: ${stats}`}</h3>
   );
 };

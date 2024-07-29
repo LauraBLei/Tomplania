@@ -1,6 +1,6 @@
 import { Media } from "./character/characters";
 import { MonsterNames } from "./Enemies/enemies";
-import { NPCNames, Locations } from "./enum";
+import { Locations, NPCNames } from "./Enums";
 
 export type Location = {
   text: string;
@@ -65,7 +65,7 @@ export const LocationList: LocationType = {
     enemy: [],
     npc: [NPCNames.OldLady],
   },
-  "Arcanthria City Gates": {
+  "Aranthria City Gates": {
     text: "City Gates",
     media: {
       src: "./assets/village/cityGates.png",

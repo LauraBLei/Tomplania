@@ -4,16 +4,12 @@ import { LocationList } from "../locations";
 import { MonstersList } from "./enemies";
 
 export const HpBarEnemy = () => {
-  const context = useContext(GameContext);
-  const prevLocation = LocationList[context.PrevLocation];
+  const { MonsterHP, PrevLocation } = useContext(GameContext);
+  const prevLocation = LocationList[PrevLocation];
 
   const enemy = MonstersList[prevLocation.enemy[0]];
 
-  const currentHP = context.MonsterHP;
-
-  const maxHP = enemy.hp;
-
-  const hpPercentage = (currentHP / maxHP) * 100;
+  const hpPercentage = (MonsterHP / enemy.hp) * 100;
 
   return (
     <div className="w-full">
@@ -25,7 +21,7 @@ export const HpBarEnemy = () => {
           ></div>
         </div>
         <h2 className="absolute font-Courier text-xl text-white text-center z-10">
-          {currentHP}/{maxHP} HP
+          {MonsterHP}/{enemy.hp} HP
         </h2>
       </div>
     </div>

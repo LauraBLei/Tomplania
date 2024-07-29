@@ -11,6 +11,7 @@ export enum QuestStages {
 
 export enum QuestNames {
   SecretIngredient = "Secret Ingredient",
+  test = "test",
 }
 
 export enum Locations {
@@ -18,7 +19,7 @@ export enum Locations {
   outsideTavern = "Ironwood Avenue",
   BackGate = "Ironwood Gate",
   EmeraldPlaza = "Emerald Plaza",
-  CityGates = "Arcanthria City Gates",
+  CityGates = "Aranthria City Gates",
   EvershadeForest = "Evershade Forest",
   TheCrystalCaves = "Crystal Caves",
   ElderglowLake = "Elderglow Lake",

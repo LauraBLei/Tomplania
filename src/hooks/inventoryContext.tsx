@@ -1,16 +1,11 @@
 import { useState, createContext } from "react";
-import { MonsterLoot } from "../gameData/Enemies/loot";
-import { ArmorType } from "../gameData/armorShop";
-import { PotionType } from "../gameData/potionShop";
-import { Item } from "../gameData/quests/questItems";
-
-type ItemType = MonsterLoot | ArmorType | PotionType | Item;
+import { Item } from "../gameData/objects/Item";
 
 type inventoryContextType = {
-  inventory: Map<ItemType, number>;
+  inventory: Map<Item, number>;
 
-  removeItem: (item: ItemType, quantity?: number) => void;
-  addItem: (item: ItemType, quantity?: number) => void;
+  removeItem: (item: Item, quantity?: number) => void;
+  addItem: (item: Item, quantity?: number) => void;
 };
 
 export const InventoryContext = createContext<inventoryContextType>(
@@ -22,40 +17,25 @@ type ContextProviderProps = {
 };
 
 export const InventoryProvider = ({ children }: ContextProviderProps) => {
-  const [inventory, setInventory] = useState<Map<ItemType, number>>(new Map());
+  const [inventory, setInventory] = useState<Map<Item, number>>(new Map());
 
-  const removeItem = (item: ItemType, quantity: number = 1) => {
-    console.log("removing item", item);
-
+  const removeItem = (item: Item, quantity: number = 1) => {
     setInventory((prevInventory) => {
-      // Create a new Map from the previous state
       const newInventory = new Map(prevInventory);
-
       const itemCount = newInventory.get(item);
-      // console.log(
-      //   `Removing item: ${item.name} Before removal there was ${itemCount} items. It should remove ${quantity} items.`
-      // );
 
       if (itemCount) {
         newInventory.set(item, itemCount - quantity);
       }
-      if (itemCount || itemCount === 0) {
+      if (newInventory.get(item) === 0) {
         newInventory.delete(item);
       }
-
-      // console.log(
-      //   `There is now ${newInventory.get(item)} of ${
-      //     item.name
-      //   } left after removing.`
-      // );
 
       return newInventory;
     });
   };
 
-  const addItem = (item: ItemType, quantity: number = 1) => {
-    console.log("adding item", item);
-
+  const addItem = (item: Item, quantity: number = 1) => {
     if (inventory.has(item)) {
       inventory.set(item, inventory.get(item)! + quantity);
     } else {

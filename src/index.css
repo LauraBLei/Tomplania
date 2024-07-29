@@ -10,6 +10,26 @@
   .button2 {
     @apply border-2 border-beige px-4 py-1 cursor-pointer font-uncial text-2xl text-beige;
   }
+
+  .Headline {
+    @apply font-Courier font-bold text-2xl text-white;
+  }
+
+  .Text {
+    @apply font-Courier font-bold text-xl text-white;
+  }
+
+  .textBox {
+    @apply flex flex-col items-center w-full mt-24 gap-4;
+  }
+
+  .outerBox {
+    @apply bg-beige border-8 border-blue max-w-[1000px] w-full mx-14 mt-[-150px] z-0 p-4;
+  }
+
+  .textDecoration {
+    @apply w-full z-10 relative;
+  }
 }
 
 .hp-bar {
@@ -19,4 +39,23 @@
   border: 1px solid #000;
   border-radius: 5px;
   overflow: hidden;
+}
+
+.tools {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.tools button {
+  background-color: #d9bf9e;
+  border: 2px solid black;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-family: "Uncial Antiqua", serif;
+  font-size: 16px;
+}
+
+.tools button:hover {
+  background-color: #b0a077;
 }

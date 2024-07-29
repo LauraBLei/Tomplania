@@ -1,23 +1,15 @@
-import { Media } from "./character/characters";
-import { QuestNames } from "./enum";
+import { QuestNames } from "./Enums";
+import { NPC } from "./objects/Npc";
 
-export type NPCText = {
-  startText: string;
-  hasVisitedText: string;
-  QuestInProgress: string;
-  QuestAccepted: string;
-  QuestDelivered: string;
-};
+// export type NPCtype = {
+//   type: string;
+//   name: string;
+//   text: NPCText;
+//   quests: QuestNames[];
+//   media: Media;
+// };
 
-export type NPCtype = {
-  type: string;
-  name: string;
-  text: NPCText;
-  quests: QuestNames[];
-  media: Media;
-};
-
-export const NPCList2: NPCtype[] = [
+export const NPCList: NPC[] = [
   {
     type: "Old Lady",
     name: "Esther Willow",
@@ -34,6 +26,7 @@ export const NPCList2: NPCtype[] = [
       src: "./assets/npc/oldLady.png",
       alt: "An old lady standing in front of some townhouses, she has a sunhat on, and holding a basket in her hand.",
     },
+    hasVisited: false,
   },
   {
     type: "Bartender",
@@ -52,32 +45,6 @@ export const NPCList2: NPCtype[] = [
       src: "./assets/npc/bartender.png",
       alt: "Image of a male bartender with grey hair, green shirt and brown apron.",
     },
+    hasVisited: false,
   },
 ];
-
-export class NPC {
-  type: string;
-  name: string;
-  text: NPCText;
-  quests: QuestNames[];
-  media: Media;
-  hasVisited: boolean;
-  constructor(
-    type: string,
-    name: string,
-    text: NPCText,
-    quests: QuestNames[],
-    media: Media
-  ) {
-    this.type = type;
-    this.name = name;
-    this.text = text;
-    this.quests = quests;
-    this.media = media;
-    this.hasVisited = false;
-  }
-}
-
-export const NPCList: NPC[] = NPCList2.map(
-  (e) => new NPC(e.type, e.name, e.text, e.quests, e.media)
-);

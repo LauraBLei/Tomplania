@@ -1,6 +1,41 @@
 import { Media } from "../character/characters";
-import { NPCNames, QuestStages } from "../enum";
-import { QuestItemNames } from "../quests/questItems";
+
+export class Item {
+  // Required properties
+  name: string;
+  media: Media;
+  description: string;
+  type: string;
+
+  // Optional properties
+  hp?: number;
+  attack?: number;
+  cost?: number;
+  dropChance?: number;
+  heal?: number;
+
+  constructor({
+    name,
+    media,
+    description,
+    type,
+    hp,
+    attack,
+    cost,
+    dropChance,
+    heal,
+  }: Item) {
+    this.name = name;
+    this.media = media;
+    this.description = description;
+    this.type = type;
+    this.hp = hp;
+    this.attack = attack;
+    this.cost = cost;
+    this.dropChance = dropChance;
+    this.heal = heal;
+  }
+}
 
 // export type NewItemType = {
 //   name: string;
@@ -68,78 +103,3 @@ import { QuestItemNames } from "../quests/questItems";
 //     this.heal = heal
 //   }
 // }
-
-export class Quest {
-  name: string;
-  description: string[];
-  reward: number;
-  questItem: QuestItemNames[];
-  status: QuestStages;
-  npc: NPCNames;
-  xp: number;
-
-  constructor({
-    name,
-    description,
-    reward,
-    questItem,
-    status,
-    npc,
-    xp,
-  }: QuestType) {
-    this.name = name;
-    this.description = description;
-    this.reward = reward;
-    this.questItem = questItem;
-    this.status = status;
-    this.npc = npc;
-    this.xp = xp;
-  }
-}
-
-export type QuestType = {
-  name: string;
-  description: string[];
-  reward: number;
-  questItem: QuestItemNames[];
-  status: QuestStages;
-  npc: NPCNames;
-  xp: number;
-};
-
-export class ItemClass {
-  // Required properties
-  name: string;
-  media: Media;
-  description: string;
-  type: string;
-
-  // Optional properties
-  hp?: number;
-  attack?: number;
-  cost?: number;
-  dropChance?: number;
-  heal?: number;
-
-  constructor({
-    name,
-    media,
-    description,
-    type,
-    hp,
-    attack,
-    cost,
-    dropChance,
-    heal,
-  }: ItemClass) {
-    this.name = name;
-    this.media = media;
-    this.description = description;
-    this.type = type;
-    this.hp = hp;
-    this.attack = attack;
-    this.cost = cost;
-    this.dropChance = dropChance;
-    this.heal = heal;
-  }
-}
