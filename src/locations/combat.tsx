@@ -1,17 +1,12 @@
 import { useContext } from "react";
-// import { useEffect } from "react";
 import { CharacterContext } from "../hooks/characterContext";
 import { GameContext } from "../hooks/gameContext";
 import { MonstersList } from "../gameData/Enemies/enemies";
 import { LocationList } from "../gameData/locations";
 import { Locations } from "../gameData/Enums";
 import { HpBarEnemy } from "../gameData/Enemies/hpBar";
-// import { MonsterLootList } from "../gameData/Enemies/loot";
+
 import { HpBarCharacter } from "../gameData/character/hpBar";
-// import { InventoryContext } from "../hooks/inventoryContext";
-// import { NewQuestItems } from "../gameData/quests/questItems";
-// import { Item } from "../gameData/objects/Item";
-// import { NewQuestItems, QuestItems } from "../gameData/quests/questItems";
 
 export const EnemyLocation = () => {
   const { MonsterHP, PrevLocation } = useContext(GameContext);

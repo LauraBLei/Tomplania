@@ -40,7 +40,7 @@ export const NPCList: NPC[] = [
       QuestAccepted: "",
       QuestDelivered: "",
     },
-    quests: [],
+    quests: [QuestNames.test],
     media: {
       src: "./assets/npc/bartender.png",
       alt: "Image of a male bartender with grey hair, green shirt and brown apron.",

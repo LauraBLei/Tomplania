@@ -126,8 +126,6 @@ const Location = () => {
 
   const currentLocation = LocationList[location];
 
-  // useEffect(() => {}, []);
-
   const checkIfNpcHasBeenVisited = (npcName: NPCNames) => {
     const npc = NPCList.filter((npc) => npcName == npc.type)[0];
     return npc.hasVisited ? npc.name : npc.type;
@@ -135,9 +133,9 @@ const Location = () => {
 
   return (
     <div>
-      {/* <p className="font-Courier max-h-[220px] overflow-auto ">
+      <p className="font-Courier max-h-[220px] overflow-auto ">
         {currentLocation.text.replaceAll("{name}", name)}
-      </p> */}
+      </p>
 
       <div className="flex flex-wrap gap-4 mt-4 mx-4 flex-col max-h-[150px] mb-6">
         {currentLocation.path.map((e, i) => (

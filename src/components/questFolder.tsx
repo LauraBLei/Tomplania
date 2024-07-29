@@ -6,13 +6,15 @@ export const QuestFolder = () => {
   // const { activeQuest, setActiveQuest } = useContext(GameContext);
   const { activeQuests } = useContext(GameContext);
 
+  console.log(activeQuests);
+
   // const abandonQuest = () => {
   //   setActiveQuest(null);
   // };
 
   return (
     <div>
-      {!activeQuests ? (
+      {activeQuests.length === 0 ? (
         <div className="my-6">
           <h3 className="font-Courier font-bold text-3xl text-white">
             You have no active Quests
