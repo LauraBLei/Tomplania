@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { Character, characters } from "../gameData/character/characters";
+import { Character, listOfCharacters } from "../gameData/character/characters";
 import { InventoryContext } from "./inventoryContext";
 import { Item } from "../gameData/objects/Item";
 import { Monster } from "../gameData/Enemies/enemies";
@@ -11,9 +11,7 @@ const xpThresholds = [10, 250, 450, 650, 900, 1300];
 type characterContextType = {
   name: string;
   characterAttack: number;
-  currentHP: number;
   character: Character;
-  maxHP: number;
   gold: number;
   chest: Item | null;
   gauntlet: Item | null;
@@ -22,12 +20,14 @@ type characterContextType = {
   xp: number;
   MaxXP: number;
   lvl: number;
+  currentMana: number;
+  currentHP: number;
+  MaxHP: number;
+  MaxMana: number;
 
   setName: React.Dispatch<React.SetStateAction<string>>;
   setCharacter: React.Dispatch<React.SetStateAction<Character>>;
   setCharacterAttack: React.Dispatch<React.SetStateAction<number>>;
-  setCurrentHP: React.Dispatch<React.SetStateAction<number>>;
-  setMaxHP: React.Dispatch<React.SetStateAction<number>>;
   setGold: React.Dispatch<React.SetStateAction<number>>;
   setChest: React.Dispatch<React.SetStateAction<Item | null>>;
   setGauntlet: React.Dispatch<React.SetStateAction<Item | null>>;
@@ -36,12 +36,16 @@ type characterContextType = {
   setXP: React.Dispatch<React.SetStateAction<number>>;
   setMaxXP: React.Dispatch<React.SetStateAction<number>>;
   setLvl: React.Dispatch<React.SetStateAction<number>>;
+  setCurrentHP: React.Dispatch<React.SetStateAction<number>>;
+  setCurrentMana: React.Dispatch<React.SetStateAction<number>>;
+  setMaxHP: React.Dispatch<React.SetStateAction<number>>;
+  setMaxMana: React.Dispatch<React.SetStateAction<number>>;
+
   sellItem: (item: Item) => void;
   equipItem: (item: Item) => void;
   unEquipItem: (item: Item) => void;
   consumeItem: (item: Item) => void;
   changeGold: (amount: number) => void;
-
   GainXP: (amount: number) => void;
   enemyDefeated: (enemy: Monster) => void;
 };
@@ -56,10 +60,8 @@ type ContextProviderProps = {
 
 export const CharacterProvider = ({ children }: ContextProviderProps) => {
   const [name, setName] = useState("Tompe");
-  const [character, setCharacter] = useState(characters[0]);
-  const [currentHP, setCurrentHP] = useState(1000);
+  const [character, setCharacter] = useState(listOfCharacters[0]);
   const [characterAttack, setCharacterAttack] = useState(10);
-  const [maxHP, setMaxHP] = useState(1000);
   const [gold, setGold] = useState(10000);
   const [chest, setChest] = useState<Item | null>(null);
   const [gauntlet, setGauntlet] = useState<Item | null>(null);
@@ -68,6 +70,11 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
   const [xp, setXP] = useState(0);
   const [MaxXP, setMaxXP] = useState(10);
   const [lvl, setLvl] = useState(1);
+  const [currentHP, setCurrentHP] = useState(character.maxHealth);
+  const [maxHP, setMaxHP] = useState(character.maxHealth);
+  const [currentMana, setCurrentMana] = useState(character.mana);
+  const [MaxMana, setMaxMana] = useState(character.mana);
+
   const { removeItem, addItem } = useContext(InventoryContext);
 
   const sellItem = (item: Item, quantity: number = 1) => {
@@ -198,16 +205,12 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
     <CharacterContext.Provider
       value={{
         changeGold,
-        currentHP,
-        setCurrentHP,
         characterAttack,
         setCharacterAttack,
         character,
         setCharacter,
         name,
         setName,
-        maxHP,
-        setMaxHP,
         gold,
         setGold,
         setChest,
@@ -230,6 +233,14 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
         GainXP,
         consumeItem,
         enemyDefeated,
+        setCurrentHP,
+        setCurrentMana,
+        currentMana,
+        currentHP,
+        MaxHP: maxHP,
+        setMaxHP,
+        MaxMana,
+        setMaxMana,
       }}
     >
       {children}

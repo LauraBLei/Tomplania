@@ -6,7 +6,7 @@ import { HpBarCharacter } from "../gameData/character/hpBar";
 import { CharacterContext } from "../hooks/characterContext";
 import { Inventory } from "../components/inventory";
 import { Shop } from "../locations/shop";
-import { EnemyLocation } from "../locations/combat";
+import { CombatImages, EnemyLocation } from "../locations/combat";
 import { NPCLocation } from "../locations/npcLocation";
 import { NPCList } from "../gameData/NPC";
 import { NPCNames } from "../gameData/Enums";
@@ -14,6 +14,7 @@ import { QuestFolder } from "../components/questFolder";
 import { XpBar } from "../gameData/character/xpBar";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { TextFieldLayout } from "../components/textFieldLayout";
+import { ManaBar } from "../gameData/character/manaBar";
 
 export const GamePage = () => {
   const { fighting, location, NPC, bgImage } = useContext(GameContext);
@@ -26,7 +27,7 @@ export const GamePage = () => {
     <div className="bg-black h-screen flex justify-center">
       <div className="w-full flex flex-col items-center max-w-[1200px]">
         <div
-          className="relative w-full max-w-[1000px] max-h-[800px] h-full bg-no-repeat bg-cover flex bg-center"
+          className="relative w-full max-w-[1000px] max-h-[800px] h-full bg-no-repeat bg-cover flex flex-col bg-center gap-5"
           style={bgImageStyle}
         >
           <div className="flex w-full mt-3 justify-between">
@@ -35,6 +36,8 @@ export const GamePage = () => {
             </div>
             <NormalTop />
           </div>
+
+          {fighting && <CombatImages />}
         </div>
         <TextFieldLayout>
           {fighting ? (
@@ -56,9 +59,9 @@ const NormalTop = () => {
   return (
     <div className="flex mr-7  mb-3">
       <details>
-        <summary className="cursor-pointer list-none text-2xl mr-7">
+        <summary className="cursor-pointer list-none text-2xl mr-7 ">
           <img
-            className="w-[55px]"
+            className="icon "
             src="./assets/bg-images/compass.png"
             alt="Icon of a compass"
           />
@@ -90,7 +93,11 @@ const NormalTop = () => {
       </details>
       <details>
         <summary className="cursor-pointer list-none text-2xl mr-7">
-          <img src="./assets/bg-images/backpack.png" alt="Icon of a backpack" />
+          <img
+            className=" icon"
+            src="./assets/bg-images/backpack.png"
+            alt="Icon of a backpack"
+          />
         </summary>
         <div className="absolute max-w-[800px] right-32   px-9 py-4 h-[600px] z-20">
           <Inventory />
@@ -99,7 +106,7 @@ const NormalTop = () => {
       <details>
         <summary className="cursor-pointer list-none text-2xl mr-7">
           <img
-            className="w-[50px]"
+            className="icon"
             src="./assets/bg-images/questlog.png"
             alt="icon of a questlog"
           />
@@ -113,15 +120,13 @@ const NormalTop = () => {
 };
 
 const Location = () => {
-  const { lvl } = useContext(CharacterContext);
+  const { name, lvl } = useContext(CharacterContext);
   const {
     setFighting,
     setMonsterHP,
-    setNPC,
-    setBgImg,
     location,
-    setLocation,
     setPrevLocation,
+    changeLocation,
   } = useContext(GameContext);
 
   const currentLocation = LocationList[location];
@@ -132,76 +137,69 @@ const Location = () => {
   };
 
   return (
-    <div>
-      <p className="font-Courier max-h-[220px] overflow-auto ">
+    <div className="flex flex-col items-center">
+      <p className="TextDark">
         {currentLocation.text.replaceAll("{name}", name)}
       </p>
 
       <div className="flex flex-wrap gap-4 mt-4 mx-4 flex-col max-h-[150px] mb-6">
-        {currentLocation.path.map((e, i) => (
-          <div key={i + 54} className="flex flex-wrap ml-4">
-            <img
-              key={i + 11}
-              src="./assets/bg-images/locationDot.png"
-              alt="location dot"
-            />
-
-            <button
-              key={i}
-              className="font-Courier text-xl"
-              onClick={() => {
-                setLocation(currentLocation.path[i]);
-                setPrevLocation(location);
-                setBgImg(LocationList[e].media);
-              }}
-            >
-              {currentLocation.path[i]}
-            </button>
-          </div>
+        {currentLocation.path.map((loc, i) => (
+          <OptionButton
+            index={i}
+            text={`${currentLocation.path[i]}`}
+            onClick={() =>
+              changeLocation(currentLocation.path[i], LocationList[loc].media)
+            }
+          />
         ))}
         {currentLocation.enemy.map((_, i) => (
-          <div className="flex flex-wrap ml-4">
-            <img src="./assets/bg-images/locationDot.png" alt="location dot" />
-            <button
-              key={i}
-              className="font-Courier text-xl"
-              onClick={() => {
-                setFighting(true);
-                setPrevLocation(location);
-                setMonsterHP(MonstersList[currentLocation.enemy[i]].hp);
-              }}
-            >
-              Fight {currentLocation.enemy[i]}
-            </button>
-          </div>
+          <OptionButton
+            index={i}
+            text={`Fight ${currentLocation.enemy[i]}`}
+            onClick={() => {
+              setFighting(true);
+              setMonsterHP(MonstersList[currentLocation.enemy[i]].hp);
+              setPrevLocation(location);
+            }}
+          />
         ))}
         {currentLocation.npc.map((npcName, i) => (
-          <div className="flex flex-wrap ml-4">
-            <img src="./assets/bg-images/locationDot.png" alt="location dot" />
-            <button
-              key={i}
-              className="font-Courier text-xl"
-              onClick={() => {
-                const npc = NPCList.filter((npc) => npcName == npc.type)[0];
-                setPrevLocation(location);
-                setNPC(currentLocation.npc[i]);
-                setBgImg(npc.media);
-                console.log("npc", npc, "npcName:", npcName);
-              }}
-            >
-              Talk with the {checkIfNpcHasBeenVisited(npcName)}
-            </button>
-          </div>
+          <OptionButton
+            index={i}
+            text={`Talk with ${checkIfNpcHasBeenVisited(npcName)}`}
+            onClick={() => {
+              const npc = NPCList.find((npc) => npcName == npc.type);
+              changeLocation(location, npc?.media, false, npcName);
+            }}
+          />
         ))}
       </div>
 
       <div className="w-full flex mb-4 justify-center">
         <div className="max-w-[600px] w-full flex items-center flex-col gap-4">
           <HpBarCharacter />
+          <ManaBar />
           <XpBar />
           <h3 className="font-Courier text-2xl">Level: {lvl}</h3>
         </div>
       </div>
+    </div>
+  );
+};
+
+interface OptionButtonProps {
+  onClick: () => void;
+  index: number;
+  text: string;
+}
+
+const OptionButton = ({ onClick, index, text }: OptionButtonProps) => {
+  return (
+    <div className="flex flex-wrap ml-4">
+      <img src="./assets/bg-images/locationDot.png" alt="location dot" />
+      <button key={index} className="font-Courier text-xl" onClick={onClick}>
+        {text}
+      </button>
     </div>
   );
 };

@@ -43,7 +43,7 @@ export const LocationList: LocationType = {
     },
     path: [Locations.outsideTavern],
     enemy: [],
-    npc: [NPCNames.Bartender],
+    npc: [NPCNames.TheBartender],
   },
   "Ironwood Avenue": {
     text: "Ironwood Avenue",
@@ -63,7 +63,7 @@ export const LocationList: LocationType = {
     },
     path: [Locations.outsideTavern, Locations.CityGates, Locations.ArmorShop],
     enemy: [],
-    npc: [NPCNames.OldLady],
+    npc: [NPCNames.TheOldLady],
   },
   "Aranthria City Gates": {
     text: "City Gates",
@@ -115,7 +115,7 @@ export const LocationList: LocationType = {
     },
     path: [Locations.Eldervale],
     enemy: [],
-    npc: [],
+    npc: [NPCNames.TheOldMan],
   },
   "Evershade Forest": {
     text: "Evershade Forest",
@@ -175,7 +175,7 @@ export const LocationList: LocationType = {
   Harbor: {
     text: "Harbor",
     media: {
-      src: "./assets/village/riverbendHabor.png",
+      src: "./assets/village/riverbendHarbor.png",
       alt: "",
     },
     path: [Locations.RiverbendHarbor],
@@ -188,7 +188,7 @@ export const LocationList: LocationType = {
       src: "./assets/world/veilOfShadows.png",
       alt: "",
     },
-    path: [Locations.Eldervale, Locations.CityGates],
+    path: [Locations.Eldervale, Locations.CityGates, Locations.EloweensCabin],
     enemy: [],
     npc: [],
   },
@@ -213,7 +213,7 @@ export const LocationList: LocationType = {
     npc: [],
   },
   "Black Void": {
-    text: "Bla bla.. bla BLA BLA. Black void",
+    text: "{name}, you are a warrior with the blood of gods coursing through your veins. To ascend to their divine ranks, you must prove your worth. You are destined to journey to a realm plagued by monstrous abominations. Conquer these beasts. Rescue the land from darkness. Fulfill your destiny.",
     media: {
       src: "./assets/world/blackVoid.png",
       alt: "",
@@ -221,5 +221,15 @@ export const LocationList: LocationType = {
     path: [Locations.CircleOfTheGods],
     enemy: [],
     npc: [],
+  },
+  "Eloween's Cabin": {
+    text: "",
+    media: {
+      src: "./assets/world/ElowensCabin.png",
+      alt: "",
+    },
+    path: [Locations.WhisperingWoods],
+    enemy: [],
+    npc: [NPCNames.TheYoungWoman],
   },
 };

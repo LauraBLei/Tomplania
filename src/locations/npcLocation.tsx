@@ -5,8 +5,6 @@ import { LocationList } from "../gameData/locations";
 import { QuestList } from "../gameData/quests/quests";
 import { QuestStages } from "../gameData/Enums";
 import { CharacterContext } from "../hooks/characterContext";
-import { QuestItemNames } from "../gameData/quests/questItems";
-import { InventoryContext } from "../hooks/inventoryContext";
 
 export const NPCLocation = () => {
   // const context = useContext(GameContext);
@@ -20,12 +18,19 @@ export const NPCLocation = () => {
     setSelectedQuest,
     activeQuests,
     startQuest,
+    acceptedQuest,
+    deliveredQuest,
+    setAcceptedQuest,
+    setDeliveredQuest,
   } = useContext(GameContext);
+  const { lvl } = useContext(CharacterContext);
   const Quest = QuestList.filter((quest) => quest.name === selectedQuest)[0];
   const npc = NPCList.filter((npc) => npc.type == NPC)[0];
   const [page, setPage] = useState(0);
   const activeQuest = activeQuests.filter((quest) => quest.npc == npc.type)[0]; // TODO
-
+  const Quests = QuestList.filter(
+    (quest) => quest.npc === npc.type && quest.lvl <= lvl
+  );
   console.log("xxxxx", activeQuests);
 
   const handleLeave = () => {
@@ -34,12 +39,15 @@ export const NPCLocation = () => {
     setNPC(null);
     npc.hasVisited = true;
     setSelectedQuest("");
+    setAcceptedQuest(false);
+    setDeliveredQuest(false);
   };
 
   const handleAcceptQuest = () => {
     Quest.status = QuestStages.InProgress;
     startQuest(Quest);
     setSelectedQuest("");
+    setAcceptedQuest(true);
   };
 
   console.log(activeQuests);
@@ -58,9 +66,11 @@ export const NPCLocation = () => {
       </div>
       {selectedQuest ? (
         <div className="flex flex-col justify-center items-center gap-6 mb-4">
-          <h3 className="font-Courier font-bold text-3xl">{selectedQuest}</h3>
+          <h3 className="Headline text-blue font-bold text-3xl">
+            {selectedQuest} (Level: {Quest.lvl})
+          </h3>
           <div className="flex flex-col items-center">
-            <p className="font-Courier text-2xl">{Quest.description[page]}</p>
+            <p className="TextDark">{Quest.description[page]}</p>
             {page < Quest.description.length - 1 ? (
               <button
                 className="button place-self-end"
@@ -72,16 +82,20 @@ export const NPCLocation = () => {
               ""
             )}
           </div>
-          <div className="flex items-center">
-            <h3 className="font-Courier font-bold text-3xl">
-              Reward: {Quest.reward}
-            </h3>
-            <img
-              className="w-[50px]"
-              src="./assets/items/coins/gold.png"
-              alt="Image og gold coins"
-            />
+          <div className="flex items-center gap-4">
+            <div className="flex items-center">
+              <h3 className="Headline text-blue">Reward: {Quest.reward}</h3>
+              <img
+                className="w-[50px]"
+                src="./assets/items/coins/gold.png"
+                alt="Image og gold coins"
+              />
+            </div>
+            <div className="flex items-center">
+              <h3 className="Headline text-blue">{Quest.xp} XP</h3>
+            </div>
           </div>
+
           <div className="flex gap-6">
             <button onClick={() => handleAcceptQuest()} className="button">
               Accept
@@ -96,11 +110,17 @@ export const NPCLocation = () => {
             </button>
           </div>
         </div>
+      ) : acceptedQuest ? (
+        <AcceptedQuest />
+      ) : deliveredQuest ? (
+        <DeliveredQuest />
       ) : activeQuest?.status === QuestStages.InProgress &&
         activeQuest?.npc === npc.type ? (
         <QuestInProgress />
       ) : npc.hasVisited === false ? (
         <FirstVisit />
+      ) : Quests ? (
+        <NoAvailableQuests />
       ) : (
         <SecondVisit />
       )}
@@ -109,37 +129,18 @@ export const NPCLocation = () => {
 };
 
 const QuestInProgress = () => {
-  const { NPC, activeQuests, removeQuest } = useContext(GameContext);
-  const { changeGold } = useContext(CharacterContext);
-  const { inventory, removeItem } = useContext(InventoryContext);
-  const npc = NPCList.filter((npc) => npc.type == NPC)[0];
+  const { NPC, deliverQuest, activeQuests } = useContext(GameContext);
+  const { name } = useContext(CharacterContext);
 
-  const handleDeliverQuest = () => {
-    const activeQuest = activeQuests.filter(
-      (quest) => quest.npc == npc.name
-    )[0]; // TODO
-    const QuestItem = activeQuest.questItem;
-    const hasAllItems = QuestItem.every((questItem) =>
-      Array.from(inventory).some(([item]) => item.name === questItem)
-    );
-    if (hasAllItems) {
-      Array.from(inventory).forEach(([item]) =>
-        QuestItem.includes(item.name as QuestItemNames)
-          ? removeItem(item)
-          : null
-      );
-      if (activeQuest) {
-        changeGold(activeQuest.reward);
-        activeQuest.status = QuestStages.Completed;
-      }
-      removeQuest(activeQuest);
-    } else alert("You do not have all the items to complete the quest!");
-  };
+  const npc = NPCList.filter((npc) => npc.type == NPC)[0];
+  const Quest = activeQuests.filter((quest) => quest.npc === npc.type)[0]; // TODO
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <p className="font-Courier text-2xl">{npc.text.QuestInProgress}</p>
-      <button className="button" onClick={() => handleDeliverQuest()}>
+      <p className="font-Courier text-2xl">
+        {npc.text.QuestInProgress.replaceAll("{name}", name)}
+      </p>
+      <button className="button" onClick={() => deliverQuest(Quest)}>
         Deliver Quest
       </button>
     </div>
@@ -148,22 +149,39 @@ const QuestInProgress = () => {
 
 const FirstVisit = () => {
   const { setSelectedQuest, NPC } = useContext(GameContext);
-  const npc = NPCList.filter((e) => e.type == NPC)[0];
+  const { lvl, name } = useContext(CharacterContext);
+  const [page, setPage] = useState(0);
+  const npc = NPCList.filter((npc) => npc.type == NPC)[0];
+  const Quests = QuestList.filter(
+    (quest) => quest.npc === npc.type && quest.lvl <= lvl
+  );
   npc.hasVisited = true;
   return (
     <div className="flex flex-col gap-4 items-center">
-      <p className="font-Courier text-3xl mb-4">{npc.text.startText}</p>
+      <p className="TextDark">
+        {npc.text.startText[page].replaceAll("{name}", name)}
+      </p>
+      {page < npc.text.startText.length - 1 ? (
+        <button
+          className="button place-self-end"
+          onClick={() => setPage(page + 1)}
+        >
+          Next
+        </button>
+      ) : (
+        ""
+      )}
       <div className="flex gap-4 items-center">
         <h3 className="font-Courier text-3xl">Quests:</h3>
-        {npc.quests.map((questName, i) => (
+        {Quests.map((Quest, i) => (
           <button
             key={i}
             className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-2xl"
             onClick={() => {
-              setSelectedQuest(questName);
+              setSelectedQuest(Quest.name);
             }}
           >
-            {questName}
+            {Quest.name}
           </button>
         ))}
       </div>
@@ -172,10 +190,16 @@ const FirstVisit = () => {
 };
 
 const SecondVisit = () => {
-  const { setSelectedQuest } = useContext(GameContext);
-  const { NPC } = useContext(GameContext);
+  const { setSelectedQuest, NPC } = useContext(GameContext);
+  const { lvl, name } = useContext(CharacterContext);
+  const [page, setPage] = useState(0);
+
   const npc = NPCList.filter((e) => e.type == NPC)[0];
-  const notCompletedQuests = QuestList.filter(
+  const Quests = QuestList.filter(
+    (quest) => quest.npc === npc.type && quest.lvl <= lvl
+  );
+
+  const notCompletedQuests = Quests.filter(
     (quest) =>
       quest.status != QuestStages.Completed && npc.quests.includes(quest.name)
   );
@@ -183,7 +207,19 @@ const SecondVisit = () => {
 
   return (
     <div className="flex flex-col gap-6 mb-5">
-      <p className="font-Courier text-3xl">{npc.text.hasVisitedText}</p>
+      <p className="TextDark">
+        {npc.text.hasVisitedText[page].replaceAll("{name}", name)}
+      </p>
+      {page < npc.text.startText.length - 1 ? (
+        <button
+          className="button place-self-end"
+          onClick={() => setPage(page + 1)}
+        >
+          Next
+        </button>
+      ) : (
+        ""
+      )}
       <div className="flex gap-4 items-center">
         <h3 className="font-Courier text-3xl">Quests:</h3>
         {notCompletedQuests.map((quest, i) => (
@@ -198,6 +234,81 @@ const SecondVisit = () => {
           </button>
         ))}
       </div>
+    </div>
+  );
+};
+
+const AcceptedQuest = () => {
+  const { NPC } = useContext(GameContext);
+  const npc = NPCList.filter((npc) => npc.type == NPC)[0];
+  const { name } = useContext(CharacterContext);
+  const [page, setPage] = useState(0);
+
+  return (
+    <div>
+      <p className="TextDark">
+        {npc.text.QuestAccepted[page].replaceAll("{name}", name)}
+      </p>
+      {page < npc.text.startText.length - 1 ? (
+        <button
+          className="button place-self-end"
+          onClick={() => setPage(page + 1)}
+        >
+          Next
+        </button>
+      ) : (
+        ""
+      )}
+    </div>
+  );
+};
+
+const DeliveredQuest = () => {
+  const { NPC } = useContext(GameContext);
+  const { name } = useContext(CharacterContext);
+  const npc = NPCList.filter((npc) => npc.type == NPC)[0];
+  const [page, setPage] = useState(0);
+
+  return (
+    <div>
+      <p className="TextDark">
+        {npc.text.QuestDelivered[page].replaceAll("{name}", name)}
+      </p>
+      {page < npc.text.startText.length - 1 ? (
+        <button
+          className="button place-self-end"
+          onClick={() => setPage(page + 1)}
+        >
+          Next
+        </button>
+      ) : (
+        ""
+      )}
+    </div>
+  );
+};
+
+const NoAvailableQuests = () => {
+  const { NPC } = useContext(GameContext);
+  const { name } = useContext(CharacterContext);
+  const [page, setPage] = useState(0);
+
+  const npc = NPCList.filter((npc) => npc.type == NPC)[0];
+  return (
+    <div>
+      <p className="TextDark">
+        {npc.text.NoAvailableQuests[page].replaceAll("{name}", name)}
+      </p>
+      {page < npc.text.startText.length - 1 ? (
+        <button
+          className="button place-self-end"
+          onClick={() => setPage(page + 1)}
+        >
+          Next
+        </button>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

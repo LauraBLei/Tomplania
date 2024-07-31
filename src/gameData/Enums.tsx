@@ -1,6 +1,8 @@
 export enum NPCNames {
-  OldLady = "Old Lady",
-  Bartender = "Bartender",
+  TheOldLady = "The Old Lady",
+  TheBartender = "The Bartender",
+  TheOldMan = "The Old Man",
+  TheYoungWoman = "The Young Woman",
 }
 
 export enum QuestStages {
@@ -12,6 +14,12 @@ export enum QuestStages {
 export enum QuestNames {
   SecretIngredient = "Secret Ingredient",
   test = "test",
+  FirstTrial = "Trial Of The Siren's Song",
+  SecondTrial = "Second Trial",
+  ThirdTrial = "Third Trial",
+  FourthTrial = "Fourth Trial",
+  FifthTrial = "Fifth Trial",
+  SixthTrial = "Sixth Trial",
 }
 
 export enum Locations {
@@ -34,6 +42,7 @@ export enum Locations {
   harbor = "Harbor",
   BlackVoid = "Black Void",
   PotionShop = "Potion Shop",
+  EloweensCabin = "Eloween's Cabin",
 }
 
 export enum Loot {

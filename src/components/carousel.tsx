@@ -1,4 +1,4 @@
-import { characters } from "../gameData/character/characters";
+import { listOfCharacters } from "../gameData/character/characters";
 import { useContext } from "react";
 import {
   CarouselProvider,
@@ -18,14 +18,14 @@ export const Carousel = () => {
     setCurrentSlide((prevSlide) => {
       console.log(prevSlide);
 
-      return prevSlide === characters.length - 1 ? 0 : prevSlide + 1;
+      return prevSlide === listOfCharacters.length - 1 ? 0 : prevSlide + 1;
     });
   };
 
   const handleBack = () => {
     setCurrentSlide((prevSlide) => {
       console.log(prevSlide);
-      return prevSlide === 0 ? characters.length - 1 : prevSlide - 1;
+      return prevSlide === 0 ? listOfCharacters.length - 1 : prevSlide - 1;
     });
   };
 
@@ -35,13 +35,13 @@ export const Carousel = () => {
     <CarouselProvider
       naturalSlideWidth={800}
       naturalSlideHeight={1000}
-      totalSlides={characters.length}
+      totalSlides={listOfCharacters.length}
       currentSlide={currentSlide}
     >
       <Slider className="w-[500px]">
-        {characters.map((character, index) => (
+        {listOfCharacters.map((character, index) => (
           <Slide key={index} index={index} className="w-full h-full">
-            <div className="flex flex-col items-center w-full gap-5">
+            <div className="flex flex-col items-center w-full gap-5 h-full">
               <div className="max-h-[400px] overflow-hidden">
                 <Image
                   hasMasterSpinner
@@ -50,10 +50,12 @@ export const Carousel = () => {
                   alt={character.media.alt}
                 />
               </div>
-              <p className="mt-6 text-6xl">{character.class}</p>
+              <p className="Headline">{character.job}</p>
+              <p className=" Headline">Staring Health: {character.maxHealth}</p>
+              <p className=" Headline">Starting Mana: {character.mana}</p>
               <button
                 className="bg-white text-black px-5 text-3xl rounded"
-                onClick={() => context.setCharacter(characters[index])}
+                onClick={() => context.setCharacter(listOfCharacters[index])}
               >
                 Choose
               </button>
@@ -62,18 +64,10 @@ export const Carousel = () => {
         ))}
       </Slider>
       <div className="flex justify-between mt-4">
-        <ButtonBack
-          onClick={handleBack}
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-          disabled={false}
-        >
+        <ButtonBack onClick={handleBack} className="Headline" disabled={false}>
           Back
         </ButtonBack>
-        <ButtonNext
-          onClick={handleNext}
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-          disabled={false}
-        >
+        <ButtonNext onClick={handleNext} className="Headline" disabled={false}>
           Next
         </ButtonNext>
       </div>

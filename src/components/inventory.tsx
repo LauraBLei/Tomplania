@@ -17,6 +17,7 @@ export const Inventory = () => {
     weapon,
     gold,
     consumeItem,
+    name,
   } = useContext(CharacterContext);
   const { location } = useContext(GameContext);
 
@@ -97,12 +98,13 @@ export const Inventory = () => {
           </div>
         </div>
         <div className="mt-16 mr-2">
-          <div className="max-w-[200px] z-0">
+          <div className="max-w-[200px] z-0 flex flex-col items-center">
             <img
               className="w-full z-0 border-4 border-blue"
               src={character.media.src}
               alt={character.media.src}
             />
+            <h2 className="Headline text-black">{name}</h2>
           </div>
           <div className="flex flex-col gap-5 mt-5 items-center">
             <Popup

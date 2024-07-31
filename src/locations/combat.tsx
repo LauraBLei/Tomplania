@@ -3,46 +3,24 @@ import { CharacterContext } from "../hooks/characterContext";
 import { GameContext } from "../hooks/gameContext";
 import { MonstersList } from "../gameData/Enemies/enemies";
 import { LocationList } from "../gameData/locations";
-import { Locations } from "../gameData/Enums";
 import { HpBarEnemy } from "../gameData/Enemies/hpBar";
 
 import { HpBarCharacter } from "../gameData/character/hpBar";
+import { ManaBar } from "../gameData/character/manaBar";
 
 export const EnemyLocation = () => {
-  const { MonsterHP, PrevLocation } = useContext(GameContext);
-  const { character, currentHP } = useContext(CharacterContext);
+  const { MonsterHP } = useContext(GameContext);
+  const { currentHP } = useContext(CharacterContext);
 
-  const prevLocation = LocationList[PrevLocation];
-  const enemy = MonstersList[prevLocation.enemy[0]];
   return (
     <div>
-      <div className="w-full flex mt-10">
-        <div className="flex justify-between w-full relative z-10 mt-[-600px]">
-          <div className="flex flex-col max-w-[400px] ml-10">
-            <img
-              className="border-double border-spacing-5 border-8 border-s-4 border-green-600"
-              src={character.media.src}
-              alt={character.media.alt}
-            />
-            <HpBarCharacter />
-          </div>
-          <div className="flex flex-col max-w-[400px] mr-10">
-            <img
-              className="border-double border-spacing-5 border-8 border-s-4 border-red-700"
-              src={enemy.media.src}
-              alt={enemy.media.alt}
-            />
-            <HpBarEnemy />
-          </div>
-        </div>
-      </div>
       {MonsterHP <= 0 && currentHP > 0 ? <EnemyDefeated /> : <Fighting />}
     </div>
   );
 };
 
 export const EnemyDefeated = () => {
-  const { PrevLocation, setLocation, setFighting } = useContext(GameContext);
+  const { leave } = useContext(GameContext);
 
   return (
     <div>
@@ -52,8 +30,7 @@ export const EnemyDefeated = () => {
           <button
             className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-4xl"
             onClick={() => {
-              setLocation(PrevLocation);
-              setFighting(false);
+              leave();
             }}
           >
             Return
@@ -65,66 +42,45 @@ export const EnemyDefeated = () => {
 };
 
 export const Fighting = () => {
-  const {
-    characterAttack,
-    gold,
-    maxHP,
-    setGold,
-    setCurrentHP,
-    currentHP,
-    enemyDefeated,
-  } = useContext(CharacterContext);
-  const { PrevLocation, setLocation, setFighting, MonsterHP, setMonsterHP } =
-    useContext(GameContext);
+  const { character, currentHP, lvl } = useContext(CharacterContext);
+  const { PrevLocation, fight, leave, handleRespawn } = useContext(GameContext);
   const prevLocation = LocationList[PrevLocation];
 
   const enemy = MonstersList[prevLocation.enemy[0]];
 
-  const HandleRespawn = () => {
-    setLocation(Locations.tavernRoom);
-    setGold(Math.floor(gold * 0.9));
-    setFighting(false);
-    setCurrentHP(maxHP);
-  };
+  const skills = character.skills.filter((skills) => lvl >= skills.level);
 
   return (
     <div className="flex flex-col items-center mt-[-100px] ">
-      <div className="mt-28 mb-5 flex justify-center">
+      <div className="mt-28 mb-5 flex justify-center w-full">
         {currentHP === 0 ? (
           <div>
             <h2>You died!</h2>
             <button
               className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-4xl"
-              onClick={HandleRespawn}
+              onClick={() => handleRespawn()}
             >
               Respawn
             </button>
           </div>
         ) : (
-          <div className=" flex gap-10">
+          <div className="flex justify-between w-full items-center">
+            <div>
+              {skills.map((skill) => (
+                <button
+                  className="max-w-[100px]"
+                  onClick={() =>
+                    fight(enemy.attack, skill.mana, skill.attack, enemy)
+                  }
+                >
+                  <img src={skill.media.src} alt={skill.media.alt} />
+                </button>
+              ))}
+            </div>
             <button
               className="button"
               onClick={() => {
-                const NewMonsterHP =
-                  MonsterHP - characterAttack < 0
-                    ? 0
-                    : MonsterHP - characterAttack;
-                const PlayerHP =
-                  currentHP - enemy.attack < 0 ? 0 : currentHP - enemy.attack;
-                setMonsterHP(NewMonsterHP);
-                setCurrentHP(PlayerHP);
-                if (NewMonsterHP <= 0) {
-                  enemyDefeated(enemy);
-                }
-              }}
-            >
-              Attack
-            </button>
-            <button
-              className="button"
-              onClick={() => {
-                setLocation(PrevLocation);
-                setFighting(false);
+                leave();
               }}
             >
               Run
@@ -136,15 +92,36 @@ export const Fighting = () => {
   );
 };
 
-// export const LootEnemy = () => {
-//   const context = useContext(GameContext);
-//   const prevLocation = LocationList[context.PrevLocation];
-//   const enemy = MonstersList[prevLocation.enemy[0]];
-//   const { addItem } = useContext(InventoryContext);
+export const CombatImages = () => {
+  const { character } = useContext(CharacterContext);
+  const { PrevLocation } = useContext(GameContext);
 
-//   const loot = enemy.loot;
-//   loot.map((item) => {
+  const prevLocation = LocationList[PrevLocation];
+  const enemy = MonstersList[prevLocation.enemy[0]];
 
-//     addItem(MonsterLootList[item])
-//   });
-// };
+  return (
+    <div className="flex w-full justify-between">
+      <div className="flex flex-col max-w-[400px] ml-10">
+        <div className="max-h-[300px] overflow-hidden">
+          <img
+            className="combatFrame border-green-600"
+            src={character.media.src}
+            alt={character.media.alt}
+          />
+        </div>
+        <HpBarCharacter />
+        <ManaBar />
+      </div>
+      <div className="flex flex-col max-w-[400px]  mr-10 ">
+        <div className="max-h-[300px] overflow-hidden">
+          <img
+            className="combatFrame border-red-700"
+            src={enemy.media.src}
+            alt={enemy.media.alt}
+          />
+        </div>
+        <HpBarEnemy />
+      </div>
+    </div>
+  );
+};

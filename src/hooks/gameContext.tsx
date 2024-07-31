@@ -7,6 +7,7 @@ import { Quest } from "../gameData/objects/Quest";
 import { InventoryContext } from "./inventoryContext";
 import { QuestItemNames } from "../gameData/quests/questItems";
 import { CharacterContext } from "./characterContext";
+import { Monster } from "../gameData/Enemies/enemies";
 
 type GameContextType = {
   location: Locations;
@@ -19,19 +20,32 @@ type GameContextType = {
   selectedQuest: string;
   item: Item | null;
   activeQuests: Quest[];
+  acceptedQuest: boolean;
+  deliveredQuest: boolean;
 
   setLocation: React.Dispatch<React.SetStateAction<Locations>>;
   setFighting: React.Dispatch<React.SetStateAction<boolean>>;
   setPrevLocation: React.Dispatch<React.SetStateAction<Locations>>;
   setMonsterHP: React.Dispatch<React.SetStateAction<number>>;
   setNPC: React.Dispatch<React.SetStateAction<NPCNames | null>>;
-  // setActiveQuest: React.Dispatch<React.SetStateAction<Quest | null>>;
   setBgImg: React.Dispatch<React.SetStateAction<Media>>;
   setSelectedQuest: React.Dispatch<React.SetStateAction<string>>;
   setItem: React.Dispatch<React.SetStateAction<Item | null>>;
+  setAcceptedQuest: React.Dispatch<React.SetStateAction<boolean>>;
+  setDeliveredQuest: React.Dispatch<React.SetStateAction<boolean>>;
+
   startQuest: (quest: Quest) => void;
   removeQuest: (quest: Quest) => void;
   deliverQuest: (quest: Quest) => void;
+  fight: (damage: number, mana: number, attack: number, enemy: Monster) => void;
+  leave: () => void;
+  handleRespawn: () => void;
+  changeLocation: (
+    newLocation?: Locations,
+    newBgImg?: Media,
+    isFighting?: boolean,
+    newNpc?: NPCNames
+  ) => void;
 };
 export const GameContext = createContext<GameContextType>(
   {} as GameContextType
@@ -49,14 +63,69 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
   const [PrevLocation, setPrevLocation] = useState(Locations.BlackVoid);
   const [MonsterHP, setMonsterHP] = useState(100);
   const [NPC, setNPC] = useState<NPCNames | null>(null);
-  // const [activeQuest, setActiveQuest] = useState<Quest | null>(null);
   const [activeQuests, setActiveQuests] = useState<Quest[]>([]);
   const [bgImage, setBgImg] = useState(LocationList[Locations.BlackVoid].media);
   const [selectedQuest, setSelectedQuest] = useState<string>("");
   const [item, setItem] = useState<Item | null>(null);
+  const [acceptedQuest, setAcceptedQuest] = useState(false);
+  const [deliveredQuest, setDeliveredQuest] = useState(false);
+
+  const {
+    setCurrentHP,
+    setCurrentMana,
+    currentMana,
+    MaxMana,
+    setGold,
+    gold,
+    MaxHP,
+    GainXP,
+    enemyDefeated,
+  } = useContext(CharacterContext);
 
   const startQuest = (quest: Quest) => {
     setActiveQuests([...activeQuests, quest]);
+  };
+
+  const changeLocation = (
+    newLocation?: Locations,
+    newBgImg?: Media,
+    isFighting?: boolean,
+    newNpc?: NPCNames
+  ) => {
+    setPrevLocation(location);
+    if (newLocation) setLocation(newLocation);
+    if (newBgImg) setBgImg(newBgImg);
+    if (isFighting != null) setFighting(isFighting);
+    if (newNpc) setNPC(newNpc);
+  };
+
+  const fight = (
+    damage: number,
+    mana: number,
+    attack: number,
+    enemy: Monster
+  ) => {
+    const newMonsterHP = Math.max(MonsterHP - attack, 0);
+    setCurrentMana(currentMana - mana);
+    setCurrentHP((prevHP) => Math.max(prevHP - damage, 0));
+    setMonsterHP(newMonsterHP);
+    if (newMonsterHP === 0) {
+      enemyDefeated(enemy);
+    }
+  };
+
+  const handleRespawn = () => {
+    const bgImage = LocationList[Locations.tavernRoom].media;
+    changeLocation(Locations.tavernRoom, bgImage, false);
+    setGold(Math.floor(gold * 0.9));
+    setCurrentHP(MaxHP);
+    setCurrentMana(MaxMana);
+  };
+
+  const leave = () => {
+    setLocation(PrevLocation);
+    setFighting(false);
+    setCurrentMana(MaxMana);
   };
 
   const removeQuest = (quest: Quest) => {
@@ -76,19 +145,22 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
       );
       if (quest) {
         changeGold(quest.reward);
+        GainXP(quest.xp);
         quest.status = QuestStages.Completed;
       }
       removeQuest(quest);
+      setDeliveredQuest(true);
     } else alert("You do not have all the items to complete the quest!");
   };
 
   return (
     <GameContext.Provider
       value={{
+        changeLocation,
         deliverQuest,
         activeQuests,
-        startQuest: startQuest,
-        removeQuest: removeQuest,
+        startQuest,
+        removeQuest,
         location,
         setLocation,
         fighting,
@@ -99,13 +171,19 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
         setMonsterHP,
         NPC,
         setNPC,
-        // setActiveQuest,
         bgImage,
         setBgImg,
         selectedQuest,
         setSelectedQuest,
         item,
         setItem,
+        fight,
+        leave,
+        handleRespawn,
+        acceptedQuest,
+        setAcceptedQuest,
+        deliveredQuest,
+        setDeliveredQuest,
       }}
     >
       {children}

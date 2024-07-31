@@ -3,11 +3,12 @@ import { NPCNames, QuestNames, QuestStages } from "../Enums";
 import { QuestItemNames } from "../quests/questItems";
 
 export type NPCText = {
-    startText: string;
-    hasVisitedText: string;
-    QuestInProgress: string;
-    QuestAccepted: string;
-    QuestDelivered: string;
+    startText: string[];
+    hasVisitedText: string[];
+    QuestInProgress: string[];
+    QuestAccepted: string[];
+    QuestDelivered: string[];
+    NoAvailableQuests: string[];
   };
 
 export class Quest {
@@ -18,6 +19,7 @@ export class Quest {
     status: QuestStages;
     npc: NPCNames;
     xp: number;
+    lvl: number;
   
     constructor({
       name,
@@ -27,6 +29,7 @@ export class Quest {
       status,
       npc,
       xp,
+      lvl,
     }: Quest) {
       this.name = name;
       this.description = description;
@@ -35,5 +38,6 @@ export class Quest {
       this.status = status;
       this.npc = npc;
       this.xp = xp;
+      this.lvl = lvl
     }
   }

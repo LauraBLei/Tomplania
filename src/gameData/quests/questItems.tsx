@@ -1,13 +1,5 @@
 import { Item } from "../objects/Item";
 
-// export type Item = {
-//   name: string;
-//   type: string;
-//   cost: number;
-//   dropChance: number;
-//   media: Media;
-// };
-
 export type QuestItemsType = {
   [key: string]: Item;
 };
