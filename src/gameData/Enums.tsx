@@ -20,6 +20,7 @@ export enum QuestNames {
   FourthTrial = "Fourth Trial",
   FifthTrial = "Fifth Trial",
   SixthTrial = "Sixth Trial",
+  MysteriousBox = "Mysterious Box",
 }
 
 export enum Locations {

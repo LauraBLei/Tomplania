@@ -99,7 +99,7 @@ export const NPCList: NPC[] = [
         "I am afraid i do not have any journeys for you {name}!",
       ],
     },
-    quests: [],
+    quests: [QuestNames.MysteriousBox],
     media: {
       src: "./assets/npc/elowen.png",
       alt: "Elowen, a woman, standing in the midst of a path in a forest.",

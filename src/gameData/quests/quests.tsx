@@ -91,4 +91,25 @@ export const QuestList: Quest[] = [
     xp: 500,
     lvl: 7,
   },
+  {
+    name: QuestNames.MysteriousBox,
+    description: [
+      "The forest does not lie, you have come at a most opportune time.",
+      "I have this box. It is said to hold a mysterious artifact, which has the power to heal the land.",
+      "Unfortunately, the three keys are missing. Each key lies in a place guarded by a guardian.",
+      "The first key's Guardian is by a moonlit pool, it is said to be an abyssal seahorse. You will need its heart for the key",
+      "The second guardian is said to be in the Singing Grove. The Guardian is a dark druid. It is said that he wears the key around his neck.",
+      "The third and last key, can be found in the Whispering Cavern. Be careful, in there lies a woman with a dangerous beast. You will need her headpiece for the key.",
+    ],
+    reward: 300,
+    questItem: [
+      QuestItemNames.KeyOne,
+      QuestItemNames.KeyTwo,
+      QuestItemNames.keyThree,
+    ],
+    status: QuestStages.NotStarted,
+    npc: NPCNames.TheYoungWoman,
+    xp: 600,
+    lvl: 1,
+  },
 ];
