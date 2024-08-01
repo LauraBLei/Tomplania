@@ -10,8 +10,7 @@ export const Inventory = () => {
     character,
     sellItem,
     equipItem,
-    boots,
-    gauntlet,
+    headPiece,
     chest,
     unEquipItem,
     weapon,
@@ -130,36 +129,16 @@ export const Inventory = () => {
             <Popup
               trigger={
                 <button className="h-[90px] w-[90px] bg-blue">
-                  <img src={gauntlet?.media.src} alt={gauntlet?.media.alt} />
+                  <img src={headPiece?.media.src} alt={headPiece?.media.alt} />
                 </button>
               }
             >
-              {gauntlet && (
+              {headPiece && (
                 <div className="bg-blue border-2 border-black p-2">
                   <button
                     className="button2"
                     onClick={() => {
-                      unEquipItem(gauntlet);
-                    }}
-                  >
-                    Unequip
-                  </button>
-                </div>
-              )}
-            </Popup>
-            <Popup
-              trigger={
-                <button className="h-[90px] w-[90px] bg-blue">
-                  <img src={boots?.media.src} alt={boots?.media.alt} />
-                </button>
-              }
-            >
-              {boots && (
-                <div className="bg-blue border-2 border-black p-2">
-                  <button
-                    className="button2"
-                    onClick={() => {
-                      unEquipItem(boots);
+                      unEquipItem(headPiece);
                     }}
                   >
                     Unequip

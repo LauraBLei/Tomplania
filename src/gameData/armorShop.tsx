@@ -1,24 +1,14 @@
 import { Item } from "./objects/Item";
 
-// export type ArmorType = {
-//   name: string;
-//   type: string;
-//   hp: number;
-//   attack: number;
-//   cost: number;
-//   media: Media;
-//   description: string;
-// };
-
 export const ArmorShopInventory: Item[] = [
   {
     name: "Sentry's Mail",
     type: "Chest",
-    hp: 30,
-    attack: 0,
-    cost: 10,
+    job: "Knight",
+    hp: 20,
+    cost: 40,
     media: {
-      src: "./assets/items/gear/armor2.png",
+      src: "./assets/items/gear/Knight/armor2.png",
       alt: "chest piece armor",
     },
     description: "You are gonna need at least this to survive out there mate!",
@@ -26,143 +16,214 @@ export const ArmorShopInventory: Item[] = [
   {
     name: "Fire lords Mail",
     type: "Chest",
-    hp: 150,
-    attack: 0,
-    cost: 10,
+    job: "Knight",
+    hp: 30,
+    cost: 55,
     media: {
-      src: "./assets/items/gear/armor1.png",
+      src: "./assets/items/gear/Knight/armor1.png",
       alt: "chest piece armor",
     },
     description:
       "This is a nice piece! Makes sure you can take a few more hits!",
   },
   {
-    name: "Serpent banes rope",
+    name: "Celestial Vanguard Chest",
     type: "Chest",
-    hp: 250,
-    attack: 0,
-    cost: 10,
+    job: "Knight",
+    hp: 40,
+    cost: 100,
     media: {
-      src: "./assets/items/gear/Rope2.png",
+      src: "./assets/items/gear/Knight/28.png",
       alt: "chest piece armor",
     },
     description:
-      "I got to admit, it did not make this. And it scares me a bit! I got it from a creepy stranger from out of town. He really wanted to get rid of it!",
+      "This is my favorite armor. Fine piece if you ask me, made it with my own 9 fingers!",
   },
   {
-    name: "Sentry's gauntlets",
-    type: "Gauntlet",
+    name: "Sentry's Helmet",
+    type: "Head",
+    job: "Knight",
     hp: 10,
-    attack: 0,
-    cost: 10,
+    cost: 30,
     media: {
-      src: "./assets/items/gear/hands1.png",
-      alt: "gauntlets",
+      src: "./assets/items/gear/Knight/Helmet1.png",
+      alt: "Head piece armor",
     },
     description:
-      "These are nice beginner gauntlets, if you cant afford anything better!",
+      "This is a fine starter helmet! Makes it hurt less when the enemy hits you right on the head!",
   },
   {
-    name: "Fire lords Gauntlets",
-    type: "Gauntlet",
-    hp: 50,
-    attack: 0,
-    cost: 10,
+    name: "Fire Lords Helmet",
+    type: "Head",
+    job: "Knight",
+    hp: 20,
+    cost: 50,
     media: {
-      src: "./assets/items/gear/hands2.png",
-      alt: "gauntlets",
+      src: "./assets/items/gear/Knight/Helmet2.png",
+      alt: "Head piece armor",
     },
-    description: "Yeah these will do it for ya! Good quality! made it myself!",
+    description: "This makes it a bit harder for you enemy to kill you, Hehe!",
   },
   {
-    name: "Sentry's Boots",
-    type: "Boot",
-    hp: 10,
-    attack: 0,
-    cost: 10,
+    name: "Celestial Vanguard Helmet",
+    type: "Head",
+    job: "Knight",
+    hp: 30,
+    cost: 80,
     media: {
-      src: "./assets/items/gear/Boots2.png",
-      alt: "Boot",
+      src: "./assets/items/gear/Knight/34.png",
+      alt: "Head piece armor",
     },
     description:
-      "You gotta have shoes?! What are you gonna do? run around barefoot? That would be crazy!",
+      "Cant have a magnificent chest piece, without a matching head piece!",
   },
 
   {
-    name: "Fire lords Boots",
-    type: "Boot",
-    hp: 50,
-    attack: 0,
-    cost: 10,
+    name: "Travelers Rope",
+    type: "Chest",
+    job: "Sorcerer",
+    hp: 10,
+    cost: 30,
     media: {
-      src: "./assets/items/gear/Boots1.png",
-      alt: "Boots",
+      src: "./assets/items/gear/Sorcerer/basicRope.png",
+      alt: "Rope for a sorcerer",
+    },
+    description: "Just a common rope, but its better than nothing!",
+  },
+  {
+    name: "Travelers Hood",
+    type: "Head",
+    job: "Sorcerer",
+    mana: 20,
+    cost: 25,
+    media: {
+      src: "./assets/items/gear/Sorcerer/basicHood.png",
+      alt: "Hood for a sorcerer",
+    },
+    description: "Just a common Hood, but its better than nothing!",
+  },
+  {
+    name: "Arcane Robe",
+    type: "Chest",
+    job: "Sorcerer",
+    mana: 20,
+    cost: 60,
+    media: {
+      src: "./assets/items/gear/Sorcerer/arcaneRope.png",
+      alt: "Rope for a sorcerer",
+    },
+    description: "This is a nice rope for a traveling sorcerer!",
+  },
+  {
+    name: "Arcane Hood",
+    type: "Head",
+    job: "Sorcerer",
+    mana: 40,
+    cost: 55,
+    media: {
+      src: "./assets/items/gear/Sorcerer/arcaneHood.png",
+      alt: "Hood for a sorcerer",
+    },
+    description: "A nice hood to go with your Arcane Robe!",
+  },
+  {
+    name: "Mystic Mantle Robe",
+    type: "Chest",
+    job: "Sorcerer",
+    mana: 30,
+    cost: 90,
+    media: {
+      src: "./assets/items/gear/Sorcerer/mysticMantle.png",
+      alt: "Rope for a sorcerer",
     },
     description:
-      "These are some good quality boots! fine as well! Made them with my own two hands!",
+      "This is the finest rope i have for a sorcerer. Its enchanted with the heart of a dragon.",
   },
   {
-    name: "Elder glow Staff",
-    type: "Weapon",
-    hp: 0,
-    attack: 5,
-    cost: 10,
+    name: "Mystic Mantle Helmet",
+    type: "Head",
+    job: "Sorcerer",
+    mana: 40,
+    cost: 85,
     media: {
-      src: "./assets/items/weapons/staffs/staff2.png",
-      alt: "Staff",
+      src: "./assets/items/gear/Sorcerer/mysticMantleHelmet.png",
+      alt: "Helmet for a sorcerer",
     },
-    description: "",
-  },
-  {
-    name: "Serpent banes staff",
-    type: "Weapon",
-    hp: 0,
-    attack: 60,
-    cost: 10,
-    media: {
-      src: "./assets/items/weapons/staffs/staff4.png",
-      alt: "Staff",
-    },
-    description: "This Staff Scares me!",
-  },
-  {
-    name: "Silver light Sword",
-    type: "Weapon",
-    hp: 0,
-    attack: 10,
-    cost: 10,
-    media: {
-      src: "./assets/items/weapons/daggers/dagger1.png",
-      alt: "Sword",
-    },
-    description:
-      "This is a fine sword for the beginner! be careful not to cut you self!",
+    description: "A helmet to match the powerful robe!",
   },
 
   {
-    name: "Wraith blade",
-    type: "Weapon",
-    hp: 0,
-    attack: 30,
-    cost: 10,
+    name: "Cotton Robe",
+    type: "chest",
+    job: "Wizard",
+    hp: 15,
+    cost: 35,
     media: {
-      src: "./assets/items/weapons/daggers/dagger2.png",
-      alt: "Sword",
+      src: "./assets/items/gear/Wizard/commonRobe.png",
+      alt: "Rope for a Wizard",
     },
     description:
-      "This one is made with the essence of wraiths! Just to give it that extra bit of fine edge!",
+      "A common cotton robe, but its better than running around naked!",
   },
   {
-    name: "Dragons bane",
-    type: "Weapon",
-    hp: 0,
-    attack: 60,
-    cost: 10,
+    name: "Cotton Hood",
+    type: "head",
+    job: "Wizard",
+    mana: 15,
+    cost: 30,
     media: {
-      src: "./assets/items/weapons/daggers/dagger3.png",
-      alt: "Dagger",
+      src: "./assets/items/gear/Wizard/commonHood.png",
+      alt: "Hood for a Wizard",
+    },
+    description: "A common cotton Hood, keeps you a bit warmer!",
+  },
+  {
+    name: "Enchanted Cloak",
+    type: "chest",
+    job: "Wizard",
+    hp: 25,
+    cost: 65,
+    media: {
+      src: "./assets/items/gear/Wizard/EnchantedCloak.png",
+      alt: "Rope for a Wizard",
     },
     description:
-      "This one.. I gotta admit, this is my pride and joy! Made from dragons fire, back when they were our allies.. Good times they were..",
+      "This cloak is made of the finest materials. And enchanted with a spell to make it stronger!",
+  },
+  {
+    name: "Enchanted Hood",
+    type: "head",
+    job: "Wizard",
+    mana: 25,
+    cost: 55,
+    media: {
+      src: "./assets/items/gear/Wizard/enchantedHood.png",
+      alt: "Hood for a Wizard",
+    },
+    description: "A nice Hood, enchanted to make it stronger!",
+  },
+  {
+    name: "Supreme Robe",
+    type: "chest",
+    job: "Wizard",
+    hp: 35,
+    cost: 95,
+    media: {
+      src: "./assets/items/gear/Wizard/supremeRobe.png",
+      alt: "Rope for a Wizard",
+    },
+    description: "This is my finest Robe. I am saving it for a strong Wizard.",
+  },
+  {
+    name: "Supreme Hood",
+    type: "head",
+    job: "Wizard",
+    mana: 35,
+    cost: 85,
+    media: {
+      src: "./assets/items/gear/Wizard/supremeHood.png",
+      alt: "Hood for a Wizard",
+    },
+    description: "The finest hood for the finest robe!",
   },
 ];

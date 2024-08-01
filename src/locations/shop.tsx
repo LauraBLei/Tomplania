@@ -9,6 +9,7 @@ import { CharacterContext } from "../hooks/characterContext";
 import { ArmorShopInventory } from "../gameData/armorShop";
 import { PotionShopInventory } from "../gameData/potionShop";
 import { Item } from "../gameData/objects/Item";
+import { BlacksmithShopInventory } from "../gameData/blackSmith";
 
 export const Shop = () => {
   const { location, PrevLocation, setLocation, setBgImg, item } =
@@ -20,17 +21,13 @@ export const Shop = () => {
     <div className="flex flex-col items-center mt-[-70px]">
       {item && (
         <div className="absolute bg-beige border-2 border-blue place-self-center mt-[-400px] px-5 py-3 rounded-md max-w-[600px] z-10">
-          <h3 className="font-Courier text-2xl">{`${item.name}`}</h3>
-          <h3 className="font-Courier text-2xl">Price: {`${item.cost}`}</h3>
-          <h3 className="font-Courier text-2xl">HP Bonus: {`${item.hp}`}</h3>
-          <h3 className="font-Courier text-2xl">
-            Attack Bonus: {`${item.attack}`}
-          </h3>
-          {item.type === "Potion" && (
-            <h3 className="font-Courier text-2xl">
-              Healing: {"currentHP" in item ? `${item.heal}` : ""}
-            </h3>
-          )}
+          <ShowStat text="" stats={item.name} />
+          <ShowStat text="Price:" stats={item.cost} />
+          <ShowStat text="HP Bonus:" stats={item.hp} />
+          <ShowStat text="Attack Bonus" stats={item.attack} />
+          <ShowStat text="Class:" stats={item.job} />
+          <ShowStat text="Healing:" stats={item.heal} />
+
           <p className="font-Courier text-2xl border-2 border-black p-2">{`${item.description}`}</p>
         </div>
       )}
@@ -58,8 +55,10 @@ export const Shop = () => {
         <div className="flex gap-4 mb-8 mt-4 flex-wrap px-9 py-4 overflow-y-auto border-2 border-black max-w-[850px] ">
           {location === Locations.ArmorShop ? (
             <MakeInventoryItems list={ArmorShopInventory} />
-          ) : (
+          ) : location === Locations.PotionShop ? (
             <MakeInventoryItems list={PotionShopInventory} />
+          ) : (
+            <MakeInventoryItems list={BlacksmithShopInventory} />
           )}
         </div>
       </div>
@@ -72,7 +71,7 @@ type MakeInventoryItemsProps = {
 };
 
 const MakeInventoryItems = ({ list }: MakeInventoryItemsProps) => {
-  const { setGold, gold } = useContext(CharacterContext);
+  const { setGold, gold, character } = useContext(CharacterContext);
 
   const { addItem } = useContext(InventoryContext);
 
@@ -87,6 +86,10 @@ const MakeInventoryItems = ({ list }: MakeInventoryItemsProps) => {
       alert("You do not have enough gold to purchase this item!");
       return;
     }
+    if (item.job !== character.job) {
+      alert("You cannot buy an item that does not belong to your class!");
+      return;
+    }
     if (confirm("are you sure you wanna buy this?") == true) {
       setGold(gold - item.cost);
       addItem(item);
@@ -98,45 +101,31 @@ const MakeInventoryItems = ({ list }: MakeInventoryItemsProps) => {
       {list.map((e, i) => (
         <div key={i}>
           <button
-            className="h-[80px] w-[80px] border-2 border-black"
+            className="h-[80px] w-[80px] overflow-hidden object-cover border-2 border-black flex justify-center"
             onClick={() => handlePurchase(e)}
             onMouseEnter={() => setItem(e)}
             onMouseLeave={() => setItem(null)}
           >
-            <img key={i} src={e.media.src} alt={e.media.alt} />
+            <img
+              className="max-h-[80px]"
+              key={i}
+              src={e.media.src}
+              alt={e.media.alt}
+            />
           </button>
         </div>
       ))}
     </>
-    // <>
-    //   {list.map((e, i) => (
-    //     <div key={i}>
-    //       <Popup
-    //         trigger={
-    //           <button className="h-[80px] w-[80px] border-2 border-black">
-    //             <img key={i} src={e.media.src} alt={e.media.alt} />
-    //           </button>
-    //         }
-    //       >
-    //         <div className="bg-[#d9bf9e] border-2 border-black p-2">
-    //           <h3 className="font-uncial text-2xl">{`${e.name}`}</h3>
-    //           <h3 className="font-uncial text-2xl">Price: {`${e.cost}`}</h3>
-    //           <h3 className="font-uncial text-2xl">HP Bonus: {`${e.hp}`}</h3>
-    //           <h3 className="font-uncial text-2xl">
-    //             Attack Bonus: {`${e.attack}`}
-    //           </h3>
-    //           <button
-    //             className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-2xl"
-    //             onClick={() => {
-    //               handlePurchase(e);
-    //             }}
-    //           >
-    //             Buy
-    //           </button>
-    //         </div>
-    //       </Popup>
-    //     </div>
-    //   ))}
-    // </>
   );
+};
+
+interface ShowStatProps {
+  text: string;
+  stats: number | undefined | string;
+}
+const ShowStat = ({ text, stats }: ShowStatProps) => {
+  if (!stats) {
+    return <></>;
+  }
+  return <h3 className="font-Courier text-2xl">{`${text} ${stats}`}</h3>;
 };

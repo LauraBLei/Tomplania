@@ -44,6 +44,12 @@ export enum Locations {
   BlackVoid = "Black Void",
   PotionShop = "Potion Shop",
   EloweensCabin = "Eloween's Cabin",
+  MoonlitPool = "Moonlit Pool",
+  SingingGrove = "The Singing Grove",
+  WhisperingCavern = "Whispering Cavern",
+  PathToCave = "Path Between Crystal Caves and Riverbend Harbor",
+  ForestPath = "Forest Path",
+  Blacksmith = "Blacksmith Shop",
 }
 
 export enum Loot {

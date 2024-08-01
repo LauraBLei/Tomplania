@@ -6,7 +6,7 @@ import { Monster } from "../gameData/Enemies/enemies";
 import { MonsterLootList } from "../gameData/Enemies/loot";
 import { NewQuestItems } from "../gameData/quests/questItems";
 
-const xpThresholds = [10, 250, 450, 650, 900, 1300];
+const xpThresholds = [100, 300, 600, 1000, 1500, 2100];
 
 type characterContextType = {
   name: string;
@@ -14,8 +14,7 @@ type characterContextType = {
   character: Character;
   gold: number;
   chest: Item | null;
-  gauntlet: Item | null;
-  boots: Item | null;
+  headPiece: Item | null;
   weapon: Item | null;
   xp: number;
   MaxXP: number;
@@ -30,8 +29,7 @@ type characterContextType = {
   setCharacterAttack: React.Dispatch<React.SetStateAction<number>>;
   setGold: React.Dispatch<React.SetStateAction<number>>;
   setChest: React.Dispatch<React.SetStateAction<Item | null>>;
-  setGauntlet: React.Dispatch<React.SetStateAction<Item | null>>;
-  setBoots: React.Dispatch<React.SetStateAction<Item | null>>;
+  setHeadPiece: React.Dispatch<React.SetStateAction<Item | null>>;
   setWeapon: React.Dispatch<React.SetStateAction<Item | null>>;
   setXP: React.Dispatch<React.SetStateAction<number>>;
   setMaxXP: React.Dispatch<React.SetStateAction<number>>;
@@ -64,8 +62,7 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
   const [characterAttack, setCharacterAttack] = useState(10);
   const [gold, setGold] = useState(10000);
   const [chest, setChest] = useState<Item | null>(null);
-  const [gauntlet, setGauntlet] = useState<Item | null>(null);
-  const [boots, setBoots] = useState<Item | null>(null);
+  const [headPiece, setHeadPiece] = useState<Item | null>(null);
   const [weapon, setWeapon] = useState<Item | null>(null);
   const [xp, setXP] = useState(0);
   const [MaxXP, setMaxXP] = useState(10);
@@ -91,14 +88,11 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
   const equipItem = (item: Item) => {
     const hpBoost = item.hp ? item.hp : 0;
     const attackBoost = item.attack ? item.attack : 0;
+    const manaBoost = item.mana ? item.mana : 0;
     switch (item.type) {
-      case "Gauntlet":
-        unEquipItem(gauntlet);
-        setGauntlet(item);
-        break;
-      case "Boot":
-        unEquipItem(boots);
-        setBoots(item);
+      case "Head":
+        unEquipItem(headPiece);
+        setHeadPiece(item);
         break;
       case "Chest":
         unEquipItem(chest);
@@ -113,6 +107,7 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
     }
     setMaxHP(maxHP + hpBoost);
     setCharacterAttack(characterAttack + attackBoost);
+    setMaxMana(MaxMana + manaBoost);
     removeItem(item);
   };
 
@@ -121,6 +116,7 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
     const attackBoost = item.attack ? item.attack : 0;
     const MaxHpBoost = item.hp ? item.hp : 0;
     const heal = item.heal ? item.heal : 0;
+    const mana = item.mana ? item.mana : 0;
 
     const newHp = currentHP + heal;
     const newMaxHp = maxHP + MaxHpBoost;
@@ -128,6 +124,7 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
     setMaxHP(newMaxHp);
     setCurrentHP(newHp >= newMaxHp ? newMaxHp : newHp);
     setCharacterAttack(characterAttack + attackBoost);
+    setCurrentMana(currentMana + mana);
     removeItem(item);
   };
 
@@ -140,13 +137,11 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
 
     const hpBoost = item.hp ? item.hp : 0;
     const attackBoost = item.attack ? item.attack : 0;
+    const mana = item.mana ? item.mana : 0;
 
     switch (item.type) {
-      case "Gauntlet":
-        setGauntlet(null);
-        break;
-      case "Boot":
-        setBoots(null);
+      case "Head":
+        setHeadPiece(null);
         break;
       case "Chest":
         setChest(null);
@@ -159,6 +154,7 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
     }
     setCharacterAttack(characterAttack - attackBoost);
     setMaxHP(maxHP - hpBoost);
+    setMaxMana(MaxMana - mana);
     addItem(item);
   };
 
@@ -171,11 +167,15 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
       console.log("Level up");
       const newLvl = lvl + 1;
       const overFlowXp = newXp - MaxXP;
+      const newMaxHp = maxHP + 10;
+      const newMaxMana = MaxMana + 5;
 
       const newMaxXP = xpThresholds[newLvl - 1] || MaxXP;
 
       setLvl(newLvl);
       setMaxXP(newMaxXP);
+      setMaxHP(newMaxHp);
+      setMaxMana(newMaxMana);
       setXP(overFlowXp); // Reset XP to the overflow value
     }
   };
@@ -215,10 +215,8 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
         setGold,
         setChest,
         chest,
-        gauntlet,
-        setGauntlet,
-        boots,
-        setBoots,
+        headPiece,
+        setHeadPiece,
         weapon,
         setWeapon,
         xp,

@@ -120,7 +120,12 @@ export const CombatImages = () => {
             alt={enemy.media.alt}
           />
         </div>
-        <HpBarEnemy />
+        <div className="flex flex-col items-center">
+          <HpBarEnemy />
+          <h2 className="Headline text-blue bg-beige border-2 border-blue w-full text-center">
+            Level: {enemy.level}
+          </h2>
+        </div>
       </div>
     </div>
   );
