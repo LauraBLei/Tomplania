@@ -22,6 +22,7 @@ type GameContextType = {
   activeQuests: Quest[];
   acceptedQuest: boolean;
   deliveredQuest: boolean;
+  selectedItem: Item | null;
 
   setLocation: React.Dispatch<React.SetStateAction<Locations>>;
   setFighting: React.Dispatch<React.SetStateAction<boolean>>;
@@ -33,10 +34,13 @@ type GameContextType = {
   setItem: React.Dispatch<React.SetStateAction<Item | null>>;
   setAcceptedQuest: React.Dispatch<React.SetStateAction<boolean>>;
   setDeliveredQuest: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedItem: React.Dispatch<React.SetStateAction<Item | null>>;
 
   startQuest: (quest: Quest) => void;
   removeQuest: (quest: Quest) => void;
   deliverQuest: (quest: Quest) => void;
+  handlePurchase: (item: Item) => void;
+
   fight: (damage: number, mana: number, attack: number, enemy: Monster) => void;
   leave: () => void;
   handleRespawn: () => void;
@@ -69,6 +73,7 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
   const [item, setItem] = useState<Item | null>(null);
   const [acceptedQuest, setAcceptedQuest] = useState(false);
   const [deliveredQuest, setDeliveredQuest] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<Item | null>(null);
 
   const {
     setCurrentHP,
@@ -80,7 +85,10 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
     MaxHP,
     GainXP,
     enemyDefeated,
+    character,
   } = useContext(CharacterContext);
+
+  const { addItem } = useContext(InventoryContext);
 
   const startQuest = (quest: Quest) => {
     setActiveQuests([...activeQuests, quest]);
@@ -153,6 +161,25 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
     } else alert("You do not have all the items to complete the quest!");
   };
 
+  const handlePurchase = (item: Item) => {
+    if (!item.cost) {
+      console.error("Item has no cost attribute: ", item);
+      return;
+    }
+    if (item.cost > gold) {
+      alert("You do not have enough gold to purchase this item!");
+      return;
+    }
+    if (item.job && item.job !== character.job) {
+      alert("You cannot buy an item that does not belong to your class!");
+      return;
+    }
+    if (confirm("are you sure you wanna buy this?") == true) {
+      setGold(gold - item.cost);
+      addItem(item);
+    }
+  };
+
   return (
     <GameContext.Provider
       value={{
@@ -184,6 +211,9 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
         setAcceptedQuest,
         deliveredQuest,
         setDeliveredQuest,
+        setSelectedItem,
+        selectedItem,
+        handlePurchase,
       }}
     >
       {children}

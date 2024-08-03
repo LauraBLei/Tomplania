@@ -16,15 +16,28 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { TextFieldLayout } from "../components/textFieldLayout";
 import { ManaBar } from "../gameData/character/manaBar";
 
-export const GamePage = () => {
-  const { fighting, location, NPC, bgImage } = useContext(GameContext);
+const isMobileDevice = () => {
+  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+};
 
+export const GamePage = () => {
+  const { fighting, location, NPC, bgImage, setSelectedItem, selectedItem } =
+    useContext(GameContext);
+
+  const IsMobile = isMobileDevice();
   const bgImageStyle = {
     backgroundImage: `url(${bgImage.src})`,
   };
-
+  const handleContainerClick = () => {
+    if (IsMobile && selectedItem) {
+      setSelectedItem(null);
+    }
+  };
   return (
-    <div className="bg-black h-screen flex ">
+    <div
+      className="bg-black h-screen flex justify-center"
+      onClick={() => handleContainerClick()}
+    >
       <div className="w-full flex flex-col items-center max-w-[1200px]">
         <div
           className="relative w-full max-w-[1000px] max-h-[800px] h-full bg-no-repeat bg-cover flex flex-col bg-center gap-5"

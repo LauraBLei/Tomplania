@@ -1,8 +1,6 @@
 import { GameContext } from "../hooks/gameContext";
 import { useContext } from "react";
 import { LocationList } from "../gameData/locations";
-// import { ArmorShopInventory, ArmorType } from "../gameData/armorShop";
-// import { PotionShopInventory, PotionType } from "../gameData/potionShop";
 import { Locations } from "../gameData/Enums";
 import { InventoryContext } from "../hooks/inventoryContext";
 import { CharacterContext } from "../hooks/characterContext";
@@ -11,26 +9,35 @@ import { PotionShopInventory } from "../gameData/potionShop";
 import { Item } from "../gameData/objects/Item";
 import { BlacksmithShopInventory } from "../gameData/blackSmith";
 
+const isMobileDevice = () => {
+  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+};
+
 export const Shop = () => {
-  const { location, PrevLocation, setLocation, setBgImg, item } =
-    useContext(GameContext);
+  const {
+    location,
+    PrevLocation,
+    setLocation,
+    setBgImg,
+    item,
+    selectedItem,
+    setSelectedItem,
+  } = useContext(GameContext);
 
   const currentLocation = LocationList[location];
 
+  const IsMobile = isMobileDevice();
+  const handleContainerClick = () => {
+    if (IsMobile && selectedItem) {
+      setSelectedItem(null);
+    }
+  };
   return (
-    <div className="flex flex-col items-center gap-2">
-      {item && (
-        <div className="absolute bg-beige border-2 border-blue place-self-center mt-[-400px] px-5 py-3 rounded-md max-w-[600px] z-10">
-          <ShowStat text="" stats={item.name} />
-          <ShowStat text="Price:" stats={item.cost} />
-          <ShowStat text="HP Bonus:" stats={item.hp} />
-          <ShowStat text="Attack Bonus" stats={item.attack} />
-          <ShowStat text="Class:" stats={item.job} />
-          <ShowStat text="Healing:" stats={item.heal} />
-
-          <p className="font-Courier text-2xl border-2 border-black p-2">{`${item.description}`}</p>
-        </div>
-      )}
+    <div
+      className="flex flex-col items-center gap-2"
+      onClick={() => handleContainerClick()}
+    >
+      {item || selectedItem ? <ItemStats item={item} /> : ""}
 
       <div className="place-self-start ml-4  flex gap-2">
         <img
@@ -73,7 +80,7 @@ const MakeInventoryItems = ({ list }: MakeInventoryItemsProps) => {
 
   const { addItem } = useContext(InventoryContext);
 
-  const { setItem } = useContext(GameContext);
+  const { setItem, setSelectedItem, selectedItem } = useContext(GameContext);
 
   const handlePurchase = (item: Item) => {
     if (!item.cost) {
@@ -84,7 +91,7 @@ const MakeInventoryItems = ({ list }: MakeInventoryItemsProps) => {
       alert("You do not have enough gold to purchase this item!");
       return;
     }
-    if (item.job !== character.job) {
+    if (item.job && item.job !== character.job) {
       alert("You cannot buy an item that does not belong to your class!");
       return;
     }
@@ -94,18 +101,28 @@ const MakeInventoryItems = ({ list }: MakeInventoryItemsProps) => {
     }
   };
 
+  const IsMobile = isMobileDevice();
+
+  const handleItemClick = (item: Item) => {
+    if (selectedItem === item) {
+      setSelectedItem(null);
+    } else {
+      setSelectedItem(item);
+    }
+  };
+
   return (
     <>
       {list.map((e, i) => (
         <div key={i}>
           <button
             className="h-[50px] w-[50px] lg:h-[80px] lg:w-[80px] overflow-hidden object-cover border-2 border-black flex justify-center"
-            onClick={() => handlePurchase(e)}
+            onClick={() => (IsMobile ? handleItemClick(e) : handlePurchase(e))}
             onMouseEnter={() => setItem(e)}
             onMouseLeave={() => setItem(null)}
           >
             <img
-              className="max-h-[50px] lg:ax-h-[80px]"
+              className="max-h-[50px] lg:max-h-[80px]"
               key={i}
               src={e.media.src}
               alt={e.media.alt}
@@ -125,5 +142,40 @@ const ShowStat = ({ text, stats }: ShowStatProps) => {
   if (!stats) {
     return <></>;
   }
-  return <h3 className="font-Courier text-2xl">{`${text} ${stats}`}</h3>;
+  return <h3 className="TextDark">{`${text} ${stats}`}</h3>;
+};
+
+interface ItemStatsProps {
+  item: Item | null;
+}
+
+const ItemStats = ({ item }: ItemStatsProps) => {
+  const IsMobile = isMobileDevice();
+  const { handlePurchase, setSelectedItem } = useContext(GameContext);
+  return (
+    <div className="absolute bg-beige border-2 border-blue place-self-center mt-[-400px] px-5 py-3 rounded-md max-w-[600px] z-10">
+      <ShowStat text="" stats={item?.name} />
+      <ShowStat text="Price:" stats={item?.cost} />
+      <ShowStat text="HP Bonus:" stats={item?.hp} />
+      <ShowStat text="Attack Bonus" stats={item?.attack} />
+      <ShowStat text="Class:" stats={item?.job} />
+      <ShowStat text="Healing:" stats={item?.heal} />
+
+      <p className="TextDark border-2 border-black p-2">{`${item?.description}`}</p>
+
+      {IsMobile && (
+        <div className="w-full flex justify-center mt-2">
+          <button
+            onClick={() => {
+              handlePurchase(item);
+              setSelectedItem(null);
+            }}
+            className="button"
+          >
+            Buy
+          </button>
+        </div>
+      )}
+    </div>
+  );
 };
