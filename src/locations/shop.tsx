@@ -163,19 +163,20 @@ const ItemStats = ({ item }: ItemStatsProps) => {
 
       <p className="TextDark border-2 border-black p-2">{`${item?.description}`}</p>
 
-      {IsMobile && (
-        <div className="w-full flex justify-center mt-2">
-          <button
-            onClick={() => {
-              handlePurchase(item);
-              setSelectedItem(null);
-            }}
-            className="button"
-          >
-            Buy
-          </button>
-        </div>
-      )}
+      {IsMobile ||
+        (item && (
+          <div className="w-full flex justify-center mt-2">
+            <button
+              onClick={() => {
+                handlePurchase(item);
+                setSelectedItem(null);
+              }}
+              className="button"
+            >
+              Buy
+            </button>
+          </div>
+        ))}
     </div>
   );
 };

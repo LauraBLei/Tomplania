@@ -7,11 +7,6 @@ import { HpBarEnemy } from "../gameData/Enemies/hpBar";
 
 import { HpBarCharacter } from "../gameData/character/hpBar";
 import { ManaBar } from "../gameData/character/manaBar";
-import { Skill } from "../gameData/character/skills";
-
-const isMobileDevice = () => {
-  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-};
 
 export const EnemyLocation = () => {
   const { MonsterHP } = useContext(GameContext);
@@ -48,29 +43,13 @@ export const EnemyDefeated = () => {
 
 export const Fighting = () => {
   const { character, currentHP, lvl } = useContext(CharacterContext);
-  const {
-    PrevLocation,
-    fight,
-    leave,
-    handleRespawn,
-    setSelectedItem,
-    selectedItem,
-  } = useContext(GameContext);
+  const { PrevLocation, fight, leave, handleRespawn } = useContext(GameContext);
   const prevLocation = LocationList[PrevLocation];
 
   const enemy = MonstersList[prevLocation.enemy[0]];
 
   const skills = character.skills.filter((skills) => lvl >= skills.level);
 
-  const IsMobile = isMobileDevice();
-
-  const handleItemClick = (item: Skill) => {
-    if (selectedItem === item) {
-      setSelectedItem(null);
-    } else {
-      setSelectedItem(item);
-    }
-  };
   return (
     <div className="flex flex-col items-center w-full">
       <div className="mb-5 flex justify-center w-full">
@@ -88,12 +67,8 @@ export const Fighting = () => {
                 <button
                   className="max-w-[50px] md:max-w-[70px] lg:max-w-[100px]"
                   onClick={() => {
-                    IsMobile
-                      ? handleItemClick(skill)
-                      : fight(enemy.attack, skill.mana, skill.attack, enemy);
+                    fight(enemy.attack, skill.mana, skill.attack, enemy);
                   }}
-                  onMouseEnter={() => setSelectedItem(skill)}
-                  onMouseLeave={() => setSelectedItem(null)}
                 >
                   <img src={skill.media.src} alt={skill.media.alt} />
                 </button>
