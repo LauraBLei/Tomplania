@@ -111,7 +111,7 @@ const NormalTop = () => {
             alt="icon of a questlog"
           />
         </summary>
-        <div className="absolute max-w-[800px] right-7 mt-4 bg-black px-9 py-4 border-2 border-[#d9bf9e] h-auto z-10">
+        <div className="absolute max-w-[600px] max-h-[600px] overflow-y-auto w-full right-7 mt-4 bg-beige px-9 py-4 border-8 border-blue h-auto z-10">
           <QuestFolder />
         </div>
       </details>

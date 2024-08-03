@@ -195,6 +195,7 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
 
       const dropRoll = Math.random();
 
+      console.log("test", dropRoll, monsterLootItem.dropChance);
       if (dropRoll <= monsterLootItem.dropChance) {
         addItem(monsterLootItem);
       }

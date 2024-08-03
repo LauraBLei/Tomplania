@@ -131,15 +131,26 @@ export const NPCLocation = () => {
 const QuestInProgress = () => {
   const { NPC, deliverQuest, activeQuests } = useContext(GameContext);
   const { name } = useContext(CharacterContext);
+  const [page, setPage] = useState(0);
 
   const npc = NPCList.filter((npc) => npc.type == NPC)[0];
   const Quest = activeQuests.filter((quest) => quest.npc === npc.type)[0]; // TODO
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <p className="font-Courier text-2xl">
-        {npc.text.QuestInProgress.replaceAll("{name}", name)}
+      <p className="TextDark">
+        {npc.text.QuestInProgress[page].replaceAll("{name}", name)}
       </p>
+      {page < npc.text.startText.length - 1 ? (
+        <button
+          className="button place-self-end"
+          onClick={() => setPage(page + 1)}
+        >
+          Next
+        </button>
+      ) : (
+        ""
+      )}
       <button className="button" onClick={() => deliverQuest(Quest)}>
         Deliver Quest
       </button>

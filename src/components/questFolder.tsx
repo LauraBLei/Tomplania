@@ -8,17 +8,11 @@ export const QuestFolder = () => {
 
   console.log(activeQuests);
 
-  // const abandonQuest = () => {
-  //   setActiveQuest(null);
-  // };
-
   return (
     <div>
       {activeQuests.length === 0 ? (
         <div className="my-6">
-          <h3 className="font-Courier font-bold text-3xl text-white">
-            You have no active Quests
-          </h3>
+          <h3 className="TextDark">You have no active Quests</h3>
         </div>
       ) : (
         <>
@@ -42,21 +36,23 @@ const ShowQuestInfo = ({ activeQuest }: ShowQuestInfoProps) => {
 
   return (
     <details>
-      <summary className="Headline">{activeQuest?.name}</summary>
+      <summary className="Headline text-blue">{activeQuest?.name}</summary>
       <div className="ml-5 flex flex-col gap-4 mt-2">
-        <p className="Text">{activeQuest?.description}</p>
-        <div className="flex items-center">
-          <h3 className="Text">Reward: {activeQuest?.reward}</h3>
-          <img
-            className="w-[30px]"
-            src="./assets/items/coins/gold.png"
-            alt="Image og gold coins"
-          />
+        <p className="TextDark">{activeQuest?.description}</p>
+        <div className="flex items-center gap-4">
+          <h3 className="TextDark">Reward: </h3>
+
+          <div className="flex items-center">
+            <h3 className="TextDark">{activeQuest?.reward}</h3>
+            <img
+              className="w-[30px]"
+              src="./assets/items/coins/gold.png"
+              alt="Image og gold coins"
+            />
+          </div>
+          <h3 className="TextDark"> {activeQuest?.reward} XP</h3>
         </div>
-        <button
-          onClick={() => abandonQuest(activeQuest)}
-          className="bg-white button"
-        >
+        <button onClick={() => abandonQuest(activeQuest)} className="button">
           Abandon Quest
         </button>
       </div>

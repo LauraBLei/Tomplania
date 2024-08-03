@@ -38,11 +38,11 @@ export const Carousel = () => {
       totalSlides={listOfCharacters.length}
       currentSlide={currentSlide}
     >
-      <Slider className="w-[500px]">
+      <Slider className="w-[300px] lg:w-[500px]">
         {listOfCharacters.map((character, index) => (
           <Slide key={index} index={index} className="w-full h-full">
-            <div className="flex flex-col items-center w-full gap-5 h-full">
-              <div className="max-h-[400px] overflow-hidden">
+            <div className="flex flex-col items-center w-full gap-3 lg:gap-5 h-full">
+              <div className="max-h-[200px] lg:max-h-[400px] overflow-hidden">
                 <Image
                   hasMasterSpinner
                   className="h-full w-full "
@@ -54,7 +54,7 @@ export const Carousel = () => {
               <p className=" Headline">Staring Health: {character.maxHealth}</p>
               <p className=" Headline">Starting Mana: {character.mana}</p>
               <button
-                className="bg-white text-black px-5 text-3xl rounded"
+                className="bg-white text-black px-5 text-2xl lg:text-3xl rounded"
                 onClick={() => context.setCharacter(listOfCharacters[index])}
               >
                 Choose
