@@ -14,7 +14,7 @@ export const XpBar = () => {
             style={{ width: `${xpPercentage}%` }}
           ></div>
         </div>
-        <h2 className="absolute font-Courier text-xl text-white text-center z-10">
+        <h2 className="absolute hp-bar-text text-center z-10">
           {xp}/{MaxXP} XP
         </h2>
       </div>

@@ -66,7 +66,7 @@ export const NPCLocation = () => {
       </div>
       {selectedQuest ? (
         <div className="flex flex-col justify-center items-center gap-6 mb-4">
-          <h3 className="Headline text-blue font-bold text-3xl">
+          <h3 className="Headline text-blue ">
             {selectedQuest} (Level: {Quest.lvl})
           </h3>
           <div className="flex flex-col items-center">
@@ -86,7 +86,7 @@ export const NPCLocation = () => {
             <div className="flex items-center">
               <h3 className="Headline text-blue">Reward: {Quest.reward}</h3>
               <img
-                className="w-[50px]"
+                className="w-[25px] lg:w-[50px]"
                 src="./assets/items/coins/gold.png"
                 alt="Image og gold coins"
               />
@@ -183,11 +183,11 @@ const FirstVisit = () => {
         ""
       )}
       <div className="flex gap-4 items-center">
-        <h3 className="font-Courier text-3xl">Quests:</h3>
+        <h3 className="font-Courier text-xl lg:text-3xl">Quests:</h3>
         {Quests.map((Quest, i) => (
           <button
             key={i}
-            className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-2xl"
+            className="button"
             onClick={() => {
               setSelectedQuest(Quest.name);
             }}

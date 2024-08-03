@@ -13,7 +13,7 @@ export const ManaBar = () => {
             style={{ width: `${manaPercentage}%` }}
           ></div>
         </div>
-        <h2 className="absolute font-Courier text-xl text-white text-center z-10">
+        <h2 className="absolute hp-bar-text text-center z-10">
           {currentMana}/{MaxMana} Mana
         </h2>
       </div>

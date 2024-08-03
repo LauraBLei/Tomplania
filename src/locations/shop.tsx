@@ -18,7 +18,7 @@ export const Shop = () => {
   const currentLocation = LocationList[location];
 
   return (
-    <div className="flex flex-col items-center mt-[-70px]">
+    <div className="flex flex-col items-center gap-2">
       {item && (
         <div className="absolute bg-beige border-2 border-blue place-self-center mt-[-400px] px-5 py-3 rounded-md max-w-[600px] z-10">
           <ShowStat text="" stats={item.name} />
@@ -32,14 +32,14 @@ export const Shop = () => {
         </div>
       )}
 
-      <div className="place-self-start ml-4 mt-28 flex gap-2">
+      <div className="place-self-start ml-4  flex gap-2">
         <img
           className="h-auto"
           src="./assets/bg-images/locationDot.png"
           alt="location dot"
         />
         <button
-          className="font-Courier text-2xl"
+          className="TextDark"
           onClick={() => {
             setLocation(PrevLocation);
             setBgImg(LocationList[PrevLocation].media);
@@ -48,11 +48,9 @@ export const Shop = () => {
           Go Back
         </button>
       </div>
-      <div className="flex ml-4 flex-col justify-center items-center w-full max-h-[500px]">
-        <p className="font-Courier text-3xl text-center">
-          {currentLocation.text}
-        </p>
-        <div className="flex gap-4 mb-8 mt-4 flex-wrap px-9 py-4 overflow-y-auto border-2 border-black max-w-[850px] ">
+      <div className="flex  flex-col justify-center items-center w-full max-h-[500px]">
+        <p className="TextDark">{currentLocation.text}</p>
+        <div className="flex gap-4  mt-4 flex-wrap px-4 lg:px-9 py-4 overflow-y-auto border-2 border-black max-w-[850px] ">
           {location === Locations.ArmorShop ? (
             <MakeInventoryItems list={ArmorShopInventory} />
           ) : location === Locations.PotionShop ? (
@@ -101,13 +99,13 @@ const MakeInventoryItems = ({ list }: MakeInventoryItemsProps) => {
       {list.map((e, i) => (
         <div key={i}>
           <button
-            className="h-[80px] w-[80px] overflow-hidden object-cover border-2 border-black flex justify-center"
+            className="h-[50px] w-[50px] lg:h-[80px] lg:w-[80px] overflow-hidden object-cover border-2 border-black flex justify-center"
             onClick={() => handlePurchase(e)}
             onMouseEnter={() => setItem(e)}
             onMouseLeave={() => setItem(null)}
           >
             <img
-              className="max-h-[80px]"
+              className="max-h-[50px] lg:ax-h-[80px]"
               key={i}
               src={e.media.src}
               alt={e.media.alt}

@@ -13,7 +13,7 @@ export const EnemyLocation = () => {
   const { currentHP } = useContext(CharacterContext);
 
   return (
-    <div>
+    <div className="w-full">
       {MonsterHP <= 0 && currentHP > 0 ? <EnemyDefeated /> : <Fighting />}
     </div>
   );
@@ -25,10 +25,10 @@ export const EnemyDefeated = () => {
   return (
     <div>
       <div className=" mb-5 flex flex-col justify-center w-full items-center gap-4">
-        <h2 className="font-uncial text-5xl">Enemy Defeated</h2>
+        <h2 className="Headline text-blue">Enemy Defeated</h2>
         <div className=" flex gap-10">
           <button
-            className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-4xl"
+            className="button"
             onClick={() => {
               leave();
             }}
@@ -51,24 +51,21 @@ export const Fighting = () => {
   const skills = character.skills.filter((skills) => lvl >= skills.level);
 
   return (
-    <div className="flex flex-col items-center mt-[-100px] ">
-      <div className="mt-28 mb-5 flex justify-center w-full">
+    <div className="flex flex-col items-center w-full">
+      <div className="mb-5 flex justify-center w-full">
         {currentHP === 0 ? (
           <div>
-            <h2>You died!</h2>
-            <button
-              className="border-2 border-black px-4 py-1 cursor-pointer font-uncial text-4xl"
-              onClick={() => handleRespawn()}
-            >
+            <h2 className="Headline text-blue">You died!</h2>
+            <button className="button" onClick={() => handleRespawn()}>
               Respawn
             </button>
           </div>
         ) : (
           <div className="flex justify-between w-full items-center">
-            <div>
+            <div className="flex gap-2">
               {skills.map((skill) => (
                 <button
-                  className="max-w-[100px]"
+                  className="max-w-[50px] lg:max-w-[100px]"
                   onClick={() =>
                     fight(enemy.attack, skill.mana, skill.attack, enemy)
                   }
@@ -100,8 +97,8 @@ export const CombatImages = () => {
   const enemy = MonstersList[prevLocation.enemy[0]];
 
   return (
-    <div className="flex w-full justify-between">
-      <div className="flex flex-col max-w-[400px] ml-10">
+    <div className="flex w-full justify-between gap-4">
+      <div className="flex flex-col max-w-[400px] lg:ml-10">
         <div className="max-h-[300px] overflow-hidden">
           <img
             className="combatFrame border-green-600"
@@ -112,7 +109,7 @@ export const CombatImages = () => {
         <HpBarCharacter />
         <ManaBar />
       </div>
-      <div className="flex flex-col max-w-[400px]  mr-10 ">
+      <div className="flex flex-col max-w-[400px] lg:mr-10 ">
         <div className="max-h-[300px] overflow-hidden">
           <img
             className="combatFrame border-red-700"
@@ -122,7 +119,7 @@ export const CombatImages = () => {
         </div>
         <div className="flex flex-col items-center">
           <HpBarEnemy />
-          <h2 className="Headline text-blue bg-beige border-2 border-blue w-full text-center">
+          <h2 className="Headline text-blue rounded-lg bg-beige border-2 border-blue w-full text-center">
             Level: {enemy.level}
           </h2>
         </div>

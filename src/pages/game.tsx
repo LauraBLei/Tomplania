@@ -24,15 +24,17 @@ export const GamePage = () => {
   };
 
   return (
-    <div className="bg-black h-screen flex justify-center">
+    <div className="bg-black h-screen flex ">
       <div className="w-full flex flex-col items-center max-w-[1200px]">
         <div
           className="relative w-full max-w-[1000px] max-h-[800px] h-full bg-no-repeat bg-cover flex flex-col bg-center gap-5"
           style={bgImageStyle}
         >
-          <div className="flex w-full mt-3 justify-between">
-            <div className="bg-beige border-2 border-blue h-fit ml-7">
-              <h1 className="text-2xl font-Courier px-6 py-1">{location}</h1>
+          <div className="flex items-center justify-between gap-4 w-full mt-1 lg:mt-3 ">
+            <div className="bg-beige border-2 border-blue h-fit ml-1 lg:ml-7">
+              <h1 className="text-sm text-nowrap lg:text-2xl font-Courier px-6 py-1">
+                {location}
+              </h1>
             </div>
             <NormalTop />
           </div>
@@ -57,17 +59,17 @@ export const GamePage = () => {
 
 const NormalTop = () => {
   return (
-    <div className="flex mr-7  mb-3">
+    <div className="flex items-center h-full gap-1 md:gap-4">
       <details>
-        <summary className="cursor-pointer list-none text-2xl mr-7 ">
+        <summary className="cursor-pointer list-none text-2xl mr-1 lg:mr-7 ">
           <img
             className="icon "
             src="./assets/bg-images/compass.png"
             alt="Icon of a compass"
           />
         </summary>
-        <div className="absolute w-full max-w-[800px] right-24 mt-4 z-20  h-auto">
-          <div className="ml-24 max-w-[700px] mt-12 border-8 border-blue">
+        <div className="InformationUI">
+          <div className=" w-full  border-8 border-blue">
             <TransformWrapper
               initialScale={1}
               minScale={0.5}
@@ -92,26 +94,26 @@ const NormalTop = () => {
         </div>
       </details>
       <details>
-        <summary className="cursor-pointer list-none text-2xl mr-7">
+        <summary className="cursor-pointer list-none mr-1 lg:mr-7">
           <img
             className=" icon"
             src="./assets/bg-images/backpack.png"
             alt="Icon of a backpack"
           />
         </summary>
-        <div className="absolute max-w-[800px] right-32   px-9 py-4 h-[600px] z-20">
+        <div className="InformationUI">
           <Inventory />
         </div>
       </details>
       <details>
-        <summary className="cursor-pointer list-none text-2xl mr-7">
+        <summary className="cursor-pointer list-none text-2xl mr-1 lg:mr-7">
           <img
             className="icon"
             src="./assets/bg-images/questlog.png"
             alt="icon of a questlog"
           />
         </summary>
-        <div className="absolute max-w-[600px] max-h-[600px] overflow-y-auto w-full right-7 mt-4 bg-beige px-9 py-4 border-8 border-blue h-auto z-10">
+        <div className="InformationUI overflow-y-auto w-full bg-beige px-9 py-4 border-8 border-blue h-auto ">
           <QuestFolder />
         </div>
       </details>
@@ -137,12 +139,12 @@ const Location = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center w-full">
       <p className="TextDark">
         {currentLocation.text.replaceAll("{name}", name)}
       </p>
 
-      <div className="flex flex-wrap gap-4 mt-4 mx-4 flex-col max-h-[150px] mb-6">
+      <div className="flex flex-wrap gap-4 mt-4 overflow-auto lg:mx-4 flex-col max-h-[150px] mb-6">
         {currentLocation.path.map((loc, i) => (
           <OptionButton
             index={i}
@@ -175,12 +177,12 @@ const Location = () => {
         ))}
       </div>
 
-      <div className="w-full flex mb-4 justify-center">
+      <div className="w-full flex justify-center">
         <div className="max-w-[600px] w-full flex items-center flex-col gap-4">
           <HpBarCharacter />
           <ManaBar />
           <XpBar />
-          <h3 className="font-Courier text-2xl">Level: {lvl}</h3>
+          <h3 className="TextDark">Level: {lvl}</h3>
         </div>
       </div>
     </div>
@@ -195,9 +197,17 @@ interface OptionButtonProps {
 
 const OptionButton = ({ onClick, index, text }: OptionButtonProps) => {
   return (
-    <div className="flex flex-wrap ml-4">
-      <img src="./assets/bg-images/locationDot.png" alt="location dot" />
-      <button key={index} className="font-Courier text-xl" onClick={onClick}>
+    <div className="flex flex-wrap ml-4 items-center">
+      <img
+        className=""
+        src="./assets/bg-images/locationDot.png"
+        alt="location dot"
+      />
+      <button
+        key={index}
+        className="TextDark text-wrap max-w-[250px] text-left"
+        onClick={onClick}
+      >
         {text}
       </button>
     </div>
