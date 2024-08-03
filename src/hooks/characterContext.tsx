@@ -66,7 +66,7 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
   const [weapon, setWeapon] = useState<Item | null>(null);
   const [xp, setXP] = useState(0);
   const [MaxXP, setMaxXP] = useState(10);
-  const [lvl, setLvl] = useState(1);
+  const [lvl, setLvl] = useState(6);
   const [currentHP, setCurrentHP] = useState(character.maxHealth);
   const [maxHP, setMaxHP] = useState(character.maxHealth);
   const [currentMana, setCurrentMana] = useState(character.mana);

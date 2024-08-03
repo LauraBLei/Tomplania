@@ -21,8 +21,16 @@ const isMobileDevice = () => {
 };
 
 export const GamePage = () => {
-  const { fighting, location, NPC, bgImage, setSelectedItem, selectedItem } =
-    useContext(GameContext);
+  const {
+    fighting,
+    location,
+    NPC,
+    bgImage,
+    setSelectedItem,
+    selectedItem,
+    fight,
+    PrevLocation,
+  } = useContext(GameContext);
 
   const IsMobile = isMobileDevice();
   const bgImageStyle = {
@@ -33,6 +41,9 @@ export const GamePage = () => {
       setSelectedItem(null);
     }
   };
+  const prevLocation = LocationList[PrevLocation];
+  const enemy = MonstersList[prevLocation.enemy[0]];
+  const skill = selectedItem;
   return (
     <div
       className="bg-black h-screen flex justify-center"
@@ -40,7 +51,7 @@ export const GamePage = () => {
     >
       <div className="w-full flex flex-col items-center max-w-[1200px]">
         <div
-          className="relative w-full max-w-[1000px] max-h-[800px] h-full bg-no-repeat bg-cover flex flex-col bg-center gap-5"
+          className="relative w-full max-w-[1000px] max-h-[800px] h-full bg-no-repeat bg-cover flex flex-col bg-center gap-5 items-center"
           style={bgImageStyle}
         >
           <div className="flex items-center justify-between gap-4 w-full mt-1 lg:mt-3 ">
@@ -53,6 +64,21 @@ export const GamePage = () => {
           </div>
 
           {fighting && <CombatImages />}
+          {selectedItem && (
+            <div className="max-w-[250px] bg-beige border-2 border-blue p-3">
+              <ShowStat text="" stats={selectedItem.name} />
+              <ShowStat text="Attack" stats={selectedItem.attack} />
+              <ShowStat text="Mana:" stats={selectedItem.mana} />
+              <button
+                className="button"
+                onClick={() =>
+                  fight(enemy.attack, skill?.mana, skill?.attack, enemy)
+                }
+              >
+                Attack
+              </button>
+            </div>
+          )}
         </div>
         <TextFieldLayout>
           {fighting ? (
@@ -218,11 +244,23 @@ const OptionButton = ({ onClick, index, text }: OptionButtonProps) => {
       />
       <button
         key={index}
-        className="TextDark text-wrap max-w-[250px] text-left"
+        className="TextDark text-wrap max-w-[250px] lg:max-w-[600px] text-left"
         onClick={onClick}
       >
         {text}
       </button>
     </div>
   );
+};
+
+interface ShowStatProps {
+  text: string;
+  stats: number | undefined | string;
+}
+
+const ShowStat = ({ text, stats }: ShowStatProps) => {
+  if (!stats) {
+    return <></>;
+  }
+  return <h3 className="TextDark">{`${text} ${stats}`}</h3>;
 };

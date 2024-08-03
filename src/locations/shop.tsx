@@ -103,11 +103,11 @@ const MakeInventoryItems = ({ list }: MakeInventoryItemsProps) => {
 
   const IsMobile = isMobileDevice();
 
-  const handleItemClick = (item: Item) => {
-    if (selectedItem === item) {
+  const handleItemClick = (skill: Item) => {
+    if (selectedItem === skill) {
       setSelectedItem(null);
     } else {
-      setSelectedItem(item);
+      setSelectedItem(skill);
     }
   };
 

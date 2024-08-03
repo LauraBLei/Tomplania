@@ -8,6 +8,7 @@ import { InventoryContext } from "./inventoryContext";
 import { QuestItemNames } from "../gameData/quests/questItems";
 import { CharacterContext } from "./characterContext";
 import { Monster } from "../gameData/Enemies/enemies";
+import { Skill } from "../gameData/character/skills";
 
 type GameContextType = {
   location: Locations;
@@ -22,7 +23,7 @@ type GameContextType = {
   activeQuests: Quest[];
   acceptedQuest: boolean;
   deliveredQuest: boolean;
-  selectedItem: Item | null;
+  selectedItem: Item | Skill | null;
 
   setLocation: React.Dispatch<React.SetStateAction<Locations>>;
   setFighting: React.Dispatch<React.SetStateAction<boolean>>;
@@ -34,7 +35,7 @@ type GameContextType = {
   setItem: React.Dispatch<React.SetStateAction<Item | null>>;
   setAcceptedQuest: React.Dispatch<React.SetStateAction<boolean>>;
   setDeliveredQuest: React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectedItem: React.Dispatch<React.SetStateAction<Item | null>>;
+  setSelectedItem: React.Dispatch<React.SetStateAction<Item | Skill | null>>;
 
   startQuest: (quest: Quest) => void;
   removeQuest: (quest: Quest) => void;
