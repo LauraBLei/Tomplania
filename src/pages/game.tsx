@@ -21,16 +21,8 @@ const isMobileDevice = () => {
 };
 
 export const GamePage = () => {
-  const {
-    fighting,
-    location,
-    NPC,
-    bgImage,
-    setSelectedItem,
-    selectedItem,
-    fight,
-    PrevLocation,
-  } = useContext(GameContext);
+  const { fighting, location, NPC, bgImage, setSelectedItem, selectedItem } =
+    useContext(GameContext);
 
   const IsMobile = isMobileDevice();
   const bgImageStyle = {
@@ -41,9 +33,7 @@ export const GamePage = () => {
       setSelectedItem(null);
     }
   };
-  const prevLocation = LocationList[PrevLocation];
-  const enemy = MonstersList[prevLocation.enemy[0]];
-  const skill = selectedItem;
+
   return (
     <div
       className="bg-black h-screen flex justify-center"
@@ -64,21 +54,6 @@ export const GamePage = () => {
           </div>
 
           {fighting && <CombatImages />}
-          {selectedItem && (
-            <div className="max-w-[250px] bg-beige border-2 border-blue p-3">
-              <ShowStat text="" stats={selectedItem.name} />
-              <ShowStat text="Attack" stats={selectedItem.attack} />
-              <ShowStat text="Mana:" stats={selectedItem.mana} />
-              <button
-                className="button"
-                onClick={() =>
-                  fight(enemy.attack, skill?.mana, skill?.attack, enemy)
-                }
-              >
-                Attack
-              </button>
-            </div>
-          )}
         </div>
         <TextFieldLayout>
           {fighting ? (
@@ -251,16 +226,4 @@ const OptionButton = ({ onClick, index, text }: OptionButtonProps) => {
       </button>
     </div>
   );
-};
-
-interface ShowStatProps {
-  text: string;
-  stats: number | undefined | string;
-}
-
-const ShowStat = ({ text, stats }: ShowStatProps) => {
-  if (!stats) {
-    return <></>;
-  }
-  return <h3 className="TextDark">{`${text} ${stats}`}</h3>;
 };

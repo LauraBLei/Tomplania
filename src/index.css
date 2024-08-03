@@ -16,10 +16,10 @@
   }
 
   .TextLight {
-    @apply font-Courier font-bold text-xs lg:text-xl text-beige;
+    @apply font-Courier font-bold text-xs md:text-sm  lg:text-xl text-beige;
   }
   .TextDark {
-    @apply font-Courier font-bold text-xs lg:text-xl text-blue;
+    @apply font-Courier font-bold text-xs md:text-sm lg:text-xl text-blue;
   }
 
   .textBox {
