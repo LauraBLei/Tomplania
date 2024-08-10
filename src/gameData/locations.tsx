@@ -118,7 +118,7 @@ export const LocationList: LocationType = {
     npc: [],
   },
   "Circle Of The Gods": {
-    text: "Circle Of The Gods",
+    text: "The Circle Of The Gods, said to have direct line to The Land Of The Gods.",
     media: {
       src: "./assets/world/stoneCircle.png",
       alt: "",
@@ -128,7 +128,7 @@ export const LocationList: LocationType = {
     npc: [NPCNames.TheOldMan],
   },
   "Evershade Forest": {
-    text: "Evershade Forest",
+    text: "",
     media: {
       src: "./assets/world/enchantedForest.png",
       alt: "",
@@ -143,7 +143,7 @@ export const LocationList: LocationType = {
     npc: [],
   },
   "Crystal Caves": {
-    text: "Crystal Caves",
+    text: "",
     media: {
       src: "./assets/world/crystalCave.png",
       alt: "",
@@ -153,7 +153,7 @@ export const LocationList: LocationType = {
     npc: [],
   },
   "Elderglow Lake": {
-    text: "Elderglow Lake",
+    text: "",
     media: {
       src: "./assets/world/elderglowLake.png",
       alt: "",
@@ -178,7 +178,7 @@ export const LocationList: LocationType = {
     npc: [],
   },
   "Riverbend Harbor": {
-    text: "Riverbend Harbor",
+    text: "",
     media: {
       src: "./assets/village/riverbendHarborEntrance.png",
       alt: "",
@@ -188,7 +188,7 @@ export const LocationList: LocationType = {
     npc: [],
   },
   Harbor: {
-    text: "Harbor",
+    text: "",
     media: {
       src: "./assets/village/riverbendHarbor.png",
       alt: "",
@@ -203,7 +203,7 @@ export const LocationList: LocationType = {
     npc: [],
   },
   "Whispering Woods": {
-    text: "Whispering Woods",
+    text: "",
     media: {
       src: "./assets/world/veilOfShadows.png",
       alt: "",
@@ -218,7 +218,7 @@ export const LocationList: LocationType = {
     npc: [],
   },
   "Aether Peak": {
-    text: "Aether Peak",
+    text: "",
     media: {
       src: "./assets/world/aetherPeak.png",
       alt: "",
@@ -228,7 +228,7 @@ export const LocationList: LocationType = {
     npc: [],
   },
   "Eagles Peak": {
-    text: "Eagles Peak",
+    text: "",
     media: {
       src: "./assets/world/eaglesPeak.png",
       alt: "",
@@ -238,7 +238,7 @@ export const LocationList: LocationType = {
     npc: [],
   },
   "Black Void": {
-    text: "{name}, you are a warrior with the blood of gods coursing through your veins. To ascend to their divine ranks, you must prove your worth. You are destined to journey to a realm plagued by monstrous abominations. Conquer these beasts. Rescue the land from darkness. Fulfill your destiny.",
+    text: "{name}, you are a warrior with the blood of gods coursing through your veins. To ascend to their divine ranks, you must prove your worth. You are destined to journey to a realm plagued by monstrous abominations. Conquer these beasts. Rescue the land from darkness. Fulfill your destiny. Find Janus, he will be your guide!",
     media: {
       src: "./assets/world/blackVoid.png",
       alt: "",
@@ -280,7 +280,7 @@ export const LocationList: LocationType = {
   "Whispering Cavern": {
     text: "",
     media: {
-      src: "./assets/world/WhisperingCavern.png",
+      src: "./assets/world/whisperingCavern.png",
       alt: "Image of a cave.",
     },
     path: [Locations.WhisperingWoods],

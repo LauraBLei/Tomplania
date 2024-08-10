@@ -210,14 +210,15 @@ interface OptionButtonProps {
 
 const OptionButton = ({ onClick, index, text }: OptionButtonProps) => {
   return (
-    <div className="flex flex-wrap ml-4 items-center">
+    <div key={index + 11} className="flex flex-wrap ml-4 items-center">
       <img
+        key={index + 12}
         className=""
         src="./assets/bg-images/locationDot.png"
         alt="location dot"
       />
       <button
-        key={index}
+        key={index + 32}
         className="TextDark text-wrap max-w-[250px] lg:max-w-[600px] text-left"
         onClick={onClick}
       >
