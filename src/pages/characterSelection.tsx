@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { CharacterContext } from "../hooks/characterContext";
 
 export const CharacterSelection = () => {
-  const context = useContext(CharacterContext);
+  const { setName } = useContext(CharacterContext);
   const bgText = {
     backgroundImage: `url("./assets/bg-images/GameWorld.png")`,
   };
@@ -29,11 +29,10 @@ export const CharacterSelection = () => {
               type="text"
               name="name"
               className="w-full text-xl lg:text-2xl text-black px-3 py-2"
-              onChange={(event) => context?.setName(event.target.value)}
+              onChange={(event) => setName(event.target.value)}
               required
             />
             <Link to="/Game" className="text-3xl lg:text-6xl">
-              {" "}
               Play
             </Link>
           </div>

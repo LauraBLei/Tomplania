@@ -140,7 +140,3 @@ export const listOfCharacters: Character[] = [
     skills: knightSkills,
   },
 ];
-
-const x: Character[] = [...listOfCharacters];
-
-console.log(x);

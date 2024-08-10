@@ -2,43 +2,20 @@ import { GameContext } from "../hooks/gameContext";
 import { useContext } from "react";
 import { LocationList } from "../gameData/locations";
 import { Locations } from "../gameData/Enums";
-import { InventoryContext } from "../hooks/inventoryContext";
-import { CharacterContext } from "../hooks/characterContext";
+
 import { ArmorShopInventory } from "../gameData/armorShop";
 import { PotionShopInventory } from "../gameData/potionShop";
 import { Item } from "../gameData/objects/Item";
 import { BlacksmithShopInventory } from "../gameData/blackSmith";
 
-const isMobileDevice = () => {
-  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-};
-
 export const Shop = () => {
-  const {
-    location,
-    PrevLocation,
-    setLocation,
-    setBgImg,
-    item,
-    selectedItem,
-    setSelectedItem,
-  } = useContext(GameContext);
+  const { location, PrevLocation, setLocation, setBgImg } =
+    useContext(GameContext);
 
   const currentLocation = LocationList[location];
 
-  const IsMobile = isMobileDevice();
-  const handleContainerClick = () => {
-    if (IsMobile && selectedItem) {
-      setSelectedItem(null);
-    }
-  };
   return (
-    <div
-      className="flex flex-col items-center gap-2"
-      onClick={() => handleContainerClick()}
-    >
-      {item || selectedItem ? <ItemStats item={item} /> : ""}
-
+    <div className="flex flex-col items-center gap-2">
       <div className="place-self-start ml-4  flex gap-2">
         <img
           className="h-auto"
@@ -76,107 +53,27 @@ type MakeInventoryItemsProps = {
 };
 
 const MakeInventoryItems = ({ list }: MakeInventoryItemsProps) => {
-  const { setGold, gold, character } = useContext(CharacterContext);
-
-  const { addItem } = useContext(InventoryContext);
-
-  const { setItem, setSelectedItem, selectedItem } = useContext(GameContext);
-
-  const handlePurchase = (item: Item) => {
-    if (!item.cost) {
-      console.error("Item has no cost attribute: ", item);
-      return;
-    }
-    if (item.cost > gold) {
-      alert("You do not have enough gold to purchase this item!");
-      return;
-    }
-    if (item.job && item.job !== character.job) {
-      alert("You cannot buy an item that does not belong to your class!");
-      return;
-    }
-    if (confirm("are you sure you wanna buy this?") == true) {
-      setGold(gold - item.cost);
-      addItem(item);
-    }
-  };
-
-  const IsMobile = isMobileDevice();
-
-  const handleItemClick = (skill: Item) => {
-    if (selectedItem === skill) {
-      setSelectedItem(null);
-    } else {
-      setSelectedItem(skill);
-    }
-  };
+  const { setItem } = useContext(GameContext);
 
   return (
     <>
-      {list.map((e, i) => (
+      {list.map((item, i) => (
         <div key={i}>
           <button
             className="h-[50px] w-[50px] lg:h-[80px] lg:w-[80px] overflow-hidden object-cover border-2 border-black flex justify-center"
-            onClick={() => (IsMobile ? handleItemClick(e) : handlePurchase(e))}
-            onMouseEnter={() => setItem(e)}
-            onMouseLeave={() => setItem(null)}
+            onClick={() => {
+              setItem(item);
+            }}
           >
             <img
               className="max-h-[50px] lg:max-h-[80px]"
               key={i}
-              src={e.media.src}
-              alt={e.media.alt}
+              src={item.media.src}
+              alt={item.media.alt}
             />
           </button>
         </div>
       ))}
     </>
-  );
-};
-
-interface ShowStatProps {
-  text: string;
-  stats: number | undefined | string;
-}
-const ShowStat = ({ text, stats }: ShowStatProps) => {
-  if (!stats) {
-    return <></>;
-  }
-  return <h3 className="TextDark">{`${text} ${stats}`}</h3>;
-};
-
-interface ItemStatsProps {
-  item: Item | null;
-}
-
-const ItemStats = ({ item }: ItemStatsProps) => {
-  const IsMobile = isMobileDevice();
-  const { handlePurchase, setSelectedItem } = useContext(GameContext);
-  return (
-    <div className="absolute bg-beige border-2 border-blue place-self-center mt-[-400px] px-5 py-3 rounded-md max-w-[600px] z-10">
-      <ShowStat text="" stats={item?.name} />
-      <ShowStat text="Price:" stats={item?.cost} />
-      <ShowStat text="HP Bonus:" stats={item?.hp} />
-      <ShowStat text="Attack Bonus" stats={item?.attack} />
-      <ShowStat text="Class:" stats={item?.job} />
-      <ShowStat text="Healing:" stats={item?.heal} />
-
-      <p className="TextDark border-2 border-black p-2">{`${item?.description}`}</p>
-
-      {IsMobile ||
-        (item && (
-          <div className="w-full flex justify-center mt-2">
-            <button
-              onClick={() => {
-                handlePurchase(item);
-                setSelectedItem(null);
-              }}
-              className="button"
-            >
-              Buy
-            </button>
-          </div>
-        ))}
-    </div>
   );
 };

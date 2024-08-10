@@ -31,7 +31,6 @@ export const NPCLocation = () => {
   const Quests = QuestList.filter(
     (quest) => quest.npc === npc.type && quest.lvl <= lvl
   );
-  console.log("xxxxx", Quests);
 
   const handleLeave = () => {
     setBgImg(LocationList[PrevLocation].media);
@@ -49,8 +48,6 @@ export const NPCLocation = () => {
     setSelectedQuest("");
     setAcceptedQuest(true);
   };
-
-  console.log(activeQuests);
 
   return (
     <div className="flex flex-col gap-5 max-w-xl">
@@ -182,7 +179,7 @@ const FirstVisit = () => {
       ) : (
         ""
       )}
-      <div className="flex gap-4 items-center">
+      <div className="flex gap-4 items-center flex-wrap">
         <h3 className="font-Courier text-xl lg:text-3xl">Quests:</h3>
         {Quests.map((Quest, i) => (
           <button
@@ -214,7 +211,6 @@ const SecondVisit = () => {
     (quest) =>
       quest.status != QuestStages.Completed && npc.quests.includes(quest.name)
   );
-  console.log("List of quest:", notCompletedQuests);
 
   return (
     <div className="flex flex-col gap-6 mb-5">
@@ -231,7 +227,7 @@ const SecondVisit = () => {
       ) : (
         ""
       )}
-      <div className="flex gap-4 items-center">
+      <div className="flex gap-4 items-center flex-wrap">
         <h3 className="Headline text-blue">Quests:</h3>
         {notCompletedQuests.map((quest, i) => (
           <button

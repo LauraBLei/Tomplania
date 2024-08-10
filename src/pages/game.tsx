@@ -18,35 +18,22 @@ import { ManaBar } from "../gameData/character/manaBar";
 import { QuestList } from "../gameData/quests/quests";
 import { Link } from "react-router-dom";
 
-const isMobileDevice = () => {
-  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-};
-
 export const GamePage = () => {
-  const { fighting, location, NPC, bgImage, setSelectedItem, selectedItem } =
-    useContext(GameContext);
+  const { fighting, location, NPC, bgImage, item } = useContext(GameContext);
+  const { skill } = useContext(CharacterContext);
 
-  const IsMobile = isMobileDevice();
   const bgImageStyle = {
     backgroundImage: `url(${bgImage.src})`,
   };
-  const handleContainerClick = () => {
-    if (IsMobile && selectedItem) {
-      setSelectedItem(null);
-    }
-  };
+
   const lastQuest = QuestList[6];
   const gameFinished = lastQuest.status === QuestStages.Completed;
-  console.log(gameFinished);
 
   return (
-    <div
-      className="bg-black h-screen flex justify-center"
-      onClick={() => handleContainerClick()}
-    >
+    <div className="bg-black h-screen flex justify-center">
       <div className="w-full flex flex-col items-center max-w-[1200px]">
         <div
-          className="relative w-full max-w-[1000px] max-h-[800px] h-full bg-no-repeat bg-cover flex flex-col bg-center gap-5 items-center"
+          className="relative w-full max-w-[1000px] max-h-[800px] h-full bg-no-repeat bg-cover flex flex-col bg-center gap-5 items-center justify-between"
           style={bgImageStyle}
         >
           <div className="flex items-center justify-between gap-4 w-full mt-1 lg:mt-3 ">
@@ -59,6 +46,8 @@ export const GamePage = () => {
           </div>
 
           {fighting && <CombatImages />}
+          {fighting && skill && <SkillInfo />}
+          {item && location.includes("Shop") && <ItemInfo />}
         </div>
         <TextFieldLayout>
           {fighting ? (
@@ -170,6 +159,7 @@ const Location = () => {
         {currentLocation.path.map((loc, i) => (
           <OptionButton
             index={i}
+            key={i}
             text={`${currentLocation.path[i]}`}
             onClick={() =>
               changeLocation(currentLocation.path[i], LocationList[loc].media)
@@ -267,6 +257,77 @@ const GameComplete = () => {
         />
         <p>Go To The Land Of The Gods</p>
       </Link>
+    </div>
+  );
+};
+
+const SkillInfo = () => {
+  const { skill } = useContext(CharacterContext);
+  const { fight, enemy } = useContext(GameContext);
+  const currentEnemy = MonstersList[enemy];
+
+  return (
+    <div className="bg-beige border-4 border-blue p-4 flex flex-col items-center">
+      <h2 className="Headline text-blue">{skill?.name}</h2>
+      <p className="TextDark">Attack: {skill?.attack}</p>
+      <p className="TextDark">Mana: {skill?.mana}</p>
+      <p className="TextDark">Level: {skill?.level}</p>
+      <button
+        className="button"
+        onClick={() =>
+          skill
+            ? fight(
+                currentEnemy.attack,
+                skill?.mana,
+                skill?.attack,
+                currentEnemy
+              )
+            : ""
+        }
+      >
+        Attack
+      </button>
+    </div>
+  );
+};
+
+interface ShowStatProps {
+  text: string;
+  stats: number | undefined | string;
+}
+const ShowStat = ({ text, stats }: ShowStatProps) => {
+  if (!stats) {
+    return <></>;
+  }
+  return <h3 className="TextDark">{`${text} ${stats}`}</h3>;
+};
+
+const ItemInfo = () => {
+  const { handlePurchase, item, setItem } = useContext(GameContext);
+
+  return (
+    <div className=" bg-beige border-2 border-blue place-self-center px-5 py-3 rounded-md max-w-[600px] z-30">
+      <ShowStat text="" stats={item?.name} />
+      <ShowStat text="Price:" stats={item?.cost} />
+      <ShowStat text="HP Bonus:" stats={item?.hp} />
+      <ShowStat text="Attack Bonus" stats={item?.attack} />
+      <ShowStat text="Class:" stats={item?.job} />
+      <ShowStat text="Healing:" stats={item?.heal} />
+
+      <p className="TextDark border-2 border-black p-2">{`${item?.description}`}</p>
+
+      <div className="w-full flex justify-center mt-2">
+        <button
+          onClick={() => {
+            item ? handlePurchase(item) : "";
+
+            setItem(null);
+          }}
+          className="button"
+        >
+          Buy
+        </button>
+      </div>
     </div>
   );
 };

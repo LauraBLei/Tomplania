@@ -76,7 +76,7 @@ export const QuestList: Quest[] = [
     description: ["This is a test"],
     reward: 80,
     questItem: [Loot.DragonSkull],
-    status: QuestStages.Completed,
+    status: QuestStages.NotStarted,
     npc: NPCNames.TheOldMan,
     xp: 400,
     lvl: 6,

@@ -3,10 +3,7 @@ import { GameContext } from "../hooks/gameContext";
 import { Quest } from "../gameData/objects/Quest";
 
 export const QuestFolder = () => {
-  // const { activeQuest, setActiveQuest } = useContext(GameContext);
   const { activeQuests } = useContext(GameContext);
-
-  console.log(activeQuests);
 
   return (
     <div>
@@ -31,8 +28,6 @@ interface ShowQuestInfoProps {
 
 const ShowQuestInfo = ({ activeQuest }: ShowQuestInfoProps) => {
   const { removeQuest: abandonQuest } = useContext(GameContext);
-
-  console.log(activeQuest);
 
   return (
     <details>

@@ -5,6 +5,7 @@ import { Item } from "../gameData/objects/Item";
 import { Monster } from "../gameData/Enemies/enemies";
 import { MonsterLootList } from "../gameData/Enemies/loot";
 import { NewQuestItems } from "../gameData/quests/questItems";
+import { Skill } from "../gameData/character/skills";
 
 const xpThresholds = [100, 300, 600, 1000, 1500, 2100];
 
@@ -23,6 +24,7 @@ type characterContextType = {
   currentHP: number;
   MaxHP: number;
   MaxMana: number;
+  skill: Skill | null;
 
   setName: React.Dispatch<React.SetStateAction<string>>;
   setCharacter: React.Dispatch<React.SetStateAction<Character>>;
@@ -38,6 +40,7 @@ type characterContextType = {
   setCurrentMana: React.Dispatch<React.SetStateAction<number>>;
   setMaxHP: React.Dispatch<React.SetStateAction<number>>;
   setMaxMana: React.Dispatch<React.SetStateAction<number>>;
+  setSkill: React.Dispatch<React.SetStateAction<Skill | null>>;
 
   sellItem: (item: Item) => void;
   equipItem: (item: Item) => void;
@@ -65,12 +68,13 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
   const [headPiece, setHeadPiece] = useState<Item | null>(null);
   const [weapon, setWeapon] = useState<Item | null>(null);
   const [xp, setXP] = useState(0);
-  const [MaxXP, setMaxXP] = useState(10);
+  const [MaxXP, setMaxXP] = useState(50);
   const [lvl, setLvl] = useState(6);
   const [currentHP, setCurrentHP] = useState(character.maxHealth);
   const [maxHP, setMaxHP] = useState(character.maxHealth);
   const [currentMana, setCurrentMana] = useState(character.mana);
   const [MaxMana, setMaxMana] = useState(character.mana);
+  const [skill, setSkill] = useState<Skill | null>(null);
 
   const { removeItem, addItem } = useContext(InventoryContext);
 
@@ -131,7 +135,6 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
   const unEquipItem = (item: Item | null) => {
     // If no item is equipped, just return
     if (item === null) {
-      console.log("No item to unequip. Returning");
       return;
     }
 
@@ -161,10 +164,8 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
   const GainXP = (amount: number) => {
     const newXp = xp + amount;
     setXP(newXp);
-    console.log(`Exp was increased from ${xp} to ${xp + amount}`);
 
     if (newXp >= MaxXP) {
-      console.log("Level up");
       const newLvl = lvl + 1;
       const overFlowXp = newXp - MaxXP;
       const newMaxHp = maxHP + 10;
@@ -195,7 +196,6 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
 
       const dropRoll = Math.random();
 
-      console.log("test", dropRoll, monsterLootItem.dropChance);
       if (dropRoll <= monsterLootItem.dropChance) {
         addItem(monsterLootItem);
       }
@@ -240,6 +240,8 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
         setMaxHP,
         MaxMana,
         setMaxMana,
+        skill,
+        setSkill,
       }}
     >
       {children}

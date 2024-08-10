@@ -7,7 +7,6 @@ export const CreditPage = () => {
   const bgImageStyle = {
     backgroundImage: `url(${bgImage.src})`,
   };
-  console.log(bgImage.src);
 
   return (
     <div

@@ -21,16 +21,16 @@ export const Inventory = () => {
   const { location } = useContext(GameContext);
 
   return (
-    <div className="bg-beige p-4 border-4 lg:border-8 border-blue z-20 flex justify-between">
+    <div className="bg-beige p-4 border-4 lg:border-8 border-blue z-20 flex justify-between gap-3">
       <div className="h-auto">
-        <div className="flex flex-wrap gap-4 h-auto">
+        <div className="flex flex-wrap gap-4 h-auto lg:max-w-[350px]">
           {Array.from(inventory).map(([item, quantity], i) => (
             <Popup
               key={i * 3}
               trigger={
                 <button
                   key={i}
-                  className="h-[60px] w-[60px] lg:h-[80px] lg:w-[80px] bg-blue"
+                  className="h-[60px] w-[60px] lg:h-[80px] lg:w-[80px] bg-blue mb-4"
                 >
                   <div className="h-[60px] w-[60px] lg:h-[80px] lg:w-[80px] overflow-hidden">
                     <img
@@ -64,9 +64,7 @@ export const Inventory = () => {
                       sell
                     </button>
                   )}
-                  {["Weapon", "Gauntlet", "Chest", "Boot"].includes(
-                    item.type
-                  ) && (
+                  {["Weapon", "Head", "Chest"].includes(item.type) && (
                     <button
                       key={i + 97}
                       className="button2"
@@ -95,7 +93,7 @@ export const Inventory = () => {
         </div>
       </div>
       <div className="  flex flex-col gap-2">
-        <div className="max-w-[100px] lg:max-w-[200px] z-0 flex flex-col items-center">
+        <div className="min-w-[100px] max-w-[300px] z-0 flex flex-col items-center">
           <img
             className="w-full z-0 border-4 border-blue"
             src={character.media.src}
@@ -106,7 +104,7 @@ export const Inventory = () => {
         <div className="flex flex-col gap-5 mt-5 items-center">
           <Popup
             trigger={
-              <button className="h-[50px] w-[50px] lg:h-[90px] lg:w-[90px] bg-blue">
+              <button className="h-[70px] w-[70px] lg:h-[90px] lg:w-[90px] bg-blue overflow-hidden">
                 <img src={chest?.media.src} alt={chest?.media.alt} />
               </button>
             }
@@ -126,7 +124,7 @@ export const Inventory = () => {
           </Popup>
           <Popup
             trigger={
-              <button className="h-[50px] w-[50px] lg:h-[90px] lg:w-[90px] bg-blue">
+              <button className="h-[70px] w-[70px] lg:h-[90px] lg:w-[90px] bg-blue overflow-hidden">
                 <img src={headPiece?.media.src} alt={headPiece?.media.alt} />
               </button>
             }
@@ -146,7 +144,7 @@ export const Inventory = () => {
           </Popup>
           <Popup
             trigger={
-              <button className="h-[50px] w-[50px] lg:h-[90px] lg:w-[90px] bg-blue">
+              <button className="h-[70px] w-[70px] lg:h-[90px] lg:w-[90px] bg-blue overflow-hidden">
                 <img src={weapon?.media.src} alt={weapon?.media.alt} />
               </button>
             }

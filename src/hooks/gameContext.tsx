@@ -15,14 +15,12 @@ type GameContextType = {
   PrevLocation: Locations;
   MonsterHP: number;
   NPC: NPCNames | null;
-  // activeQuest: Quest | null;
   bgImage: Media;
   selectedQuest: string;
   item: Item | null;
   activeQuests: Quest[];
   acceptedQuest: boolean;
   deliveredQuest: boolean;
-  selectedItem: Item | null;
   enemy: MonsterNames;
 
   setLocation: React.Dispatch<React.SetStateAction<Locations>>;
@@ -36,7 +34,6 @@ type GameContextType = {
   setItem: React.Dispatch<React.SetStateAction<Item | null>>;
   setAcceptedQuest: React.Dispatch<React.SetStateAction<boolean>>;
   setDeliveredQuest: React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectedItem: React.Dispatch<React.SetStateAction<Item | null>>;
 
   startQuest: (quest: Quest) => void;
   removeQuest: (quest: Quest) => void;
@@ -75,7 +72,6 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
   const [item, setItem] = useState<Item | null>(null);
   const [acceptedQuest, setAcceptedQuest] = useState(false);
   const [deliveredQuest, setDeliveredQuest] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<Item | null>(null);
   const [enemy, setEnemy] = useState(MonsterNames.AbyssalSeahorse);
 
   const {
@@ -116,8 +112,12 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
     attack: number,
     enemy: Monster
   ) => {
+    if (currentMana < mana) {
+      alert("You do not have enough Mana");
+      return;
+    }
     const newMonsterHP = Math.max(MonsterHP - attack, 0);
-    setCurrentMana(currentMana - mana);
+    setCurrentMana((prevMana) => Math.max(prevMana - mana, 0));
     setCurrentHP((prevHP) => Math.max(prevHP - damage, 0));
     setMonsterHP(newMonsterHP);
     if (newMonsterHP === 0) {
@@ -214,8 +214,6 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
         setAcceptedQuest,
         deliveredQuest,
         setDeliveredQuest,
-        setSelectedItem,
-        selectedItem,
         handlePurchase,
         enemy,
         setEnemy,

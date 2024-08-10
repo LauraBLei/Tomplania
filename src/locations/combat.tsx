@@ -41,10 +41,8 @@ export const EnemyDefeated = () => {
 };
 
 export const Fighting = () => {
-  const { character, currentHP, lvl } = useContext(CharacterContext);
-  const { fight, leave, handleRespawn, enemy } = useContext(GameContext);
-
-  const currentEnemy = MonstersList[enemy];
+  const { character, currentHP, lvl, setSkill } = useContext(CharacterContext);
+  const { leave, handleRespawn } = useContext(GameContext);
 
   const skills = character.skills.filter((skills) => lvl >= skills.level);
 
@@ -65,12 +63,7 @@ export const Fighting = () => {
                 <button
                   className="max-w-[50px] md:max-w-[70px] lg:max-w-[100px]"
                   onClick={() => {
-                    fight(
-                      currentEnemy.attack,
-                      skill.mana,
-                      skill.attack,
-                      currentEnemy
-                    );
+                    setSkill(skill);
                   }}
                 >
                   <img src={skill.media.src} alt={skill.media.alt} />

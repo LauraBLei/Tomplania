@@ -16,20 +16,18 @@ export const Carousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const handleNext = () => {
     setCurrentSlide((prevSlide) => {
-      console.log(prevSlide);
-
       return prevSlide === listOfCharacters.length - 1 ? 0 : prevSlide + 1;
     });
   };
 
   const handleBack = () => {
     setCurrentSlide((prevSlide) => {
-      console.log(prevSlide);
       return prevSlide === 0 ? listOfCharacters.length - 1 : prevSlide - 1;
     });
   };
 
-  const context = useContext(CharacterContext);
+  const { setCharacter, setMaxHP, setMaxMana, setCurrentMana, setCurrentHP } =
+    useContext(CharacterContext);
 
   return (
     <CarouselProvider
@@ -51,11 +49,19 @@ export const Carousel = () => {
                 />
               </div>
               <p className="Headline">{character.job}</p>
-              <p className=" Headline">Staring Health: {character.maxHealth}</p>
+              <p className=" Headline">
+                Starting Health: {character.maxHealth}
+              </p>
               <p className=" Headline">Starting Mana: {character.mana}</p>
               <button
                 className="bg-white text-black px-5 text-2xl lg:text-3xl rounded"
-                onClick={() => context.setCharacter(listOfCharacters[index])}
+                onClick={() => {
+                  setCharacter(listOfCharacters[index]);
+                  setMaxMana(character.mana);
+                  setMaxHP(character.maxHealth);
+                  setCurrentHP(character.maxHealth);
+                  setCurrentMana(character.mana);
+                }}
               >
                 Choose
               </button>
