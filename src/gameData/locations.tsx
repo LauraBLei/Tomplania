@@ -56,7 +56,7 @@ export const LocationList: LocationType = {
     npc: [NPCNames.TheBartender, NPCNames.Bård, NPCNames.Ella],
   },
   "Ironwood Avenue": {
-    text: "Ironwood Avenue",
+    text: "",
     media: {
       src: "./assets/village/ironwoodAvenue.png",
       alt: "",
@@ -66,7 +66,7 @@ export const LocationList: LocationType = {
     npc: [],
   },
   "Emerald Plaza": {
-    text: "Emerald Plaza",
+    text: "",
     media: {
       src: "./assets/village/EmeraldPlaza.png",
       alt: "",
@@ -76,7 +76,7 @@ export const LocationList: LocationType = {
     npc: [NPCNames.TheOldLady],
   },
   "Aranthria City Gates": {
-    text: "City Gates",
+    text: "The front gate to the city Aranthria",
     media: {
       src: "./assets/village/cityGates.png",
       alt: "",
@@ -91,7 +91,7 @@ export const LocationList: LocationType = {
     npc: [],
   },
   "Ironwood Gate": {
-    text: "Ironwood Gate",
+    text: "The back gate to the city of Aranthria! And the way to Evershade Forest",
     media: {
       src: "./assets/village/backGate.png",
       alt: "",
@@ -101,7 +101,7 @@ export const LocationList: LocationType = {
     npc: [],
   },
   Eldervale: {
-    text: "Eldervale",
+    text: "The small village of Eldervale, i heard there was a potion shop around here!",
     media: {
       src: "./assets/village/eldervale.png",
       alt: "",
@@ -178,7 +178,7 @@ export const LocationList: LocationType = {
     npc: [],
   },
   "Riverbend Harbor": {
-    text: "",
+    text: "Riverbend Harbor! I heard there was a blacksmith somewhere around here!",
     media: {
       src: "./assets/village/riverbendHarborEntrance.png",
       alt: "",
@@ -203,7 +203,7 @@ export const LocationList: LocationType = {
     npc: [],
   },
   "Whispering Woods": {
-    text: "",
+    text: "Hmmm.. The energy seems weird around these woods...",
     media: {
       src: "./assets/world/veilOfShadows.png",
       alt: "",
@@ -218,7 +218,7 @@ export const LocationList: LocationType = {
     npc: [],
   },
   "Aether Peak": {
-    text: "",
+    text: "I've heard about this place. It is said a viscous beast lives here..",
     media: {
       src: "./assets/world/aetherPeak.png",
       alt: "",
@@ -228,7 +228,7 @@ export const LocationList: LocationType = {
     npc: [],
   },
   "Eagles Peak": {
-    text: "",
+    text: "This used to be a popular hiking spot.. until the beasts came.. Now no one dares to go here. I have to help them!",
     media: {
       src: "./assets/world/eaglesPeak.png",
       alt: "",
@@ -248,7 +248,7 @@ export const LocationList: LocationType = {
     npc: [],
   },
   "Eloween's Cabin": {
-    text: "",
+    text: "A mysterious but kind energy comes from this place...",
     media: {
       src: "./assets/world/ElowensCabin.png",
       alt: "",
@@ -258,7 +258,7 @@ export const LocationList: LocationType = {
     npc: [NPCNames.TheYoungWoman],
   },
   "Moonlit Pool": {
-    text: "",
+    text: "I don not trust this place..",
     media: {
       src: "./assets/world/moonlitPool.png",
       alt: "In a forest, lies a moonlit pool, surrounded my green trees.",
@@ -268,12 +268,12 @@ export const LocationList: LocationType = {
     npc: [],
   },
   "The Singing Grove": {
-    text: "",
+    text: "Singing Grove? but it is so silent here..",
     media: {
       src: "./assets/world/singingGrove.png",
       alt: "a grove.",
     },
-    path: [],
+    path: [Locations.PathToCave],
     enemy: [MonsterNames.DarkDruid, MonsterNames.FruitMonster, MonsterNames.Zu],
     npc: [],
   },
@@ -298,7 +298,7 @@ export const LocationList: LocationType = {
     npc: [NPCNames.Lums],
   },
   "Forest Path": {
-    text: "",
+    text: "Hmm.. i wonder what else lives in this forest...",
     media: {
       src: "./assets/world/forestPath.png",
       alt: "Forrest path.",
@@ -308,7 +308,7 @@ export const LocationList: LocationType = {
     npc: [],
   },
   "Riverbend Beach": {
-    text: "",
+    text: "The water looks so nice!",
     media: {
       src: "./assets/world/beach.png",
       alt: "Riverbend Beach.",

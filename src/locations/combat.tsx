@@ -92,9 +92,9 @@ export const CombatImages = () => {
   const currentEnemy = MonstersList[enemy];
 
   return (
-    <div className="flex w-full justify-between gap-4">
-      <div className="flex flex-col max-w-[400px] lg:ml-10">
-        <div className="max-h-[300px] overflow-hidden">
+    <div className="flex w-full justify-evenly ">
+      <div className="combatBox lg:ml-10">
+        <div className="max-h-[400px] overflow-hidden">
           <img
             className="combatFrame border-green-600"
             src={character.media.src}
@@ -104,8 +104,8 @@ export const CombatImages = () => {
         <HpBarCharacter />
         <ManaBar />
       </div>
-      <div className="flex flex-col max-w-[400px] lg:mr-10 ">
-        <div className="max-h-[300px] overflow-hidden">
+      <div className="combatBox lg:mr-10 ">
+        <div className="max-h-[400px] overflow-hidden">
           <img
             className="combatFrame border-red-700"
             src={currentEnemy.media.src}
