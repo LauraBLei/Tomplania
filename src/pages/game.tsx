@@ -9,12 +9,14 @@ import { Shop } from "../locations/shop";
 import { CombatImages, EnemyLocation } from "../locations/combat";
 import { NPCLocation } from "../locations/npcLocation";
 import { NPCList } from "../gameData/NPC";
-import { NPCNames } from "../gameData/Enums";
+import { NPCNames, QuestNames, QuestStages } from "../gameData/Enums";
 import { QuestFolder } from "../components/questFolder";
 import { XpBar } from "../gameData/character/xpBar";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { TextFieldLayout } from "../components/textFieldLayout";
 import { ManaBar } from "../gameData/character/manaBar";
+import { QuestList } from "../gameData/quests/quests";
+import { Link } from "react-router-dom";
 
 const isMobileDevice = () => {
   return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -33,6 +35,9 @@ export const GamePage = () => {
       setSelectedItem(null);
     }
   };
+  const lastQuest = QuestList[6];
+  const gameFinished = lastQuest.status === QuestStages.Completed;
+  console.log(gameFinished);
 
   return (
     <div
@@ -62,6 +67,8 @@ export const GamePage = () => {
             <Shop />
           ) : NPC ? (
             <NPCLocation />
+          ) : gameFinished ? (
+            <GameComplete />
           ) : (
             <Location />
           )}
@@ -143,6 +150,7 @@ const Location = () => {
     location,
     setPrevLocation,
     changeLocation,
+    setEnemy,
   } = useContext(GameContext);
 
   const currentLocation = LocationList[location];
@@ -176,6 +184,7 @@ const Location = () => {
               setFighting(true);
               setMonsterHP(MonstersList[currentLocation.enemy[i]].hp);
               setPrevLocation(location);
+              setEnemy(currentLocation.enemy[i]);
             }}
           />
         ))}
@@ -224,6 +233,40 @@ const OptionButton = ({ onClick, index, text }: OptionButtonProps) => {
       >
         {text}
       </button>
+    </div>
+  );
+};
+
+const GameComplete = () => {
+  const { setBgImg } = useContext(GameContext);
+
+  const Media = {
+    src: "./assets/world/GoldenCity.png",
+    alt: "Golden City",
+  };
+
+  return (
+    <div className="flex flex-col gap-4 items-center">
+      <p className="TextDark">
+        Congratulations! You have successfully overcome all the trials. Your
+        courage, skill, and determination have restored peace and order to the
+        land.
+      </p>
+      <p className="TextDark">
+        Your time has come to go back to the Land Of The Gods!
+      </p>
+      <Link
+        to="/Credits"
+        onClick={() => setBgImg(Media)}
+        className="flex gap-2 TextDark"
+      >
+        <img
+          className=""
+          src="./assets/bg-images/locationDot.png"
+          alt="location dot"
+        />
+        <p>Go To The Land Of The Gods</p>
+      </Link>
     </div>
   );
 };

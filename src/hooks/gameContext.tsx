@@ -7,7 +7,7 @@ import { Quest } from "../gameData/objects/Quest";
 import { InventoryContext } from "./inventoryContext";
 import { QuestItemNames } from "../gameData/quests/questItems";
 import { CharacterContext } from "./characterContext";
-import { Monster } from "../gameData/Enemies/enemies";
+import { Monster, MonsterNames } from "../gameData/Enemies/enemies";
 
 type GameContextType = {
   location: Locations;
@@ -23,8 +23,10 @@ type GameContextType = {
   acceptedQuest: boolean;
   deliveredQuest: boolean;
   selectedItem: Item | null;
+  enemy: MonsterNames;
 
   setLocation: React.Dispatch<React.SetStateAction<Locations>>;
+  setEnemy: React.Dispatch<React.SetStateAction<MonsterNames>>;
   setFighting: React.Dispatch<React.SetStateAction<boolean>>;
   setPrevLocation: React.Dispatch<React.SetStateAction<Locations>>;
   setMonsterHP: React.Dispatch<React.SetStateAction<number>>;
@@ -74,6 +76,7 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
   const [acceptedQuest, setAcceptedQuest] = useState(false);
   const [deliveredQuest, setDeliveredQuest] = useState(false);
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+  const [enemy, setEnemy] = useState(MonsterNames.AbyssalSeahorse);
 
   const {
     setCurrentHP,
@@ -214,6 +217,8 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
         setSelectedItem,
         selectedItem,
         handlePurchase,
+        enemy,
+        setEnemy,
       }}
     >
       {children}

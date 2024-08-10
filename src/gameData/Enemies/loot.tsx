@@ -1,18 +1,6 @@
 // import { Media } from "../character/characters";
 import { Item } from "../objects/Item";
 
-// export type MonsterLoot = {
-//   name: string;
-//   type: string;
-//   cost: number;
-//   dropChance: number;
-//   media: Media;
-// };
-
-// export type MonsterLootListType = {
-//   [key: string]: MonsterLoot;
-// };
-
 export const MonsterLootList: Item[] = [
   {
     name: "Feather Leaf Skeleton",
@@ -56,6 +44,116 @@ export const MonsterLootList: Item[] = [
     media: {
       src: "./assets/items/monsterLoot/Icon38.png",
       alt: "Image of a siren skull",
+    },
+  },
+  {
+    name: "Eagle Queen Skull",
+    type: "loot",
+    cost: 1,
+    description: "description",
+    dropChance: 1,
+    media: {
+      src: "./assets/items/monsterLoot/eagleSkull.png",
+      alt: "Image of a eagle queen skull",
+    },
+  },
+  {
+    name: "Mirewalker skull",
+    type: "loot",
+    cost: 1,
+    description: "description",
+    dropChance: 1,
+    media: {
+      src: "./assets/items/monsterLoot/mireWalker.png",
+      alt: "Image of a mirewalker skull",
+    },
+  },
+  {
+    name: "Grim Lurker Poison",
+    type: "loot",
+    cost: 1,
+    description: "description",
+    dropChance: 1,
+    media: {
+      src: "./assets/items/monsterLoot/snakePoison.png",
+      alt: "Image of a grim lurker poison vile",
+    },
+  },
+  {
+    name: "Marasnake Skull",
+    type: "loot",
+    cost: 1,
+    description: "description",
+    dropChance: 1,
+    media: {
+      src: "./assets/items/monsterLoot/marasnakeSkull.png",
+      alt: "Image of a marasnake skull",
+    },
+  },
+  {
+    name: "Dragon Skull",
+    type: "loot",
+    cost: 1,
+    description: "description",
+    dropChance: 1,
+    media: {
+      src: "./assets/items/monsterLoot/dragonSkull.png",
+      alt: "Image of a dragon skull",
+    },
+  },
+  {
+    name: "Dragon Egg",
+    type: "loot",
+    cost: 100,
+    description: "description",
+    dropChance: 0.03,
+    media: {
+      src: "./assets/items/monsterLoot/dragonEgg.png",
+      alt: "Image of a Dragon egg in a chest",
+    },
+  },
+  {
+    name: "Zu Skull",
+    type: "loot",
+    cost: 1,
+    description: "The skull of a Zu",
+    dropChance: 1,
+    media: {
+      src: "./assets/items/monsterLoot/eagleSkull.png",
+      alt: "Image of a Zu skull",
+    },
+  },
+  {
+    name: "Magic Ring",
+    type: "loot",
+    cost: 100,
+    description: "A Magic ring, it might sell for some gold!",
+    dropChance: 0.1,
+    media: {
+      src: "./assets/items/monsterLoot/ring.png",
+      alt: "Image of a ring",
+    },
+  },
+  {
+    name: "Glowfin Minnow Meat",
+    type: "loot",
+    cost: 1,
+    description: "Meat from a Glowfin Minnow Fish",
+    dropChance: 1,
+    media: {
+      src: "./assets/items/monsterLoot/15.png",
+      alt: "Image of Glowfin Minnow Meat",
+    },
+  },
+  {
+    name: "Hellmaw Piranha Meat",
+    type: "loot",
+    cost: 1,
+    description: "Meat from a Glowfin Minnow Fish",
+    dropChance: 1,
+    media: {
+      src: "./assets/items/monsterLoot/15.png",
+      alt: "Image of Glowfin Minnow Meat",
     },
   },
 ];

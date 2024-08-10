@@ -8,6 +8,7 @@ import { GameProvider } from "./hooks/gameContext";
 import { GamePage } from "./pages/game";
 import { CharacterProvider } from "./hooks/characterContext";
 import { InventoryProvider } from "./hooks/inventoryContext";
+import { CreditPage } from "./pages/credits";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -19,7 +20,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
               <Route path="/" element={<StartPage />} />
               <Route path="/Character" element={<CharacterSelection />} />
               <Route path="/Game" element={<GamePage />} />
-              {/* <Route path="/Settings" element={<Settings />} /> */}
+              <Route path="/Credits" element={<CreditPage />} />
             </Routes>
           </BrowserRouter>
         </GameProvider>

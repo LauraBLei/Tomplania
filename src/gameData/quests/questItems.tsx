@@ -9,6 +9,10 @@ export enum QuestItemNames {
   KeyOne = "Heart Of The Abyssal Seahorse",
   KeyTwo = "Dark Druid Necklace",
   keyThree = "Crown Of The Snake Woman",
+  ForbiddenFruit = "ForbiddenFruit",
+  BårdsChest = "Bård's Chest",
+  VillagersNecklace = "Villagers Necklace",
+  VillagersChest = "Villagers Chest",
 }
 
 export const QuestItems: QuestItemsType = {
@@ -71,6 +75,50 @@ export const NewQuestItems: Item[] = [
     media: {
       src: "./assets/items/questItems/key3.png",
       alt: "Crown of the Snake Woman",
+    },
+  },
+  {
+    name: "Forbidden Fruit",
+    type: "QuestItem",
+    description: "Forbidden Fruit",
+    cost: 1,
+    dropChance: 0.4,
+    media: {
+      src: "./assets/items/questItems/forbiddenFruit.png",
+      alt: "Purple fruit",
+    },
+  },
+  {
+    name: "Bård's Chest",
+    type: "QuestItem",
+    description: "Bård's Chest",
+    cost: 1,
+    dropChance: 0.4,
+    media: {
+      src: "./assets/items/questItems/BårdsChest.png",
+      alt: "Purple fruit",
+    },
+  },
+  {
+    name: "Villagers Necklace",
+    type: "QuestItem",
+    description: "Villagers Necklace",
+    cost: 1,
+    dropChance: 1,
+    media: {
+      src: "./assets/items/questItems/necklace.png",
+      alt: "Gold necklace",
+    },
+  },
+  {
+    name: "Villagers Chest",
+    type: "QuestItem",
+    description: "Villagers Chest",
+    cost: 1,
+    dropChance: 1,
+    media: {
+      src: "./assets/items/questItems/BårdsChest.png",
+      alt: "Chest",
     },
   },
 ];

@@ -53,7 +53,7 @@ export const LocationList: LocationType = {
     },
     path: [Locations.outsideTavern],
     enemy: [],
-    npc: [NPCNames.TheBartender],
+    npc: [NPCNames.TheBartender, NPCNames.Bård, NPCNames.Ella],
   },
   "Ironwood Avenue": {
     text: "Ironwood Avenue",
@@ -139,7 +139,7 @@ export const LocationList: LocationType = {
       Locations.ElderglowLake,
       Locations.ForestPath,
     ],
-    enemy: [],
+    enemy: [MonsterNames.Niffler],
     npc: [],
   },
   "Crystal Caves": {
@@ -159,7 +159,11 @@ export const LocationList: LocationType = {
       alt: "",
     },
     path: [Locations.EvershadeForest],
-    enemy: [MonsterNames.Siren],
+    enemy: [
+      MonsterNames.Siren,
+      MonsterNames.GlowfinMinnow,
+      MonsterNames.HellmawPiranha,
+    ],
     npc: [],
   },
 
@@ -193,6 +197,7 @@ export const LocationList: LocationType = {
       Locations.RiverbendHarbor,
       Locations.PathToCave,
       Locations.Blacksmith,
+      Locations.RiverbendBeach,
     ],
     enemy: [],
     npc: [],
@@ -219,7 +224,7 @@ export const LocationList: LocationType = {
       alt: "",
     },
     path: [Locations.Eldervale, Locations.CircleOfTheGods],
-    enemy: [],
+    enemy: [MonsterNames.SixthBoss],
     npc: [],
   },
   "Eagles Peak": {
@@ -229,7 +234,7 @@ export const LocationList: LocationType = {
       alt: "",
     },
     path: [Locations.Eldervale, Locations.CircleOfTheGods],
-    enemy: [],
+    enemy: [MonsterNames.SecondBoss],
     npc: [],
   },
   "Black Void": {
@@ -269,7 +274,7 @@ export const LocationList: LocationType = {
       alt: "a grove.",
     },
     path: [],
-    enemy: [MonsterNames.DarkDruid],
+    enemy: [MonsterNames.DarkDruid, MonsterNames.FruitMonster, MonsterNames.Zu],
     npc: [],
   },
   "Whispering Cavern": {
@@ -289,8 +294,8 @@ export const LocationList: LocationType = {
       alt: "Forrest path.",
     },
     path: [Locations.SingingGrove, Locations.harbor, Locations.TheCrystalCaves],
-    enemy: [],
-    npc: [],
+    enemy: [MonsterNames.FourthBoss],
+    npc: [NPCNames.Lums],
   },
   "Forest Path": {
     text: "",
@@ -299,7 +304,17 @@ export const LocationList: LocationType = {
       alt: "Forrest path.",
     },
     path: [Locations.EvershadeForest, Locations.MoonlitPool],
-    enemy: [],
+    enemy: [MonsterNames.ThirdBoss],
+    npc: [],
+  },
+  "Riverbend Beach": {
+    text: "",
+    media: {
+      src: "./assets/world/beach.png",
+      alt: "Riverbend Beach.",
+    },
+    path: [Locations.RiverbendHarbor],
+    enemy: [MonsterNames.FifthBoss, MonsterNames.Squirmoth],
     npc: [],
   },
 };

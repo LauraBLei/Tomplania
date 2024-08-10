@@ -1,5 +1,5 @@
 
-import { NPCNames, QuestNames, QuestStages } from "../Enums";
+import { Loot, NPCNames, QuestNames, QuestStages } from "../Enums";
 import { QuestItemNames } from "../quests/questItems";
 
 export type NPCText = {
@@ -15,7 +15,7 @@ export class Quest {
     name: QuestNames;
     description: string[];
     reward: number;
-    questItem: QuestItemNames[];
+    questItem: (QuestItemNames|Loot)[];
     status: QuestStages;
     npc: NPCNames;
     xp: number;

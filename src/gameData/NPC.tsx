@@ -34,12 +34,14 @@ export const NPCList: NPC[] = [
       hasVisitedText: [
         "Hello Again! What do you say, are you ready to help me out?",
       ],
-      QuestInProgress: [""],
-      QuestAccepted: [""],
-      QuestDelivered: [""],
-      NoAvailableQuests: [""],
+      QuestInProgress: [
+        "Thank you for helping me out! Let me know when you are done ay?",
+      ],
+      QuestAccepted: ["Thank you! I will be waiting for your return!"],
+      QuestDelivered: ["Awesome mate! This is for you!"],
+      NoAvailableQuests: ["Sorry friend, i have no tasks for you right now!"],
     },
-    quests: [QuestNames.test],
+    quests: [],
     media: {
       src: "./assets/npc/bartender.png",
       alt: "Image of a male bartender with grey hair, green shirt and brown apron.",
@@ -51,12 +53,14 @@ export const NPCList: NPC[] = [
     name: "Janus",
     text: {
       startText: [
-        "Ahh. I see you have arrived. I have waited a while for you. You can call me Janus. I am your guide in this world. Explore, and come back when you are ready for the trials.",
+        "Ahh. I see you have arrived {name}. I have waited a while for you. You can call me Janus. I am your guide in this world. Explore, and come back when you are ready for the trials.",
       ],
-      hasVisitedText: ["Are you ready for your trial?"],
-      QuestInProgress: ["Safe journey my friend"],
-      QuestAccepted: [""],
-      QuestDelivered: [""],
+      hasVisitedText: ["Are you ready for your trial {name}?"],
+      QuestInProgress: ["Have you killed the beast?"],
+      QuestAccepted: ["Safe journey {name}"],
+      QuestDelivered: [
+        "Well done {name}, When you are ready for the next trial come and see me.",
+      ],
       NoAvailableQuests: [
         "You are not ready for the next trial {name}. Come back when you are stronger.",
       ],
@@ -71,7 +75,7 @@ export const NPCList: NPC[] = [
     ],
     media: {
       src: "./assets/npc/oldMan.png",
-      alt: "Image of a male bartender with grey hair, green shirt and brown apron.",
+      alt: "Image of Janus, your guide in the game.",
     },
     hasVisited: false,
   },
@@ -103,6 +107,103 @@ export const NPCList: NPC[] = [
     media: {
       src: "./assets/npc/elowen.png",
       alt: "Elowen, a woman, standing in the midst of a path in a forest.",
+    },
+    hasVisited: false,
+  },
+  {
+    type: NPCNames.Bård,
+    name: "Bård",
+    text: {
+      startText: [
+        "Oink... And who are you?",
+        "well {name}, I am Bård.",
+        "You do seem.. useful.. i guess.",
+      ],
+      hasVisitedText: ["Oink.. you again."],
+      QuestInProgress: ["You done yet?"],
+      QuestAccepted: ["Well thank you.. i guess."],
+      QuestDelivered: [
+        "Oink...So you are useful after all! Here take this, for your help.",
+      ],
+      NoAvailableQuests: [
+        "What do you want? I do not have any tasks for you! Oink off!",
+      ],
+    },
+    quests: [QuestNames.BårdQuestOne, QuestNames.BårdQuestTwo],
+    media: {
+      src: "./assets/npc/BårdNPC.png",
+      alt: "image of Bård, the pig.",
+    },
+    hasVisited: false,
+  },
+  {
+    type: NPCNames.Ella,
+    name: "Ella",
+    text: {
+      startText: [
+        "Well hello there. My name is Ella! And you are?",
+        "Well hello {name}, You look capable, i might have some work for you!",
+      ],
+      hasVisitedText: ["Hello again {name}!"],
+      QuestInProgress: ["Oh! Hello {name} you finished with the task yet?"],
+      QuestAccepted: ["Nice! thank you for the help!"],
+      QuestDelivered: ["You are amazing! Take this, for the trouble!"],
+      NoAvailableQuests: [
+        "I am sorry {name} i do not have any tasks for you right now.",
+      ],
+    },
+    quests: [],
+    media: {
+      src: "./assets/npc/ellaNPC.png",
+      alt: "",
+    },
+    hasVisited: false,
+  },
+  {
+    type: NPCNames.Lums,
+    name: "Lums",
+    text: {
+      startText: [
+        "*KWEH* Hello there! You startled me a bit! My name is Lums. And you are?",
+        "Oh! nice to meet you [name}!",
+        "You look like a strong adventurer! i might need your help sometime, if you are up to it!",
+      ],
+      hasVisitedText: ["*KWEH*, Hello again {name}!"],
+      QuestInProgress: [
+        "*KWEH*, Hey there [name}, have you finished the task?",
+      ],
+      QuestAccepted: [
+        "*KWEH*, Well thank you very much! That is very kind of you!",
+      ],
+      QuestDelivered: [
+        "Holy *KWEH*! You are amazing! This is for your trouble!",
+      ],
+      NoAvailableQuests: [
+        "*KWEH*, I am sorry {name}, i do not have any tasks for you at the moment!",
+      ],
+    },
+    quests: [],
+    media: {
+      src: "./assets/npc/LasseChocobo.png",
+      alt: "A image of Lums The Chocobo",
+    },
+    hasVisited: false,
+  },
+  {
+    type: "",
+    name: "",
+    text: {
+      startText: [""],
+      hasVisitedText: [""],
+      QuestInProgress: [""],
+      QuestAccepted: [""],
+      QuestDelivered: [""],
+      NoAvailableQuests: [""],
+    },
+    quests: [],
+    media: {
+      src: "./assets/npc/",
+      alt: "",
     },
     hasVisited: false,
   },

@@ -3,6 +3,9 @@ export enum NPCNames {
   TheBartender = "The Bartender",
   TheOldMan = "The Old Man",
   TheYoungWoman = "The Young Woman",
+  Ella = "Strange Lady",
+  Bård = "Strange Pig",
+  Lums = "Wild Chocobo",
 }
 
 export enum QuestStages {
@@ -13,7 +16,6 @@ export enum QuestStages {
 
 export enum QuestNames {
   SecretIngredient = "Secret Ingredient",
-  test = "test",
   FirstTrial = "Trial Of The Siren's Song",
   SecondTrial = "Second Trial",
   ThirdTrial = "Third Trial",
@@ -21,6 +23,13 @@ export enum QuestNames {
   FifthTrial = "Fifth Trial",
   SixthTrial = "Sixth Trial",
   MysteriousBox = "Mysterious Box",
+  BårdQuestOne = "Forbidden Fruit",
+  BårdQuestTwo = "The Thief",
+  EllaQuestOne = "Forbidden Juice",
+  EllaQuestTwo = "Steaks are high",
+  BartenderOne = "Catch Of The Day",
+  BartenderTwo = "Beastly Bother",
+  LumsQuestOne = "The Zu's Gotta Go",
 }
 
 export enum Locations {
@@ -50,6 +59,7 @@ export enum Locations {
   PathToCave = "Path Between Crystal Caves and Riverbend Harbor",
   ForestPath = "Forest Path",
   Blacksmith = "Blacksmith Shop",
+  RiverbendBeach = "Riverbend Beach",
 }
 
 export enum Loot {
@@ -57,4 +67,14 @@ export enum Loot {
   FeatherLeafFluid = "Feather Leaf Fluid",
   SirenSkull = "Siren Skull",
   SirenScale = "Siren Scale",
+  EagleSkull = "Eagle Queen Skull",
+  MirewalkerSkull = "Mirewalker Skull",
+  GrimLurkerPoison = "Grim Lurker Poison",
+  MarasnakeSkull = "Marasnake Skull",
+  DragonSkull = "Dragon Skull",
+  DragonEgg = "Dragon Egg",
+  ZuSkull = "Zu Skull",
+  Ring = "Magic Ring",
+  GlowfinMinnowMeat = "Glowfin Minnow Meat",
+  HellmawPiranhaMeat = "Hellmaw Piranha Meat",
 }

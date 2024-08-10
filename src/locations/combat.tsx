@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { CharacterContext } from "../hooks/characterContext";
 import { GameContext } from "../hooks/gameContext";
 import { MonstersList } from "../gameData/Enemies/enemies";
-import { LocationList } from "../gameData/locations";
 import { HpBarEnemy } from "../gameData/Enemies/hpBar";
 
 import { HpBarCharacter } from "../gameData/character/hpBar";
@@ -43,10 +42,9 @@ export const EnemyDefeated = () => {
 
 export const Fighting = () => {
   const { character, currentHP, lvl } = useContext(CharacterContext);
-  const { PrevLocation, fight, leave, handleRespawn } = useContext(GameContext);
-  const prevLocation = LocationList[PrevLocation];
+  const { fight, leave, handleRespawn, enemy } = useContext(GameContext);
 
-  const enemy = MonstersList[prevLocation.enemy[0]];
+  const currentEnemy = MonstersList[enemy];
 
   const skills = character.skills.filter((skills) => lvl >= skills.level);
 
@@ -67,7 +65,12 @@ export const Fighting = () => {
                 <button
                   className="max-w-[50px] md:max-w-[70px] lg:max-w-[100px]"
                   onClick={() => {
-                    fight(enemy.attack, skill.mana, skill.attack, enemy);
+                    fight(
+                      currentEnemy.attack,
+                      skill.mana,
+                      skill.attack,
+                      currentEnemy
+                    );
                   }}
                 >
                   <img src={skill.media.src} alt={skill.media.alt} />
@@ -91,10 +94,9 @@ export const Fighting = () => {
 
 export const CombatImages = () => {
   const { character } = useContext(CharacterContext);
-  const { PrevLocation } = useContext(GameContext);
+  const { enemy } = useContext(GameContext);
 
-  const prevLocation = LocationList[PrevLocation];
-  const enemy = MonstersList[prevLocation.enemy[0]];
+  const currentEnemy = MonstersList[enemy];
 
   return (
     <div className="flex w-full justify-between gap-4">
@@ -113,14 +115,14 @@ export const CombatImages = () => {
         <div className="max-h-[300px] overflow-hidden">
           <img
             className="combatFrame border-red-700"
-            src={enemy.media.src}
-            alt={enemy.media.alt}
+            src={currentEnemy.media.src}
+            alt={currentEnemy.media.alt}
           />
         </div>
         <div className="flex flex-col items-center">
           <HpBarEnemy />
           <h2 className="Headline text-blue rounded-lg bg-beige border-2 border-blue w-full text-center">
-            Level: {enemy.level}
+            Level: {currentEnemy.level}
           </h2>
         </div>
       </div>
