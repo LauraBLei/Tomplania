@@ -9,7 +9,7 @@ import { Shop } from "../locations/shop";
 import { CombatImages, EnemyLocation } from "../locations/combat";
 import { NPCLocation } from "../locations/npcLocation";
 import { NPCList } from "../gameData/NPC";
-import { NPCNames, QuestNames, QuestStages } from "../gameData/Enums";
+import { NPCNames, QuestStages } from "../gameData/Enums";
 import { QuestFolder } from "../components/questFolder";
 import { XpBar } from "../gameData/character/xpBar";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";

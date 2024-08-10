@@ -151,7 +151,7 @@ export const QuestList: Quest[] = [
   {
     name: QuestNames.EllaQuestTwo,
     description: [
-      "Alright! so i have heard of this huuge fish that lives in the Elderglow lake.",
+      "Alright! so i have heard of this huge fish that lives in the Elderglow lake.",
       "Its supposed to be the best meat you have ever tasted!",
       "If i remember correctly, its called a Hellmaw Piranha!",
     ],
