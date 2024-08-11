@@ -25,8 +25,6 @@ export const NPCLocation = () => {
     makeQuestListNPC,
   } = useContext(GameContext);
 
-  const Quest = QuestList.filter((quest) => quest.name === selectedQuest)[0];
-
   const npc = NPCList.filter((npc) => npc.type == NPC)[0];
   const [page, setPage] = useState(0);
   const activeQuest = activeQuests.filter((quest) => quest.npc == npc.type)[0];
