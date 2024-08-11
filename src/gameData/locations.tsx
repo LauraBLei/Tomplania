@@ -101,7 +101,7 @@ export const LocationList: LocationType = {
     npc: [],
   },
   Eldervale: {
-    text: "The small village of Eldervale, i heard there was a potion shop around here!",
+    text: "The small village of Eldervale, I heard there was a potion shop around here!",
     media: {
       src: "./assets/village/eldervale.png",
       alt: "",
@@ -218,7 +218,7 @@ export const LocationList: LocationType = {
     npc: [],
   },
   "Aether Peak": {
-    text: "I've heard about this place. It is said a viscous beast lives here..",
+    text: "I've heard about this place. It is said a vicious beast lives here..",
     media: {
       src: "./assets/world/aetherPeak.png",
       alt: "",

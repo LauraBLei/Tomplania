@@ -56,7 +56,7 @@ export enum Locations {
   MoonlitPool = "Moonlit Pool",
   SingingGrove = "The Singing Grove",
   WhisperingCavern = "Whispering Cavern",
-  PathToCave = "Path Between Crystal Caves and Riverbend Harbor",
+  PathToCave = "Harbor Path",
   ForestPath = "Forest Path",
   Blacksmith = "Blacksmith Shop",
   RiverbendBeach = "Riverbend Beach",

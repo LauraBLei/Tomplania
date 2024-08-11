@@ -23,7 +23,7 @@ export const Shop = () => {
           alt="location dot"
         />
         <button
-          className="TextDark"
+          className="TextDark whitespace-nowrap"
           onClick={() => {
             setLocation(PrevLocation);
             setBgImg(LocationList[PrevLocation].media);
