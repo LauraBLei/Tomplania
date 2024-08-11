@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { GameContext } from "../hooks/gameContext";
 import { Quest } from "../gameData/objects/Quest";
+import { NPCList } from "../gameData/NPC";
 
 export const QuestFolder = () => {
   const { activeQuests } = useContext(GameContext);
@@ -28,11 +29,13 @@ interface ShowQuestInfoProps {
 
 const ShowQuestInfo = ({ activeQuest }: ShowQuestInfoProps) => {
   const { removeQuest: abandonQuest } = useContext(GameContext);
+  const npc = NPCList.filter((npc) => npc.type == activeQuest.npc)[0];
 
   return (
     <details>
       <summary className="Headline text-blue">{activeQuest?.name}</summary>
       <div className="ml-5 flex flex-col gap-4 mt-2">
+        <p className="TextDark">{npc.name}</p>
         <p className="TextDark">{activeQuest?.description}</p>
         <div className="flex items-center gap-4">
           <h3 className="TextDark">Reward: </h3>
