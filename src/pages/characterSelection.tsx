@@ -31,6 +31,7 @@ export const CharacterSelection = () => {
               className="w-full text-xl lg:text-2xl text-black px-3 py-2"
               onChange={(event) => setName(event.target.value)}
               required
+              maxLength={15}
             />
             <Link to="/Game" className="text-3xl lg:text-6xl">
               Play
