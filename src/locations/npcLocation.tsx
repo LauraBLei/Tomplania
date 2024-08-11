@@ -22,26 +22,16 @@ export const NPCLocation = () => {
     deliveredQuest,
     setAcceptedQuest,
     setDeliveredQuest,
+    makeQuestListNPC,
   } = useContext(GameContext);
-  const { lvl } = useContext(CharacterContext);
+
   const Quest = QuestList.filter((quest) => quest.name === selectedQuest)[0];
-  const npc = NPCList.filter((npc) => npc.type == NPC)[0];
+
   const [page, setPage] = useState(0);
   const activeQuest = activeQuests.filter((quest) => quest.npc == npc.type)[0];
-  const saveFile = localStorage.getItem("Quests");
 
-  const getQuests = () => {
-    if (saveFile) {
-      return JSON.parse(saveFile);
-    } else {
-      return QuestList.filter(
-        (quest) => quest.npc === npc.type && quest.lvl <= lvl
-      );
-    }
-  };
-
-  const Quests = getQuests();
-  console.log(Quests);
+  const npc = NPCList.filter((npc) => npc.type == NPC)[0];
+  const Quests = makeQuestListNPC();
 
   const handleLeave = () => {
     setBgImg(LocationList[PrevLocation].media);
