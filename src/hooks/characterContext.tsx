@@ -80,7 +80,7 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
 
   const sellItem = (item: Item, quantity: number = 1) => {
     if (item.cost) {
-      changeGold(-item.cost);
+      changeGold(+item.cost);
       removeItem(item, quantity);
     }
   };

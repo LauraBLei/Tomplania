@@ -98,6 +98,8 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
     setXP,
     setLvl,
     setSkill,
+    name,
+    setName,
   } = useContext(CharacterContext);
 
   const { addItem } = useContext(InventoryContext);
@@ -243,6 +245,7 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
         Level: lvl,
         QuestLog: activeQuests,
         inventory: serializedInventory,
+        name: name,
       };
 
       localStorage.setItem("characterStats", JSON.stringify(characterStats));
@@ -268,6 +271,7 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
       setLvl(stats.Level);
       setActiveQuests(stats.QuestLog);
       setInventory(deserializedInventory);
+      setName(stats.name);
     }
   };
   return (
