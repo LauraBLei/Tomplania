@@ -41,7 +41,7 @@ export const NPCList: NPC[] = [
       QuestDelivered: ["Awesome mate! This is for you!"],
       NoAvailableQuests: ["Sorry friend, i have no tasks for you right now!"],
     },
-    quests: [],
+    quests: [QuestNames.BartenderOne, QuestNames.BartenderTwo],
     media: {
       src: "./assets/npc/bartender.png",
       alt: "Image of a male bartender with grey hair, green shirt and brown apron.",
@@ -152,7 +152,7 @@ export const NPCList: NPC[] = [
         "I am sorry {name} i do not have any tasks for you right now.",
       ],
     },
-    quests: [],
+    quests: [QuestNames.EllaQuestOne, QuestNames.EllaQuestTwo],
     media: {
       src: "./assets/npc/ellaNPC.png",
       alt: "",
@@ -182,7 +182,7 @@ export const NPCList: NPC[] = [
         "*KWEH*, I am sorry {name}, i do not have any tasks for you at the moment!",
       ],
     },
-    quests: [],
+    quests: [QuestNames.LumsQuestOne],
     media: {
       src: "./assets/npc/LasseChocobo.png",
       alt: "A image of Lums The Chocobo",
@@ -204,7 +204,7 @@ export const NPCList: NPC[] = [
       QuestDelivered: ["You finished it! you really are strong!"],
       NoAvailableQuests: ["Work? no sorry, i do not have any for you.."],
     },
-    quests: [],
+    quests: [QuestNames.FrederikQuestOne, QuestNames.FrederikQuestTwo],
     media: {
       src: "./assets/npc/FrederikNPC.png",
       alt: "Image of a small boy with blond hair and blue eyes",
