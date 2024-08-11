@@ -36,7 +36,7 @@ const ShowQuestInfo = ({ activeQuest }: ShowQuestInfoProps) => {
       <summary className="Headline text-blue">{activeQuest?.name}</summary>
       <div className="ml-5 flex flex-col gap-4 mt-2 max-h-[300px] lg:max-h-[600px] overflow-y-auto">
         <p className="TextDark">{npc.name}</p>
-        <p className="TextDark">{activeQuest?.description}</p>
+        <p className="TextDark">{activeQuest.description}</p>
         <div className="flex items-center gap-4">
           <h3 className="TextDark">Reward: </h3>
 
