@@ -6,7 +6,7 @@ export const PotionShopInventory: Item[] = [
   {
     name: "Healing",
     type: "Potion",
-    cost: 50,
+    cost: 20,
     hp: 0,
     heal: 50,
     attack: 0,

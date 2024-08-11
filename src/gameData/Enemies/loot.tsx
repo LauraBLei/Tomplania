@@ -5,7 +5,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Feather Leaf Skeleton",
     type: "loot",
-    cost: 2,
+    cost: 5,
     description: "description",
     dropChance: 1,
     media: {
@@ -60,7 +60,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Mirewalker skull",
     type: "loot",
-    cost: 1,
+    cost: 10,
     description: "description",
     dropChance: 1,
     media: {
@@ -71,7 +71,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Grim Lurker Poison",
     type: "loot",
-    cost: 1,
+    cost: 10,
     description: "description",
     dropChance: 1,
     media: {
@@ -82,7 +82,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Marasnake Skull",
     type: "loot",
-    cost: 1,
+    cost: 10,
     description: "description",
     dropChance: 1,
     media: {
@@ -93,7 +93,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Dragon Skull",
     type: "loot",
-    cost: 1,
+    cost: 10,
     description: "description",
     dropChance: 1,
     media: {

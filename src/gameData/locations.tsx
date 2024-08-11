@@ -51,7 +51,7 @@ export const LocationList: LocationType = {
       src: "./assets/village/tavern.png",
       alt: "",
     },
-    path: [Locations.outsideTavern],
+    path: [Locations.outsideTavern, Locations.RestRoom],
     enemy: [],
     npc: [NPCNames.TheBartender, NPCNames.Bård, NPCNames.Ella],
   },
@@ -315,6 +315,16 @@ export const LocationList: LocationType = {
     },
     path: [Locations.RiverbendHarbor],
     enemy: [MonsterNames.FifthBoss, MonsterNames.Squirmoth],
+    npc: [],
+  },
+  "Your Tavern Room": {
+    text: "A nice place for you to rest and regain your strength!",
+    media: {
+      src: "./assets/village/tavernRoom.png",
+      alt: "Image of a tavern room with a double bed, a fireplace and a window with a nice view of some mountains.",
+    },
+    path: [Locations.Tavern],
+    enemy: [],
     npc: [],
   },
 };

@@ -60,6 +60,7 @@ export enum Locations {
   ForestPath = "Forest Path",
   Blacksmith = "Blacksmith Shop",
   RiverbendBeach = "Riverbend Beach",
+  RestRoom = "Your Tavern Room",
 }
 
 export enum Loot {

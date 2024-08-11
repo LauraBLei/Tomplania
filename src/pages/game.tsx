@@ -9,7 +9,7 @@ import { Shop } from "../locations/shop";
 import { CombatImages, EnemyLocation } from "../locations/combat";
 import { NPCLocation } from "../locations/npcLocation";
 import { NPCList } from "../gameData/NPC";
-import { NPCNames, QuestStages } from "../gameData/Enums";
+import { Locations, NPCNames, QuestStages } from "../gameData/Enums";
 import { QuestFolder } from "../components/questFolder";
 import { XpBar } from "../gameData/character/xpBar";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
@@ -153,7 +153,7 @@ const NormalTop = () => {
 };
 
 const Location = () => {
-  const { name, lvl } = useContext(CharacterContext);
+  const { name, lvl, setCurrentHP, MaxHP } = useContext(CharacterContext);
   const {
     setFighting,
     setMonsterHP,
@@ -169,6 +169,9 @@ const Location = () => {
     const npc = NPCList.filter((npc) => npcName == npc.type)[0];
     return npc.hasVisited ? npc.name : npc.type;
   };
+  if (location === Locations.RestRoom) {
+    setCurrentHP(MaxHP);
+  }
 
   return (
     <div className="flex flex-col items-center w-full">
