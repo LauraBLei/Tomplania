@@ -49,6 +49,7 @@ type characterContextType = {
   changeGold: (amount: number) => void;
   GainXP: (amount: number) => void;
   enemyDefeated: (enemy: Monster) => void;
+  defaultName: () => void;
 };
 
 export const CharacterContext = createContext<characterContextType>(
@@ -89,6 +90,11 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
     setGold(gold + amount);
   };
 
+  const defaultName = () => {
+    if (name === "") {
+      setName("Tompe");
+    }
+  };
   const equipItem = (item: Item) => {
     const hpBoost = item.hp ? item.hp : 0;
     const attackBoost = item.attack ? item.attack : 0;
@@ -246,6 +252,7 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
         setMaxMana,
         skill,
         setSkill,
+        defaultName,
       }}
     >
       {children}

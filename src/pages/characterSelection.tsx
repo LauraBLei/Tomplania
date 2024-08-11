@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { CharacterContext } from "../hooks/characterContext";
 
 export const CharacterSelection = () => {
-  const { setName } = useContext(CharacterContext);
+  const { setName, defaultName } = useContext(CharacterContext);
   const bgText = {
     backgroundImage: `url("./assets/bg-images/GameWorld.png")`,
   };
@@ -33,7 +33,11 @@ export const CharacterSelection = () => {
               required
               maxLength={15}
             />
-            <Link to="/Game" className="text-3xl lg:text-6xl">
+            <Link
+              to="/Game"
+              className="text-3xl lg:text-6xl"
+              onClick={() => defaultName()}
+            >
               Play
             </Link>
           </div>
