@@ -58,6 +58,9 @@
   }
 }
 
+body {
+  cursor: url("./assets/items/weapons/daggers/dagger1.png") 16 16, auto;
+}
 .tools {
   display: flex;
   gap: 10px;
