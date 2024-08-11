@@ -32,9 +32,18 @@ export const CreditPage = () => {
           </p>
         </div>
       </div>
-      <Link to="/" className="rounded-md bg-blue TextLight text-white p-3">
+      <Link
+        to="/"
+        className="rounded-md bg-blue TextLight text-white p-3"
+        onClick={() => deleteCharacter()}
+      >
         End Game
       </Link>
     </div>
   );
+};
+
+const deleteCharacter = () => {
+  localStorage.removeItem("characterStats");
+  localStorage.removeItem("Quests");
 };
