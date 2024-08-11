@@ -83,7 +83,7 @@ export const NewQuestItems: Item[] = [
     type: "QuestItem",
     description: "Forbidden Fruit",
     cost: 1,
-    dropChance: 0.4,
+    dropChance: 0.7,
     media: {
       src: "./assets/items/questItems/forbiddenFruit.png",
       alt: "Purple fruit",
