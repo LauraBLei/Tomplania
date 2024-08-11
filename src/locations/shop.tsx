@@ -9,7 +9,7 @@ import { Item } from "../gameData/objects/Item";
 import { BlacksmithShopInventory } from "../gameData/blackSmith";
 
 export const Shop = () => {
-  const { location, PrevLocation, setLocation, setBgImg } =
+  const { location, PrevLocation, setLocation, setBgImg, setItem } =
     useContext(GameContext);
 
   const currentLocation = LocationList[location];
@@ -27,6 +27,7 @@ export const Shop = () => {
           onClick={() => {
             setLocation(PrevLocation);
             setBgImg(LocationList[PrevLocation].media);
+            setItem(null);
           }}
         >
           Go Back
