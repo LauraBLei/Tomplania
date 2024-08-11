@@ -163,21 +163,25 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
 
   const GainXP = (amount: number) => {
     const newXp = xp + amount;
-    setXP(newXp);
+    if (lvl < 6) {
+      setXP(newXp);
 
-    if (newXp >= MaxXP) {
-      const newLvl = lvl + 1;
-      const overFlowXp = newXp - MaxXP;
-      const newMaxHp = maxHP + 10;
-      const newMaxMana = MaxMana + 5;
+      if (newXp >= MaxXP) {
+        const newLvl = lvl + 1;
+        const overFlowXp = newXp - MaxXP;
+        const newMaxHp = maxHP + 10;
+        const newMaxMana = MaxMana + 5;
 
-      const newMaxXP = xpThresholds[newLvl - 1] || MaxXP;
+        const newMaxXP = xpThresholds[newLvl - 1] || MaxXP;
 
-      setLvl(newLvl);
-      setMaxXP(newMaxXP);
-      setMaxHP(newMaxHp);
-      setMaxMana(newMaxMana);
-      setXP(overFlowXp); // Reset XP to the overflow value
+        setLvl(newLvl);
+        setMaxXP(newMaxXP);
+        setMaxHP(newMaxHp);
+        setMaxMana(newMaxMana);
+        setXP(overFlowXp); // Reset XP to the overflow value
+      }
+    } else {
+      setXP(Math.min(newXp, MaxXP));
     }
   };
 
