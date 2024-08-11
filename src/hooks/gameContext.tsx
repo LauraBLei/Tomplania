@@ -8,6 +8,7 @@ import { InventoryContext } from "./inventoryContext";
 import { CharacterContext } from "./characterContext";
 import { Monster, MonsterNames } from "../gameData/Enemies/enemies";
 import { QuestList } from "../gameData/quests/quests";
+import { NPCList } from "../gameData/NPC";
 
 type GameContextType = {
   location: Locations;
@@ -42,6 +43,7 @@ type GameContextType = {
   saveGame: () => void;
   startSavedGame: () => void;
   newGame: () => void;
+  makeQuestListNPC: () => Quest[];
 
   fight: (damage: number, mana: number, attack: number, enemy: Monster) => void;
   leave: () => void;
@@ -109,6 +111,18 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
     setActiveQuests([...activeQuests, quest]);
   };
 
+  const makeQuestListNPC = () => {
+    const npc = NPCList.filter((npc) => npc.type == NPC)[0];
+    const Quests = QuestList.filter(
+      (quest) => quest.npc === npc.type && quest.lvl <= lvl
+    );
+    const notCompletedQuests = Quests.filter(
+      (quest) =>
+        quest.status != QuestStages.Completed && npc.quests.includes(quest.name)
+    );
+
+    return notCompletedQuests.length > 0 ? [notCompletedQuests[0]] : [];
+  };
   const changeLocation = (
     newLocation?: Locations,
     newBgImg?: Media,
@@ -337,6 +351,7 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
         saveGame,
         startSavedGame,
         newGame,
+        makeQuestListNPC,
       }}
     >
       {children}

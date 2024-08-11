@@ -167,13 +167,11 @@ const QuestInProgress = () => {
 };
 
 const FirstVisit = () => {
-  const { setSelectedQuest, NPC } = useContext(GameContext);
-  const { lvl, name } = useContext(CharacterContext);
+  const { setSelectedQuest, NPC, makeQuestListNPC } = useContext(GameContext);
+  const { name } = useContext(CharacterContext);
   const [page, setPage] = useState(0);
   const npc = NPCList.filter((npc) => npc.type == NPC)[0];
-  const Quests = QuestList.filter(
-    (quest) => quest.npc === npc.type && quest.lvl <= lvl
-  );
+  const Quests = makeQuestListNPC();
   npc.hasVisited = true;
   return (
     <div className="flex flex-col gap-4 items-center">
@@ -213,20 +211,11 @@ const FirstVisit = () => {
 };
 
 const SecondVisit = () => {
-  const { setSelectedQuest, NPC } = useContext(GameContext);
-  const { lvl, name } = useContext(CharacterContext);
+  const { setSelectedQuest, NPC, makeQuestListNPC } = useContext(GameContext);
+  const { name } = useContext(CharacterContext);
   const [page, setPage] = useState(0);
-
-  const npc = NPCList.filter((e) => e.type == NPC)[0];
-  const Quests = QuestList.filter(
-    (quest) => quest.npc === npc.type && quest.lvl <= lvl
-  );
-
-  const notCompletedQuests = Quests.filter(
-    (quest) =>
-      quest.status != QuestStages.Completed && npc.quests.includes(quest.name)
-  );
-
+  const npc = NPCList.filter((npc) => npc.type == NPC)[0];
+  const Quests = makeQuestListNPC();
   return (
     <div className="flex flex-col gap-6 mb-5">
       <p className="TextDark">
@@ -243,7 +232,7 @@ const SecondVisit = () => {
         ""
       )}
       <div className="flex gap-4 items-center flex-wrap">
-        {notCompletedQuests.length > 0 && (
+        {Quests.length > 0 && (
           <>
             <h3 className="font-Courier text-xl lg:text-3xl">Quests:</h3>
             {Quests.map((Quest, i) => (
