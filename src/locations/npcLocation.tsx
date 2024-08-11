@@ -30,7 +30,7 @@ export const NPCLocation = () => {
   const activeQuest = activeQuests.filter((quest) => quest.npc == npc.type)[0];
   const saveFile = localStorage.getItem("Quests");
 
-  const Quests = () => {
+  const getQuests = () => {
     if (saveFile) {
       return JSON.parse(saveFile);
     } else {
@@ -39,6 +39,9 @@ export const NPCLocation = () => {
       );
     }
   };
+
+  const Quests = getQuests();
+  console.log(Quests);
 
   const handleLeave = () => {
     setBgImg(LocationList[PrevLocation].media);
