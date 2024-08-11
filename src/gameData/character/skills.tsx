@@ -169,7 +169,7 @@ export const knightSkills: Skill[] = [
     attack: 12,
     mana: 0,
     media: {
-      src: "./assets/skills/cleve.png",
+      src: "./assets/skills/cleave.png",
       alt: "Knight attack",
     },
   },

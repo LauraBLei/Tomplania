@@ -191,18 +191,22 @@ const FirstVisit = () => {
         ""
       )}
       <div className="flex gap-4 items-center flex-wrap">
-        <h3 className="font-Courier text-xl lg:text-3xl">Quests:</h3>
-        {Quests.map((Quest, i) => (
-          <button
-            key={i}
-            className="button"
-            onClick={() => {
-              setSelectedQuest(Quest.name);
-            }}
-          >
-            {Quest.name}
-          </button>
-        ))}
+        {Quests.length > 0 && (
+          <>
+            <h3 className="font-Courier text-xl lg:text-3xl">Quests:</h3>
+            {Quests.map((Quest, i) => (
+              <button
+                key={i}
+                className="button"
+                onClick={() => {
+                  setSelectedQuest(Quest.name);
+                }}
+              >
+                {Quest.name}
+              </button>
+            ))}
+          </>
+        )}
       </div>
     </div>
   );
@@ -228,29 +232,31 @@ const SecondVisit = () => {
       <p className="TextDark">
         {npc.text.hasVisitedText[page].replaceAll("{name}", name)}
       </p>
-      {page < npc.text.startText.length - 1 ? (
+      {page < npc.text.startText.length - 1 && (
         <button
           className="button place-self-end"
           onClick={() => setPage(page + 1)}
         >
           Next
         </button>
-      ) : (
-        ""
       )}
       <div className="flex gap-4 items-center flex-wrap">
-        <h3 className="Headline text-blue">Quests:</h3>
-        {notCompletedQuests.map((quest, i) => (
-          <button
-            key={i}
-            className="button"
-            onClick={() => {
-              setSelectedQuest(quest.name);
-            }}
-          >
-            {quest.name}
-          </button>
-        ))}
+        {notCompletedQuests.length > 0 && (
+          <>
+            <h3 className="font-Courier text-xl lg:text-3xl">Quests:</h3>
+            {Quests.map((Quest, i) => (
+              <button
+                key={i}
+                className="button"
+                onClick={() => {
+                  setSelectedQuest(Quest.name);
+                }}
+              >
+                {Quest.name}
+              </button>
+            ))}
+          </>
+        )}
       </div>
     </div>
   );
