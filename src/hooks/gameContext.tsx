@@ -41,6 +41,7 @@ type GameContextType = {
   handlePurchase: (item: Item) => void;
   saveGame: () => void;
   startSavedGame: () => void;
+  newGame: () => void;
 
   fight: (damage: number, mana: number, attack: number, enemy: Monster) => void;
   leave: () => void;
@@ -274,6 +275,31 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
       setName(stats.name);
     }
   };
+
+  const newGame = () => {
+    const saveFile = localStorage.getItem("characterStats");
+    if (saveFile) {
+      const confirmCheck = confirm(
+        "Starting a new game will delete your save files. Will you continue to create a New Game ?"
+      );
+
+      if (confirmCheck) {
+        localStorage.removeItem("characterStats");
+        localStorage.removeItem("Quests");
+        setXP(0);
+        setGold(10);
+        setLvl(1);
+        setActiveQuests([]);
+        setInventory(new Map());
+      }
+    } else {
+      setXP(0);
+      setGold(10);
+      setLvl(1);
+      setActiveQuests([]);
+      setInventory(new Map());
+    }
+  };
   return (
     <GameContext.Provider
       value={{
@@ -310,6 +336,7 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
         setEnemy,
         saveGame,
         startSavedGame,
+        newGame,
       }}
     >
       {children}

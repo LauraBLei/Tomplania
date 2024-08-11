@@ -7,7 +7,7 @@ export const StartPage = () => {
     backgroundImage: `url("./assets/bg-images/GameWorld.png")`,
   };
   const saveFile = localStorage.getItem("characterStats");
-  const { startSavedGame } = useContext(GameContext);
+  const { startSavedGame, newGame } = useContext(GameContext);
   return (
     <>
       <div
@@ -26,8 +26,12 @@ export const StartPage = () => {
               Continue
             </Link>
           )}
-          <Link className="text-3xl lg:text-6xl" to="/Character">
-            Play
+          <Link
+            className="text-3xl lg:text-6xl"
+            to="/Character"
+            onClick={() => newGame()}
+          >
+            New Game
           </Link>
         </div>
       </div>
