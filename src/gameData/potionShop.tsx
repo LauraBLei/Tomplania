@@ -67,7 +67,6 @@ export const PotionShopInventory: Item[] = [
       src: "./assets/items/potions/Elixir.png",
       alt: "Image of a purple Potion bottle",
     },
-    description:
-      "Ahh, The Life Essence, perfect for the warrior who needs a great healing boost on the journey!",
+    description: "This is a mana potion! It will ",
   },
 ];

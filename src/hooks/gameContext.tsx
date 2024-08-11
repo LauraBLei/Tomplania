@@ -97,6 +97,7 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
     setCharacter,
     setXP,
     setLvl,
+    setSkill,
   } = useContext(CharacterContext);
 
   const { addItem } = useContext(InventoryContext);
@@ -129,11 +130,16 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
       return;
     }
     const newMonsterHP = Math.max(MonsterHP - attack, 0);
+    const newCurrentHp = Math.max(currentHP - damage, 0);
     setCurrentMana((prevMana) => Math.max(prevMana - mana, 0));
-    setCurrentHP((prevHP) => Math.max(prevHP - damage, 0));
+    setCurrentHP(newCurrentHp);
     setMonsterHP(newMonsterHP);
     if (newMonsterHP === 0) {
       enemyDefeated(enemy);
+      setSkill(null);
+    }
+    if (newCurrentHp === 0) {
+      setSkill(null);
     }
   };
 

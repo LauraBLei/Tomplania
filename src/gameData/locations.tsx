@@ -287,7 +287,7 @@ export const LocationList: LocationType = {
     enemy: [MonsterNames.SnakeWoman],
     npc: [],
   },
-  "Path Between Crystal Caves and Riverbend Harbor": {
+  "Harbor Path": {
     text: "",
     media: {
       src: "./assets/world/pathToCave.png",

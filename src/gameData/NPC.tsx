@@ -165,12 +165,12 @@ export const NPCList: NPC[] = [
     text: {
       startText: [
         "*KWEH* Hello there! You startled me a bit! My name is Lums. And you are?",
-        "Oh! nice to meet you [name}!",
+        "Oh! nice to meet you {name} !",
         "You look like a strong adventurer! i might need your help sometime, if you are up to it!",
       ],
       hasVisitedText: ["*KWEH*, Hello again {name}!"],
       QuestInProgress: [
-        "*KWEH*, Hey there [name}, have you finished the task?",
+        "*KWEH*, Hey there [name} , have you finished the task?",
       ],
       QuestAccepted: [
         "*KWEH*, Well thank you very much! That is very kind of you!",

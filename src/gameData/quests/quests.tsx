@@ -135,7 +135,7 @@ export const QuestList: Quest[] = [
   {
     name: QuestNames.EllaQuestOne,
     description: [
-      "Hey! So i have a task for you {name}!",
+      "Hey! So i have a task for you {name} !",
       "(Ella gets distracted when she sees a fly. As it lands, she quickly stabs it with her knife and eats it.)",
       "Oh.. where was i..",
       "Right! The task! I need some Feather Leaf Fluid. You can only get if from a perfect kill of a Feather Leaf.",
@@ -195,7 +195,7 @@ export const QuestList: Quest[] = [
   {
     name: QuestNames.LumsQuestOne,
     description: [
-      "*KWEH*, {name}! I was hoping you could help me with something!",
+      "*KWEH*, {name} ! I was hoping you could help me with something!",
       "I usually get my food from the grove, but recently a Zu has been watching over it!",
       "It would be very helpful if you could scare it away!",
       "I will pay you of course! Just bring me some proof!",
