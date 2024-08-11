@@ -149,7 +149,7 @@ const QuestInProgress = () => {
       <p className="TextDark">
         {npc.text.QuestInProgress[page].replaceAll("{name}", name)}
       </p>
-      {page < npc.text.startText.length - 1 ? (
+      {page < npc.text.QuestInProgress.length - 1 ? (
         <button
           className="button place-self-end"
           onClick={() => setPage(page + 1)}
@@ -275,7 +275,7 @@ const AcceptedQuest = () => {
       <p className="TextDark">
         {npc.text.QuestAccepted[page].replaceAll("{name}", name)}
       </p>
-      {page < npc.text.startText.length - 1 ? (
+      {page < npc.text.QuestAccepted.length - 1 ? (
         <button
           className="button place-self-end"
           onClick={() => setPage(page + 1)}
@@ -300,7 +300,7 @@ const DeliveredQuest = () => {
       <p className="TextDark">
         {npc.text.QuestDelivered[page].replaceAll("{name}", name)}
       </p>
-      {page < npc.text.startText.length - 1 ? (
+      {page < npc.text.QuestDelivered.length - 1 ? (
         <button
           className="button place-self-end"
           onClick={() => setPage(page + 1)}
@@ -325,7 +325,7 @@ const NoAvailableQuests = () => {
       <p className="TextDark">
         {npc.text.NoAvailableQuests[page].replaceAll("{name}", name)}
       </p>
-      {page < npc.text.startText.length - 1 ? (
+      {page < npc.text.NoAvailableQuests.length - 1 ? (
         <button
           className="button place-self-end"
           onClick={() => setPage(page + 1)}
