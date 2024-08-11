@@ -232,13 +232,15 @@ const SecondVisit = () => {
       <p className="TextDark">
         {npc.text.hasVisitedText[page].replaceAll("{name}", name)}
       </p>
-      {page < npc.text.startText.length - 1 && (
+      {page < npc.text.hasVisitedText.length - 1 ? (
         <button
           className="button place-self-end"
           onClick={() => setPage(page + 1)}
         >
           Next
         </button>
+      ) : (
+        ""
       )}
       <div className="flex gap-4 items-center flex-wrap">
         {notCompletedQuests.length > 0 && (
