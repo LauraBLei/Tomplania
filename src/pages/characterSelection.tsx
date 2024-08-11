@@ -15,8 +15,8 @@ export const CharacterSelection = () => {
         className="relative flex justify-center items-center h-screen bg-no-repeat bg-cover text-white font-uncial"
         style={bgText}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
-        <div className="z-10 flex flex-col items-center gap-6 w-full">
+        <div className="absolute inset-0 bg-black bg-opacity-50 z-0 h-full"></div>
+        <div className="z-10 flex flex-col items-center gap-6 w-full h-full overflow-y-auto">
           <h1 className="text-xl lg:text-8xl text-center">
             Choose Your Character
           </h1>
