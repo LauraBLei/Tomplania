@@ -27,10 +27,18 @@ export const NPCLocation = () => {
   const Quest = QuestList.filter((quest) => quest.name === selectedQuest)[0];
   const npc = NPCList.filter((npc) => npc.type == NPC)[0];
   const [page, setPage] = useState(0);
-  const activeQuest = activeQuests.filter((quest) => quest.npc == npc.type)[0]; // TODO
-  const Quests = QuestList.filter(
-    (quest) => quest.npc === npc.type && quest.lvl <= lvl
-  );
+  const activeQuest = activeQuests.filter((quest) => quest.npc == npc.type)[0];
+  const saveFile = localStorage.getItem("Quests");
+
+  const Quests = () => {
+    if (saveFile) {
+      return JSON.parse(saveFile);
+    } else {
+      return QuestList.filter(
+        (quest) => quest.npc === npc.type && quest.lvl <= lvl
+      );
+    }
+  };
 
   const handleLeave = () => {
     setBgImg(LocationList[PrevLocation].media);

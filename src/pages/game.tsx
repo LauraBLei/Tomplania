@@ -19,7 +19,8 @@ import { QuestList } from "../gameData/quests/quests";
 import { Link } from "react-router-dom";
 
 export const GamePage = () => {
-  const { fighting, location, NPC, bgImage, item } = useContext(GameContext);
+  const { fighting, location, NPC, bgImage, item, saveGame } =
+    useContext(GameContext);
   const { skill } = useContext(CharacterContext);
 
   const bgImageStyle = {
@@ -68,6 +69,7 @@ export const GamePage = () => {
 };
 
 const NormalTop = () => {
+  const { saveGame } = useContext(GameContext);
   return (
     <div className="flex items-center h-full gap-1 md:gap-4">
       <details>
@@ -125,6 +127,26 @@ const NormalTop = () => {
         </summary>
         <div className="InformationUI overflow-y-auto w-full bg-beige px-9 py-4 border-8 border-blue h-auto ">
           <QuestFolder />
+        </div>
+      </details>
+      <details>
+        <summary className="cursor-pointer list-none text-2xl mr-1 lg:mr-7">
+          <img
+            className="icon"
+            src="./assets/bg-images/settings.png"
+            alt="icon of a settings wheel"
+          />
+        </summary>
+        <div className="InformationUI w-auto flex flex-col gap-4 text-center overflow-y-auto w-full bg-beige px-9 py-4 border-8 border-blue h-auto ">
+          <button className="button" onClick={() => saveGame()}>
+            Save Game
+          </button>
+          <Link className="button" to="/" onClick={() => saveGame()}>
+            Save & Exit
+          </Link>
+          <Link className="button" to="/">
+            Exit
+          </Link>
         </div>
       </details>
     </div>

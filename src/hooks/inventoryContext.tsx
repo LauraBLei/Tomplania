@@ -6,6 +6,7 @@ type inventoryContextType = {
 
   removeItem: (item: Item, quantity?: number) => void;
   addItem: (item: Item, quantity?: number) => void;
+  setInventory: React.Dispatch<React.SetStateAction<Map<Item, number>>>;
 };
 
 export const InventoryContext = createContext<inventoryContextType>(
@@ -48,6 +49,7 @@ export const InventoryProvider = ({ children }: ContextProviderProps) => {
         inventory,
         addItem,
         removeItem,
+        setInventory,
       }}
     >
       {children}

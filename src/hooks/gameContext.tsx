@@ -8,6 +8,7 @@ import { InventoryContext } from "./inventoryContext";
 import { QuestItemNames } from "../gameData/quests/questItems";
 import { CharacterContext } from "./characterContext";
 import { Monster, MonsterNames } from "../gameData/Enemies/enemies";
+import { QuestList } from "../gameData/quests/quests";
 
 type GameContextType = {
   location: Locations;
@@ -39,6 +40,8 @@ type GameContextType = {
   removeQuest: (quest: Quest) => void;
   deliverQuest: (quest: Quest) => void;
   handlePurchase: (item: Item) => void;
+  saveGame: () => void;
+  startSavedGame: () => void;
 
   fight: (damage: number, mana: number, attack: number, enemy: Monster) => void;
   leave: () => void;
@@ -59,7 +62,7 @@ type ContextProviderProps = {
 };
 
 export const GameProvider = ({ children }: ContextProviderProps) => {
-  const { inventory, removeItem } = useContext(InventoryContext);
+  const { inventory, removeItem, setInventory } = useContext(InventoryContext);
   const { changeGold } = useContext(CharacterContext);
   const [location, setLocation] = useState(Locations.BlackVoid);
   const [fighting, setFighting] = useState(false);
@@ -85,6 +88,16 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
     GainXP,
     enemyDefeated,
     character,
+    currentHP,
+    lvl,
+    setMaxHP,
+    setMaxMana,
+    setMaxXP,
+    xp,
+    MaxXP,
+    setCharacter,
+    setXP,
+    setLvl,
   } = useContext(CharacterContext);
 
   const { addItem } = useContext(InventoryContext);
@@ -183,6 +196,50 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
     }
   };
 
+  const saveGame = () => {
+    const userConfirmed = confirm("Are you sure you wanna save?");
+
+    if (userConfirmed) {
+      const serializedInventory = Array.from(inventory.entries());
+      const characterStats = {
+        character: character,
+        MaxHP: MaxHP,
+        hp: currentHP,
+        MaxMana: MaxMana,
+        mana: currentMana,
+        MaxXP: MaxXP,
+        xp: xp,
+        gold: gold,
+        Level: lvl,
+        QuestLog: activeQuests,
+        inventory: serializedInventory,
+      };
+
+      localStorage.setItem("characterStats", JSON.stringify(characterStats));
+      localStorage.setItem("Quests", JSON.stringify(QuestList));
+    }
+  };
+
+  const startSavedGame = () => {
+    const fromLocal = localStorage.getItem("characterStats");
+    if (fromLocal) {
+      const stats = JSON.parse(fromLocal);
+      const deserializedInventory = new Map<Item, number>(
+        stats.inventory.map((entry: [Item, number]) => [entry[0], entry[1]])
+      );
+      setCharacter(stats.character);
+      setMaxHP(stats.MaxHP);
+      setCurrentHP(stats.hp);
+      setMaxMana(stats.MaxMana);
+      setCurrentMana(stats.mana);
+      setMaxXP(stats.MaxXP);
+      setXP(stats.xp);
+      setGold(stats.gold);
+      setLvl(stats.Level);
+      setActiveQuests(stats.QuestLog);
+      setInventory(deserializedInventory);
+    }
+  };
   return (
     <GameContext.Provider
       value={{
@@ -217,6 +274,8 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
         handlePurchase,
         enemy,
         setEnemy,
+        saveGame,
+        startSavedGame,
       }}
     >
       {children}
