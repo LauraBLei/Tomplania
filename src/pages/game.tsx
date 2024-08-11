@@ -187,13 +187,13 @@ const Location = () => {
             }
           />
         ))}
-        {currentLocation.enemy.map((_, i) => (
+        {currentLocation.enemy.map((e, i) => (
           <OptionButton
             index={i}
             text={`Fight ${currentLocation.enemy[i]}`}
             onClick={() => {
               setFighting(true);
-              setMonsterHP(MonstersList[currentLocation.enemy[i]].hp);
+              setMonsterHP(MonstersList[e].hp);
               setPrevLocation(location);
               setEnemy(currentLocation.enemy[i]);
             }}
