@@ -263,7 +263,7 @@ export const LocationList: LocationType = {
       src: "./assets/world/moonlitPool.png",
       alt: "In a forest, lies a moonlit pool, surrounded my green trees.",
     },
-    path: [],
+    path: [Locations.ForestPath],
     enemy: [MonsterNames.AbyssalSeahorse],
     npc: [],
   },

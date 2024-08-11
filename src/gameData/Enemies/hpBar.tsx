@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { GameContext } from "../../hooks/gameContext";
-import { LocationList } from "../locations";
 import { MonstersList } from "./enemies";
 
 export const HpBarEnemy = () => {
