@@ -76,10 +76,10 @@ export const Carousel = () => {
       </Slider>
       <div className="flex justify-between mt-4">
         <ButtonBack onClick={handleBack} className="Headline" disabled={false}>
-          Back
+          <img src="./assets/bg-images/leftArrow.png" alt="Left arrow" />
         </ButtonBack>
         <ButtonNext onClick={handleNext} className="Headline" disabled={false}>
-          Next
+          <img src="./assets/bg-images/rightArrow.png" alt="Right arrow" />
         </ButtonNext>
       </div>
     </CarouselProvider>
