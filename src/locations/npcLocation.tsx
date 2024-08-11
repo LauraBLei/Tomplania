@@ -25,6 +25,8 @@ export const NPCLocation = () => {
     makeQuestListNPC,
   } = useContext(GameContext);
 
+  const { name } = useContext(CharacterContext);
+
   const Quest = QuestList.filter((quest) => quest.name === selectedQuest)[0];
 
   const npc = NPCList.filter((npc) => npc.type == NPC)[0];
@@ -62,13 +64,16 @@ export const NPCLocation = () => {
           Leave
         </button>
       </div>
+
       {selectedQuest ? (
         <div className="flex flex-col justify-center items-center gap-6 mb-4">
           <h3 className="Headline text-blue ">
             {selectedQuest} (Level: {Quest.lvl})
           </h3>
           <div className="flex flex-col items-center">
-            <p className="TextDark">{Quest.description[page]}</p>
+            <p className="TextDark">
+              {Quest.description[page].replaceAll("{name}", name)}
+            </p>
             {page < Quest.description.length - 1 ? (
               <button
                 className="button place-self-end"
