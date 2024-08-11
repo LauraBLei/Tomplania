@@ -6,6 +6,7 @@ export enum NPCNames {
   Ella = "Strange Lady",
   Bård = "Strange Pig",
   Lums = "Wild Chocobo",
+  Frederik = "Young Boy",
 }
 
 export enum QuestStages {
@@ -30,6 +31,8 @@ export enum QuestNames {
   BartenderOne = "Catch Of The Day",
   BartenderTwo = "Beastly Bother",
   LumsQuestOne = "The Zu's Gotta Go",
+  FrederikQuestOne = "Save The Beetles",
+  FrederikQuestTwo = "Berry Big Trouble",
 }
 
 export enum Locations {
@@ -61,6 +64,7 @@ export enum Locations {
   Blacksmith = "Blacksmith Shop",
   RiverbendBeach = "Riverbend Beach",
   RestRoom = "Your Tavern Room",
+  WillowbrookLane = "Willowbrook Lane",
 }
 
 export enum Loot {
@@ -78,4 +82,7 @@ export enum Loot {
   Ring = "Magic Ring",
   GlowfinMinnowMeat = "Glowfin Minnow Meat",
   HellmawPiranhaMeat = "Hellmaw Piranha Meat",
+  LadybugPowder = "Ladybug Powder",
+  LadybugFlower = "Ladybug Flower",
+  TrollBerries = "Troll Berries",
 }

@@ -13,6 +13,7 @@ export enum QuestItemNames {
   BårdsChest = "Bård's Chest",
   VillagersNecklace = "Villagers Necklace",
   VillagersChest = "Villagers Chest",
+  Medallion = "Frederik's Medallion",
 }
 
 export const QuestItems: QuestItemsType = {
@@ -119,6 +120,17 @@ export const NewQuestItems: Item[] = [
     media: {
       src: "./assets/items/questItems/BårdsChest.png",
       alt: "Chest",
+    },
+  },
+  {
+    name: "Frederik's Medallion",
+    type: "QuestItem",
+    description: "Frederik's Medallion",
+    cost: 1,
+    dropChance: 1,
+    media: {
+      src: "./assets/items/questItems/medallion.png",
+      alt: "Medallion",
     },
   },
 ];

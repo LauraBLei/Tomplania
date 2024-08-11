@@ -156,4 +156,37 @@ export const MonsterLootList: Item[] = [
       alt: "Image of Glowfin Minnow Meat",
     },
   },
+  {
+    name: "Ladybug Powder",
+    type: "loot",
+    cost: 5,
+    description: "Powder from a ladybug",
+    dropChance: 1,
+    media: {
+      src: "./assets/items/monsterLoot/powder.png",
+      alt: "Image of Ladybug Powder",
+    },
+  },
+  {
+    name: "Ladybug Flower",
+    type: "loot",
+    cost: 15,
+    description: "Flower from a ladybug",
+    dropChance: 0.5,
+    media: {
+      src: "./assets/items/monsterLoot/flower.png",
+      alt: "Image of Ladybug Flower",
+    },
+  },
+  {
+    name: "Troll Berries",
+    type: "loot",
+    cost: 5,
+    description: "Troll Berries",
+    dropChance: 1,
+    media: {
+      src: "./assets/items/monsterLoot/berries.png",
+      alt: "Image of Troll Berries",
+    },
+  },
 ];

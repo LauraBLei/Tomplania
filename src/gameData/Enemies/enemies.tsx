@@ -32,6 +32,8 @@ export enum MonsterNames {
   GlowfinMinnow = "Glowfin Minnow",
   HellmawPiranha = "Hellmaw Piranha",
   Niffler = "Niffler",
+  ladybug = "Ladybug",
+  troll = "Troll",
 }
 
 export const MonstersList: MonstersList = {
@@ -145,7 +147,7 @@ export const MonstersList: MonstersList = {
       src: "./assets/enemies/dragon.png",
       alt: "Image of a big blue dragon",
     },
-    loot: [Loot.DragonSkull, Loot.DragonEgg],
+    loot: [Loot.DragonSkull],
     xp: 80,
     level: 6,
   },
@@ -209,10 +211,36 @@ export const MonstersList: MonstersList = {
     attack: 10,
     media: {
       src: "./assets/enemies/niffler.png",
-      alt: "Image of a big fish",
+      alt: "Image of a Niffler",
     },
-    loot: [QuestItemNames.VillagersChest, QuestItemNames.VillagersNecklace],
+    loot: [
+      QuestItemNames.VillagersChest,
+      QuestItemNames.VillagersNecklace,
+      Loot.DragonEgg,
+    ],
     xp: 25,
     level: 2,
+  },
+  LadyBug: {
+    hp: 100,
+    attack: 10,
+    media: {
+      src: "./assets/enemies/ladybug.png",
+      alt: "Image of a evil ladybug",
+    },
+    loot: [Loot.LadybugPowder, Loot.LadybugFlower],
+    xp: 25,
+    level: 2,
+  },
+  Troll: {
+    hp: 300,
+    attack: 30,
+    media: {
+      src: "./assets/enemies/ladybug.png",
+      alt: "Image of a evil ladybug",
+    },
+    loot: [Loot.TrollBerries, QuestItemNames.Medallion],
+    xp: 70,
+    level: 4,
   },
 };
