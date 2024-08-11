@@ -16,7 +16,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Feather Leaf Fluid",
     type: "loot",
-    cost: 5,
+    cost: 8,
     description: "description",
     dropChance: 0.5,
     media: {
@@ -27,7 +27,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Siren Skull",
     type: "loot",
-    cost: 30,
+    cost: 2,
     description: "description",
     dropChance: 1,
     media: {
@@ -49,7 +49,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Eagle Queen Skull",
     type: "loot",
-    cost: 1,
+    cost: 2,
     description: "description",
     dropChance: 1,
     media: {
@@ -60,7 +60,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Mirewalker skull",
     type: "loot",
-    cost: 10,
+    cost: 2,
     description: "description",
     dropChance: 1,
     media: {
@@ -71,7 +71,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Grim Lurker Poison",
     type: "loot",
-    cost: 10,
+    cost: 2,
     description: "description",
     dropChance: 1,
     media: {
@@ -82,7 +82,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Marasnake Skull",
     type: "loot",
-    cost: 10,
+    cost: 2,
     description: "description",
     dropChance: 1,
     media: {
@@ -104,7 +104,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Dragon Egg",
     type: "loot",
-    cost: 100,
+    cost: 150,
     description: "description",
     dropChance: 0.03,
     media: {
@@ -187,6 +187,39 @@ export const MonsterLootList: Item[] = [
     media: {
       src: "./assets/items/monsterLoot/berries.png",
       alt: "Image of Troll Berries",
+    },
+  },
+  {
+    name: "Silver Ring ",
+    type: "loot",
+    cost: 12,
+    description: "Silver Ring",
+    dropChance: 0.4,
+    media: {
+      src: "./assets/items/monsterLoot/silverRing.png",
+      alt: "Image of a silver ring",
+    },
+  },
+  {
+    name: "Silver Crown",
+    type: "loot",
+    cost: 40,
+    description: "Silver Ring",
+    dropChance: 0.2,
+    media: {
+      src: "./assets/items/monsterLoot/silverRing.png",
+      alt: "Image of a silver Crown",
+    },
+  },
+  {
+    name: "Gold Chalice",
+    type: "loot",
+    cost: 60,
+    description: "Silver Ring",
+    dropChance: 0.05,
+    media: {
+      src: "./assets/items/monsterLoot/cup.png",
+      alt: "Image of a gold chalice",
     },
   },
 ];

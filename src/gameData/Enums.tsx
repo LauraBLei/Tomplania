@@ -85,4 +85,7 @@ export enum Loot {
   LadybugPowder = "Ladybug Powder",
   LadybugFlower = "Ladybug Flower",
   TrollBerries = "Troll Berries",
+  SilverRing = "Silver Ring",
+  SilverCrown = "Silver Crown",
+  GoldChalice = "Gold Chalice",
 }
