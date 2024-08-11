@@ -33,7 +33,11 @@ export const QuestList: Quest[] = [
   },
   {
     name: QuestNames.SecondTrial,
-    description: ["This is a test"],
+    description: [
+      "For this next trial, you will have to climb the mountain called The Eagles Peak",
+      "There you will find the Queen Of Eagles.",
+      "Retrieve its skull, and the trial will be done!",
+    ],
     reward: 30,
     questItem: [Loot.EagleSkull],
     status: QuestStages.NotStarted,
@@ -43,7 +47,13 @@ export const QuestList: Quest[] = [
   },
   {
     name: QuestNames.ThirdTrial,
-    description: ["This is a test"],
+    description: [
+      "You have come far {name} !",
+      "For the third trial, you will go far south, deep in the forest.",
+      "Their lives a creature called the Mirewalker.",
+      "Hmmm.. it has been so long since a villager has dared venture that deep into the forest..",
+      "Well.. Bring me its head.. And.. be careful!",
+    ],
     reward: 40,
     questItem: [Loot.MirewalkerSkull],
     status: QuestStages.NotStarted,
@@ -53,7 +63,12 @@ export const QuestList: Quest[] = [
   },
   {
     name: QuestNames.FourthTrial,
-    description: ["This is a test"],
+    description: [
+      "3 done.. 3 more to go.. You are doing well!",
+      "The Grim Lurker.. A nasty beast!",
+      "it lives near Riverbend Harbor.. I cannot tell you its exact location, since it likes to roam around..",
+      "Bring me its poison.. And watch your back!",
+    ],
     reward: 50,
     questItem: [Loot.GrimLurkerPoison],
     status: QuestStages.NotStarted,
@@ -63,7 +78,13 @@ export const QuestList: Quest[] = [
   },
   {
     name: QuestNames.FifthTrial,
-    description: ["This is a test"],
+    description: [
+      "You have done well! it is clear that you are strong!",
+      "You will need your strength for the next trial!",
+      "The Marasnake, it is one of the most feared creatures.. and not only in this world.",
+      "It lives in the sea. It will often get close to shore, where there are people.",
+      "Get me its skull.. and the trial will be done!",
+    ],
     reward: 60,
     questItem: [Loot.MarasnakeSkull],
     status: QuestStages.NotStarted,
@@ -73,12 +94,18 @@ export const QuestList: Quest[] = [
   },
   {
     name: QuestNames.SixthTrial,
-    description: ["This is a test"],
-    reward: 80,
+    description: [
+      "I am impressed! I do not doubt that the gods are proud of your efforts!",
+      "The last trial is a dragon, who can be found at The Aether Peak",
+      "Though i shall remind you.. before killing the dragon, you should complete any unfinished business. Who knows what will happen..",
+      "You might not return..",
+      "Well if you slay the dragon, bring me its head!",
+    ],
+    reward: 0,
     questItem: [Loot.DragonSkull],
     status: QuestStages.NotStarted,
     npc: NPCNames.TheOldMan,
-    xp: 400,
+    xp: 0,
     lvl: 6,
   },
   {

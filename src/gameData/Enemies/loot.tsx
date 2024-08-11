@@ -29,7 +29,7 @@ export const MonsterLootList: Item[] = [
     type: "loot",
     cost: 30,
     description: "description",
-    dropChance: 0.7,
+    dropChance: 1,
     media: {
       src: "./assets/items/monsterLoot/8.png",
       alt: "Image of a siren skull",
@@ -38,7 +38,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Siren Scale",
     type: "loot",
-    cost: 50,
+    cost: 20,
     description: "description",
     dropChance: 0.3,
     media: {
