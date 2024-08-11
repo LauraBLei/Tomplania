@@ -63,13 +63,13 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
   const [name, setName] = useState("Tompe");
   const [character, setCharacter] = useState(listOfCharacters[0]);
   const [characterAttack, setCharacterAttack] = useState(10);
-  const [gold, setGold] = useState(10000);
+  const [gold, setGold] = useState(10);
   const [chest, setChest] = useState<Item | null>(null);
   const [headPiece, setHeadPiece] = useState<Item | null>(null);
   const [weapon, setWeapon] = useState<Item | null>(null);
   const [xp, setXP] = useState(0);
   const [MaxXP, setMaxXP] = useState(50);
-  const [lvl, setLvl] = useState(6);
+  const [lvl, setLvl] = useState(1);
   const [currentHP, setCurrentHP] = useState(character.maxHealth);
   const [maxHP, setMaxHP] = useState(character.maxHealth);
   const [currentMana, setCurrentMana] = useState(character.mana);
