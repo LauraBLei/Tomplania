@@ -5,7 +5,6 @@ import { Media } from "../gameData/character/characters";
 import { Item } from "../gameData/objects/Item";
 import { Quest } from "../gameData/objects/Quest";
 import { InventoryContext } from "./inventoryContext";
-import { QuestItemNames } from "../gameData/quests/questItems";
 import { CharacterContext } from "./characterContext";
 import { Monster, MonsterNames } from "../gameData/Enemies/enemies";
 import { QuestList } from "../gameData/quests/quests";
@@ -158,23 +157,48 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
   };
 
   const deliverQuest = (quest: Quest) => {
-    const hasAllItems = quest.questItem.every((questItem) =>
-      Array.from(inventory).some(([item]) => item.name === questItem)
-    );
-    if (hasAllItems) {
-      Array.from(inventory).forEach(([item]) =>
-        quest.questItem.includes(item.name as QuestItemNames)
-          ? removeItem(item)
-          : null
+    const inventoryCopy = new Map(inventory); // Create a copy of the inventory to modify
+
+    // Check if the inventory has all required items in the correct quantities
+    const hasAllItems = quest.questItem.every((questItem) => {
+      const itemInInventory = Array.from(inventoryCopy).find(
+        ([item]) => item.name === questItem
       );
-      if (quest) {
-        changeGold(quest.reward);
-        GainXP(quest.xp);
-        quest.status = QuestStages.Completed;
+      if (itemInInventory) {
+        const [item, count] = itemInInventory;
+        if (count > 0) {
+          inventoryCopy.set(item, count - 1); // Decrease count in the copied inventory
+          return true;
+        }
       }
+      return false;
+    });
+
+    if (hasAllItems) {
+      // Update the original inventory by removing the required items
+      quest.questItem.forEach((questItem) => {
+        const itemInInventory = Array.from(inventory).find(
+          ([item]) => item.name === questItem
+        );
+        if (itemInInventory) {
+          const [item, count] = itemInInventory;
+          if (count > 1) {
+            removeItem(item, 1); // Remove only one of the required item
+          } else {
+            removeItem(item); // Remove the item completely if it's the last one
+          }
+        }
+      });
+
+      // Process the quest completion
+      changeGold(quest.reward);
+      GainXP(quest.xp);
+      quest.status = QuestStages.Completed;
       removeQuest(quest);
       setDeliveredQuest(true);
-    } else alert("You do not have all the items to complete the quest!");
+    } else {
+      alert("You do not have all the items to complete the quest!");
+    }
   };
 
   const handlePurchase = (item: Item) => {

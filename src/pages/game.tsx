@@ -19,8 +19,7 @@ import { QuestList } from "../gameData/quests/quests";
 import { Link } from "react-router-dom";
 
 export const GamePage = () => {
-  const { fighting, location, NPC, bgImage, item, saveGame } =
-    useContext(GameContext);
+  const { fighting, location, NPC, bgImage, item } = useContext(GameContext);
   const { skill } = useContext(CharacterContext);
 
   const bgImageStyle = {
