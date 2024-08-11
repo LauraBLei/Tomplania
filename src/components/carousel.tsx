@@ -54,8 +54,13 @@ export const Carousel = () => {
               </p>
               <p className=" Headline">Starting Mana: {character.mana}</p>
               <button
-                className="bg-white text-black px-5 text-2xl lg:text-3xl rounded"
+                className="chooseButton"
                 onClick={() => {
+                  alert(
+                    "You have chosen The " +
+                      character.job +
+                      " as your character!"
+                  );
                   setCharacter(listOfCharacters[index]);
                   setMaxMana(character.mana);
                   setMaxHP(character.maxHealth);

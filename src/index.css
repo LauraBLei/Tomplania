@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer components {
+  .chooseButton {
+    @apply bg-beige border-2 border-blue text-blue px-5 text-2xl lg:text-3xl rounded hover:bg-blue hover:text-beige hover:border-beige;
+  }
   .button {
     @apply border-2 border-blue px-4 py-1 cursor-pointer font-uncial text-xs lg:text-2xl text-blue;
   }

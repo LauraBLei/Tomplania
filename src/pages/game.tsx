@@ -136,7 +136,7 @@ const NormalTop = () => {
             alt="icon of a settings wheel"
           />
         </summary>
-        <div className="InformationUI w-auto flex flex-col gap-4 text-center overflow-y-auto w-full bg-beige px-9 py-4 border-8 border-blue h-auto ">
+        <div className="InformationUI flex flex-col gap-4 text-center overflow-y-auto w-full bg-beige px-9 py-4 border-8 border-blue h-auto ">
           <button className="button" onClick={() => saveGame()}>
             Save Game
           </button>
