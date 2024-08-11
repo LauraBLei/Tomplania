@@ -305,6 +305,7 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
         setLvl(1);
         setActiveQuests([]);
         setInventory(new Map());
+        setLocation(Locations.BlackVoid);
       }
     } else {
       setXP(0);
@@ -312,6 +313,7 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
       setLvl(1);
       setActiveQuests([]);
       setInventory(new Map());
+      setLocation(Locations.BlackVoid);
     }
   };
   return (
