@@ -67,6 +67,7 @@ export const PotionShopInventory: Item[] = [
       src: "./assets/items/potions/Elixir.png",
       alt: "Image of a purple Potion bottle",
     },
-    description: "This is a mana potion! It will ",
+    description:
+      "This is a mana potion! It will help if you are low on mana in combat!",
   },
 ];
