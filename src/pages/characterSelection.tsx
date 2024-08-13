@@ -2,9 +2,12 @@ import { Carousel } from "../components/carousel";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CharacterContext } from "../hooks/characterContext";
+import { GameContext } from "../hooks/gameContext";
+import { Locations } from "../gameData/Enums";
 
 export const CharacterSelection = () => {
   const { setName, defaultName } = useContext(CharacterContext);
+  const { setLocation } = useContext(GameContext);
   const bgText = {
     backgroundImage: `url("./assets/bg-images/GameWorld.png")`,
   };
@@ -33,7 +36,14 @@ export const CharacterSelection = () => {
               required
               maxLength={15}
             />
-            <Link to="/Game" className="play" onClick={() => defaultName()}>
+            <Link
+              to="/Game"
+              className="play"
+              onClick={() => {
+                defaultName();
+                setLocation(Locations.BlackVoid);
+              }}
+            >
               Play
             </Link>
           </div>

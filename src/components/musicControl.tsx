@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export const MusicControl = () => {
-  const [volume, setVolume] = useState(50);
+  const [volume, setVolume] = useState(25);
 
   useEffect(() => {
     const musicPlayer = document.getElementById(
