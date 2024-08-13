@@ -68,6 +68,10 @@
   .menuButtons {
     @apply text-3xl lg:text-6xl transition-transform duration-150 ease-in-out scale-95 hover:scale-100;
   }
+
+  .locationButton {
+    @apply TextDark transition-transform duration-150 ease-in-out scale-95 hover:scale-100 flex text-wrap max-w-[250px] lg:max-w-[600px] text-left;
+  }
 }
 
 .tools {

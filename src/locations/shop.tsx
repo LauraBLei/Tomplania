@@ -17,19 +17,19 @@ export const Shop = () => {
   return (
     <div className="flex flex-col items-center gap-2">
       <div className="place-self-start ml-4  flex gap-2">
-        <img
-          className="h-auto"
-          src="./assets/bg-images/locationDot.png"
-          alt="location dot"
-        />
         <button
-          className="TextDark whitespace-nowrap"
+          className="locationButton"
           onClick={() => {
             setLocation(PrevLocation);
             setBgImg(LocationList[PrevLocation].media);
             setItem(null);
           }}
         >
+          <img
+            className="h-auto"
+            src="./assets/bg-images/locationDot.png"
+            alt="location dot"
+          />
           Go Back
         </button>
       </div>

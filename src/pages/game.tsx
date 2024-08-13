@@ -251,11 +251,7 @@ const OptionButton = ({ onClick, index, text }: OptionButtonProps) => {
       key={index + 11}
       className="flex flex-wrap ml-4 items-center cursor-pointer"
     >
-      <button
-        key={index + 32}
-        className="TextDark transition-transform duration-150 ease-in-out scale-95 hover:scale-100 flex text-wrap max-w-[250px] lg:max-w-[600px] text-left"
-        onClick={onClick}
-      >
+      <button key={index + 32} className="locationButton" onClick={onClick}>
         <img
           key={index + 12}
           className=""
