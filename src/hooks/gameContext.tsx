@@ -271,9 +271,24 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
 
   const saveAndExit = () => {
     const userConfirmed = confirm("Are you sure you wanna save and exit?");
-
+    const serializedInventory = Array.from(inventory.entries());
+    const characterStats = {
+      character: character,
+      MaxHP: MaxHP,
+      hp: currentHP,
+      MaxMana: MaxMana,
+      mana: currentMana,
+      MaxXP: MaxXP,
+      xp: xp,
+      gold: gold,
+      Level: lvl,
+      QuestLog: activeQuests,
+      inventory: serializedInventory,
+      name: name,
+    };
     if (userConfirmed) {
-      saveGame();
+      localStorage.setItem("characterStats", JSON.stringify(characterStats));
+      localStorage.setItem("Quests", JSON.stringify(QuestList));
     }
   };
 

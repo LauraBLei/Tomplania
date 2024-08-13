@@ -38,7 +38,7 @@ export const NewQuestItems: Item[] = [
     cost: 1,
     dropChance: 1,
     media: {
-      src: "./assets/items/monsterLoot/featherLeafMeat.png",
+      src: "./assets/items/monsterLoot/meat.png",
       alt: "Feather Leaf Meat",
     },
   },

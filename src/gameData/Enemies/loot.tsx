@@ -141,7 +141,7 @@ export const MonsterLootList: Item[] = [
     description: "Meat from a Glowfin Minnow Fish",
     dropChance: 1,
     media: {
-      src: "./assets/items/monsterLoot/15.png",
+      src: "./assets/items/monsterLoot/meat.png",
       alt: "Image of Glowfin Minnow Meat",
     },
   },
@@ -152,7 +152,7 @@ export const MonsterLootList: Item[] = [
     description: "Meat from a Glowfin Minnow Fish",
     dropChance: 1,
     media: {
-      src: "./assets/items/monsterLoot/15.png",
+      src: "./assets/items/monsterLoot/meat.png",
       alt: "Image of Glowfin Minnow Meat",
     },
   },
