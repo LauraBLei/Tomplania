@@ -15,6 +15,15 @@ export const CreditPage = () => {
     >
       <div className="bg-black backdrop-blur-sm bg-opacity-15 max-w-[600px] max-h-[600px] p-4 overflow-y-auto px-11 py-6">
         <div className="w-full gap-8 h-full flex flex-col items-center text-center">
+          <div className="flex flex-col gap-3 mb-48 mt-14">
+            <p className="font-Courier text-3xl text-blue font-bold">A</p>
+            <h1 className="font-Courier text-3xl lg:text-7xl text-blue font-bold">
+              Lei Dev
+            </h1>
+            <p className="font-Courier text-3xl text-blue font-bold">
+              Production
+            </p>
+          </div>
           <h2 className="Headline text-blue">The End</h2>
           <p className="TextDark">Thank you for playing my game!</p>
           <p className="TextDark">
@@ -75,7 +84,6 @@ export const CreditPage = () => {
             <div className="flex flex-wrap gap-20 items-center justify-center p-10">
               <p className="TextDark">Lums</p>
               <p className="TextDark">Ella</p>
-              <p className="TextDark">Junior</p>
               <p className="TextDark">Panchi</p>
               <p className="TextDark">Ranta</p>
               <p className="TextDark">Raiyan</p>
@@ -97,6 +105,7 @@ export const CreditPage = () => {
             <div className="flex justify-between">
               <p className="TextDark">Game Music:</p>
               <a
+                target="_blank"
                 href="https://www.youtube.com/watch?v=PxUEWuDec4k"
                 className="TextDark"
               >
@@ -107,6 +116,7 @@ export const CreditPage = () => {
             <div className="flex justify-between">
               <p className="TextDark">Combat Music:</p>
               <a
+                target="_blank"
                 href="https://www.youtube.com/watch?v=USBucuZiarA&list=PLfP6i5T0-DkLiR-gmzeFGY1S-10Ur0wso"
                 className="TextDark"
               >
@@ -116,11 +126,32 @@ export const CreditPage = () => {
             <div className="flex justify-between mb-6">
               <p className="TextDark">Final Boss Music:</p>
               <a
+                target="_blank"
                 href="https://www.youtube.com/watch?v=USBucuZiarA&list=PLfP6i5T0-DkLiR-gmzeFGY1S-10Ur0wso"
                 className="TextDark"
               >
                 Youtube
               </a>
+            </div>
+          </div>
+          <div className="flex flex-col gap-5">
+            <p className="Headline text-blue">Interested in Collaborating?</p>
+            <p className="TextDark">
+              If you're interested in working with me on future projects, feel
+              free to reach out! I'm always excited to connect with new talent
+              and explore creative opportunities together.
+            </p>
+            <div className="mb-5">
+              <p className="TextDark">
+                Reach me through my website{" "}
+                <a
+                  target="_blank"
+                  className="TextDark underline"
+                  href="https://leidev.net/"
+                >
+                  Here
+                </a>
+              </p>
             </div>
           </div>
         </div>
