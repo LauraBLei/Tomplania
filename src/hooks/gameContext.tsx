@@ -107,6 +107,20 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
     setName,
   } = useContext(CharacterContext);
 
+  const controlMusic = () => {
+    if (fighting && enemy === MonsterNames.SixthBoss) {
+      const musicPlayer = document.getElementById("music-player");
+      musicPlayer.src = "https://www.youtube.com/watch?v=TNs5JFYaTMk";
+    } else if (fighting) {
+      const musicPlayer = document.getElementById("music-player");
+      musicPlayer.src =
+        "https://www.youtube.com/watch?v=USBucuZiarA&list=PLfP6i5T0-DkLiR-gmzeFGY1S-10Ur0wso";
+    } else {
+      const musicPlayer = document.getElementById("music-player");
+      musicPlayer.src = "https://www.youtube.com/watch?v=pgLjYsVP4H0";
+    }
+  };
+
   const { addItem } = useContext(InventoryContext);
 
   const startQuest = (quest: Quest) => {
