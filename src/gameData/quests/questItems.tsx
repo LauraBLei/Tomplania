@@ -9,7 +9,7 @@ export enum QuestItemNames {
   KeyOne = "Heart Of The Abyssal Seahorse",
   KeyTwo = "Dark Druid Necklace",
   keyThree = "Crown Of The Snake Woman",
-  ForbiddenFruit = "ForbiddenFruit",
+  ForbiddenFruit = "Forbidden Fruit",
   BårdsChest = "Bård's Chest",
   VillagersNecklace = "Villagers Necklace",
   VillagersChest = "Villagers Chest",
@@ -83,7 +83,7 @@ export const NewQuestItems: Item[] = [
     type: "QuestItem",
     description: "Forbidden Fruit",
     cost: 1,
-    dropChance: 0.7,
+    dropChance: 1,
     media: {
       src: "./assets/items/questItems/forbiddenFruit.png",
       alt: "Purple fruit",
