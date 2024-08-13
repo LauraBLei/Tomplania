@@ -22,22 +22,18 @@ export const CharacterSelection = () => {
           </h1>
           <Carousel />
           <div className="flex flex-col gap-5 items-center lg:mt-5">
-            <label htmlFor="" className="text-xl lg:text-5xl">
+            <label htmlFor="" className="Headline">
               Character Name
             </label>
             <input
               type="text"
               name="name"
-              className="w-full text-xl lg:text-2xl text-black px-3 py-2"
+              className="TextDark"
               onChange={(event) => setName(event.target.value)}
               required
               maxLength={15}
             />
-            <Link
-              to="/Game"
-              className="text-3xl lg:text-6xl"
-              onClick={() => defaultName()}
-            >
+            <Link to="/Game" className="play" onClick={() => defaultName()}>
               Play
             </Link>
           </div>
