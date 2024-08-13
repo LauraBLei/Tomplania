@@ -6,9 +6,9 @@ export const QuestList: Quest[] = [
   {
     name: QuestNames.SecretIngredient,
     description: [
-      "I want to make my famous meal, but none of the stores have any! ",
+      "I want to make my famous meal, but i need Feather Leaf meat and none of the stores have any! ",
       "The meat are from the little Feather Leafs in the cave, but that is way to dangerous for an old lady like me. ",
-      "Could i bother you with fetching some for me? one should be plenty!",
+      "Could i bother you with fetching some for me? One should be plenty!",
     ],
     reward: 10,
     questItem: [QuestItemNames.FeatherLeafMeat],
