@@ -4,10 +4,10 @@
 
 @layer components {
   .chooseButton {
-    @apply bg-beige border-2 border-blue text-blue px-5 text-2xl lg:text-3xl rounded hover:bg-blue hover:text-beige hover:border-beige;
+    @apply bg-beige border-2 border-blue text-blue px-5 text-2xl lg:text-3xl rounded hover:bg-blue hover:text-beige hover:border-beige transition-transform ease-in-out duration-150 hover:scale-105;
   }
   .button {
-    @apply border-2 border-blue px-4 py-1 cursor-pointer font-uncial text-xs lg:text-2xl text-blue;
+    @apply border-2 border-blue px-4 py-1 cursor-pointer font-uncial text-xs lg:text-2xl text-blue transition-transform ease-in-out duration-150 hover:scale-105;
   }
 
   .button2 {
@@ -67,6 +67,10 @@
 
   .play {
     @apply text-4xl transition-transform duration-150 ease-in-out hover:scale-125;
+  }
+
+  .menuButtons {
+    @apply text-3xl lg:text-6xl transition-transform duration-150 ease-in-out hover:scale-125;
   }
 }
 

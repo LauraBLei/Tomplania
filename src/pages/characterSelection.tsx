@@ -28,7 +28,7 @@ export const CharacterSelection = () => {
             <input
               type="text"
               name="name"
-              className="TextDark"
+              className="TextDark p-2 rounded-md"
               onChange={(event) => setName(event.target.value)}
               required
               maxLength={15}

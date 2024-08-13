@@ -20,14 +20,14 @@ export const StartPage = () => {
           {saveFile && (
             <Link
               to="/Game"
-              className="text-3xl lg:text-6xl"
+              className="menuButtons"
               onClick={() => startSavedGame()}
             >
               Continue
             </Link>
           )}
           <Link
-            className="text-3xl lg:text-6xl"
+            className="menuButtons"
             to="/Character"
             onClick={() => newGame()}
           >
