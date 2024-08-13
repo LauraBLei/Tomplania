@@ -68,7 +68,7 @@ export const GamePage = () => {
 };
 
 const NormalTop = () => {
-  const { saveGame } = useContext(GameContext);
+  const { saveGame, saveAndExit } = useContext(GameContext);
   return (
     <div className="flex items-center h-full gap-1 md:gap-4">
       <details>
@@ -140,7 +140,7 @@ const NormalTop = () => {
           <button className="button" onClick={() => saveGame()}>
             Save Game
           </button>
-          <Link className="button" to="/" onClick={() => saveGame()}>
+          <Link className="button" to="/" onClick={() => saveAndExit()}>
             Save & Exit
           </Link>
           <Link className="button" to="/">

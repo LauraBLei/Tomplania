@@ -43,6 +43,7 @@ type GameContextType = {
   saveGame: () => void;
   startSavedGame: () => void;
   newGame: () => void;
+  saveAndExit: () => void;
   makeQuestListNPC: () => Quest[];
 
   fight: (damage: number, mana: number, attack: number, enemy: Monster) => void;
@@ -268,6 +269,14 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
     }
   };
 
+  const saveAndExit = () => {
+    const userConfirmed = confirm("Are you sure you wanna save and exit?");
+
+    if (userConfirmed) {
+      saveGame();
+    }
+  };
+
   const startSavedGame = () => {
     const fromLocal = localStorage.getItem("characterStats");
     if (fromLocal) {
@@ -354,6 +363,7 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
         startSavedGame,
         newGame,
         makeQuestListNPC,
+        saveAndExit,
       }}
     >
       {children}
