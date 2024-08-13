@@ -189,6 +189,8 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
         setLvl(newLvl);
         setMaxXP(newMaxXP);
         setMaxHP(newMaxHp);
+        setCurrentHP(newMaxHp);
+        setCurrentMana(newMaxMana);
         setMaxMana(newMaxMana);
         setXP(overFlowXp); // Reset XP to the overflow value
       }

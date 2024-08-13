@@ -3,11 +3,10 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CharacterContext } from "../hooks/characterContext";
 import { GameContext } from "../hooks/gameContext";
-import { Locations } from "../gameData/Enums";
 
 export const CharacterSelection = () => {
   const { setName, defaultName } = useContext(CharacterContext);
-  const { setLocation, newGame } = useContext(GameContext);
+  const { newGame } = useContext(GameContext);
   const bgText = {
     backgroundImage: `url("./assets/bg-images/GameWorld.png")`,
   };
