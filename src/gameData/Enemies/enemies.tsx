@@ -224,7 +224,7 @@ export const MonstersList: MonstersList = {
     xp: 25,
     level: 2,
   },
-  LadyBug: {
+  Ladybug: {
     hp: 100,
     attack: 10,
     media: {
@@ -239,7 +239,7 @@ export const MonstersList: MonstersList = {
     hp: 300,
     attack: 30,
     media: {
-      src: "./assets/enemies/ladybug.png",
+      src: "./assets/enemies/troll.png",
       alt: "Image of a evil ladybug",
     },
     loot: [Loot.TrollBerries, QuestItemNames.Medallion],

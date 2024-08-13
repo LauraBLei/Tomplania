@@ -199,6 +199,7 @@ const Location = () => {
               setMonsterHP(MonstersList[e].hp);
               setPrevLocation(location);
               setEnemy(currentLocation.enemy[i]);
+              console.log("enemy:", currentLocation.enemy[i]);
             }}
           />
         ))}

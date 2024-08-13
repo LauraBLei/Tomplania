@@ -213,7 +213,7 @@ export const LocationList: LocationType = {
       Locations.EloweensCabin,
       Locations.WhisperingCavern,
     ],
-    enemy: [],
+    enemy: [MonsterNames.ladybug],
     npc: [],
   },
   "Aether Peak": {
@@ -303,7 +303,7 @@ export const LocationList: LocationType = {
       alt: "Forrest path.",
     },
     path: [Locations.EvershadeForest, Locations.MoonlitPool],
-    enemy: [MonsterNames.ThirdBoss],
+    enemy: [MonsterNames.ThirdBoss, MonsterNames.troll],
     npc: [],
   },
   "Riverbend Beach": {

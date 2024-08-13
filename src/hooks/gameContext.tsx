@@ -45,6 +45,7 @@ type GameContextType = {
   newGame: () => void;
   saveAndExit: () => void;
   makeQuestListNPC: () => Quest[];
+  save: () => void;
 
   fight: (damage: number, mana: number, attack: number, enemy: Monster) => void;
   leave: () => void;
@@ -220,6 +221,7 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
       quest.status = QuestStages.Completed;
       removeQuest(quest);
       setDeliveredQuest(true);
+      save();
     } else {
       alert("You do not have all the items to complete the quest!");
     }
@@ -248,29 +250,11 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
     const userConfirmed = confirm("Are you sure you wanna save?");
 
     if (userConfirmed) {
-      const serializedInventory = Array.from(inventory.entries());
-      const characterStats = {
-        character: character,
-        MaxHP: MaxHP,
-        hp: currentHP,
-        MaxMana: MaxMana,
-        mana: currentMana,
-        MaxXP: MaxXP,
-        xp: xp,
-        gold: gold,
-        Level: lvl,
-        QuestLog: activeQuests,
-        inventory: serializedInventory,
-        name: name,
-      };
-
-      localStorage.setItem("characterStats", JSON.stringify(characterStats));
-      localStorage.setItem("Quests", JSON.stringify(QuestList));
+      save();
     }
   };
 
-  const saveAndExit = () => {
-    const userConfirmed = confirm("Are you sure you wanna save and exit?");
+  const save = () => {
     const serializedInventory = Array.from(inventory.entries());
     const characterStats = {
       character: character,
@@ -286,9 +270,14 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
       inventory: serializedInventory,
       name: name,
     };
+    localStorage.setItem("characterStats", JSON.stringify(characterStats));
+    localStorage.setItem("Quests", JSON.stringify(QuestList));
+  };
+
+  const saveAndExit = () => {
+    const userConfirmed = confirm("Are you sure you wanna save and exit?");
     if (userConfirmed) {
-      localStorage.setItem("characterStats", JSON.stringify(characterStats));
-      localStorage.setItem("Quests", JSON.stringify(QuestList));
+      save();
     }
   };
 
@@ -379,6 +368,7 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
         newGame,
         makeQuestListNPC,
         saveAndExit,
+        save,
       }}
     >
       {children}
