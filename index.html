@@ -6,9 +6,7 @@
     <title>Tomplania</title>
     <style>
       #music-player {
-        position: absolute;
-        left: -9999px;
-        top: -9999px;
+        display: none;
       }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -22,14 +20,15 @@
   </head>
   <body>
     <div id="root"></div>
-    <iframe
+    <audio
       id="music-player"
-      src="https://www.youtube.com/embed/pgLjYsVP4H0?autoplay=1&loop=1&playlist=pgLjYsVP4H0"
+      src="./assets/music/reg.mp3"
       frameborder="0"
       allow="autoplay; encrypted-media"
       allowfullscreen
-    >
-    </iframe>
+      loop
+      autoplay
+    ></audio>
     <script type="module" src="./src/main.tsx"></script>
   </body>
 </html>

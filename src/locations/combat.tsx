@@ -19,7 +19,7 @@ export const EnemyLocation = () => {
 };
 
 export const EnemyDefeated = () => {
-  const { leave } = useContext(GameContext);
+  const { leave, controlMusic } = useContext(GameContext);
 
   return (
     <div>
@@ -30,6 +30,7 @@ export const EnemyDefeated = () => {
             className="button"
             onClick={() => {
               leave();
+              controlMusic();
             }}
           >
             Return
@@ -42,7 +43,7 @@ export const EnemyDefeated = () => {
 
 export const Fighting = () => {
   const { character, currentHP, lvl, setSkill } = useContext(CharacterContext);
-  const { leave, handleRespawn } = useContext(GameContext);
+  const { leave, handleRespawn, controlMusic } = useContext(GameContext);
 
   const skills = character.skills.filter((skills) => lvl >= skills.level);
 
@@ -74,6 +75,7 @@ export const Fighting = () => {
               className="button"
               onClick={() => {
                 leave();
+                controlMusic();
               }}
             >
               Run

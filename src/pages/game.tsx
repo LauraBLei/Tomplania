@@ -17,6 +17,7 @@ import { TextFieldLayout } from "../components/textFieldLayout";
 import { ManaBar } from "../gameData/character/manaBar";
 import { QuestList } from "../gameData/quests/quests";
 import { Link } from "react-router-dom";
+import { MusicControl } from "../components/musicControl";
 
 export const GamePage = () => {
   const { fighting, location, NPC, bgImage, item } = useContext(GameContext);
@@ -74,7 +75,7 @@ const NormalTop = () => {
       <details>
         <summary className="cursor-pointer list-none text-2xl mr-1 lg:mr-7 ">
           <img
-            className="icon "
+            className="icon"
             src="./assets/bg-images/compass.png"
             alt="Icon of a compass"
           />
@@ -137,6 +138,14 @@ const NormalTop = () => {
           />
         </summary>
         <div className="InformationUI flex flex-col gap-4 text-center overflow-y-auto w-full bg-beige px-9 py-4 border-8 border-blue h-auto ">
+          <div className="flex items-center justify-center gap-5">
+            <img
+              className=""
+              src="./assets/bg-images/musicBlue.png"
+              alt="Music Icon"
+            />
+            <MusicControl />
+          </div>
           <button className="button" onClick={() => saveGame()}>
             Save Game
           </button>
@@ -172,7 +181,7 @@ const Location = () => {
   if (location === Locations.RestRoom) {
     setCurrentHP(MaxHP);
   }
-
+  const { controlMusic } = useContext(GameContext);
   return (
     <div className="flex flex-col items-center w-full">
       <p className="TextDark">
@@ -200,6 +209,7 @@ const Location = () => {
               setPrevLocation(location);
               setEnemy(currentLocation.enemy[i]);
               console.log("enemy:", currentLocation.enemy[i]);
+              controlMusic(currentLocation.enemy[i], true);
             }}
           />
         ))}

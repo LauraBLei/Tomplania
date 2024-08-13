@@ -46,6 +46,7 @@ type GameContextType = {
   saveAndExit: () => void;
   makeQuestListNPC: () => Quest[];
   save: () => void;
+  controlMusic: (enemy?: MonsterNames, fight?: boolean) => void;
 
   fight: (damage: number, mana: number, attack: number, enemy: Monster) => void;
   leave: () => void;
@@ -107,18 +108,22 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
     setName,
   } = useContext(CharacterContext);
 
-  const controlMusic = () => {
-    if (fighting && enemy === MonsterNames.SixthBoss) {
-      const musicPlayer = document.getElementById("music-player");
-      musicPlayer.src = "https://www.youtube.com/watch?v=TNs5JFYaTMk";
-    } else if (fighting) {
-      const musicPlayer = document.getElementById("music-player");
-      musicPlayer.src =
-        "https://www.youtube.com/watch?v=USBucuZiarA&list=PLfP6i5T0-DkLiR-gmzeFGY1S-10Ur0wso";
-    } else {
-      const musicPlayer = document.getElementById("music-player");
-      musicPlayer.src = "https://www.youtube.com/watch?v=pgLjYsVP4H0";
+  const controlMusic = (enemy?: MonsterNames, fight: boolean = false) => {
+    const musicPlayer = document.getElementById(
+      "music-player"
+    ) as HTMLAudioElement;
+
+    if (musicPlayer) {
+      if (fight && enemy === MonsterNames.SixthBoss) {
+        musicPlayer.src = "./assets/music/dragonFight.mp3";
+      } else if (fight) {
+        musicPlayer.src = "./assets/music/combat.mp3";
+      } else {
+        musicPlayer.src = "./assets/music/reg.mp3";
+      }
     }
+
+    musicPlayer.play;
   };
 
   const { addItem } = useContext(InventoryContext);
@@ -383,6 +388,7 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
         makeQuestListNPC,
         saveAndExit,
         save,
+        controlMusic,
       }}
     >
       {children}
