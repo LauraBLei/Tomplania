@@ -47,6 +47,7 @@ export const MusicControl = () => {
           Music On/Off
         </label>
         <input
+          className="w-5"
           type="checkbox"
           id="music-toggle"
           checked={isPlaying}
