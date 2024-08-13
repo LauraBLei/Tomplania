@@ -58,7 +58,7 @@
   }
 
   .arrow {
-    @apply w-5 transition-transform duration-150 ease-in-out scale-95 hover:scale-100;
+    @apply w-5 transition-transform duration-150 ease-in-out scale-95 hover:scale-125;
   }
 
   .play {
