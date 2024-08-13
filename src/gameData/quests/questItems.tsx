@@ -129,7 +129,7 @@ export const NewQuestItems: Item[] = [
     cost: 1,
     dropChance: 1,
     media: {
-      src: "./assets/items/questItems/medallion.png",
+      src: "./assets/items/monsterLoot/medallion.png",
       alt: "Medallion",
     },
   },

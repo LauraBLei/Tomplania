@@ -140,7 +140,7 @@ const NormalTop = () => {
         <div className="InformationUI flex flex-col gap-4 text-center overflow-y-auto w-full bg-beige px-9 py-4 border-8 border-blue h-auto ">
           <div className="flex items-center justify-center gap-5">
             <img
-              className=""
+              className="icon"
               src="./assets/bg-images/musicBlue.png"
               alt="Music Icon"
             />

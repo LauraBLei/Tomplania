@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { LocationList } from "../gameData/locations";
 import { NPCNames, Locations, QuestStages } from "../gameData/Enums";
 import { Media } from "../gameData/character/characters";
