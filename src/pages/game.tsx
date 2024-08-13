@@ -247,18 +247,21 @@ interface OptionButtonProps {
 
 const OptionButton = ({ onClick, index, text }: OptionButtonProps) => {
   return (
-    <div key={index + 11} className="flex flex-wrap ml-4 items-center">
-      <img
-        key={index + 12}
-        className=""
-        src="./assets/bg-images/locationDot.png"
-        alt="location dot"
-      />
+    <div
+      key={index + 11}
+      className="flex flex-wrap ml-4 items-center cursor-pointer"
+    >
       <button
         key={index + 32}
-        className="TextDark text-wrap max-w-[250px] lg:max-w-[600px] text-left"
+        className="TextDark transition-transform duration-150 ease-in-out scale-95 hover:scale-100 flex text-wrap max-w-[250px] lg:max-w-[600px] text-left"
         onClick={onClick}
       >
+        <img
+          key={index + 12}
+          className=""
+          src="./assets/bg-images/locationDot.png"
+          alt="location dot"
+        />
         {text}
       </button>
     </div>

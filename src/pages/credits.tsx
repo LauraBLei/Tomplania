@@ -20,10 +20,19 @@ export const CreditPage = () => {
           <p className="TextLight">
             This Game was made to practice my React and Typescript.
           </p>
-          <h3 className="Headline">Special Thanks To:</h3>
-          <p className="TextLight">
-            Lasse : For helping me learn React and Typescript
-          </p>
+          <div>
+            <h3 className="Headline">Special Thanks To:</h3>
+            <div>
+              <p>Lasse</p>
+              <p>
+                For invaluable guidance and support in overcoming coding
+                challenges and for teaching React and TypeScript.
+              </p>
+            </div>
+          </div>
+          <div>
+            <h2></h2>
+          </div>
           <p className="TextLight">
             Ella : For making the NPC Eloween, and her quests!
           </p>
