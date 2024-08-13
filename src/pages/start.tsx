@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { GameContext } from "../hooks/gameContext";
 
@@ -8,8 +8,10 @@ export const StartPage = () => {
   };
   const saveFile = localStorage.getItem("characterStats");
   const { startSavedGame, newGame, controlMusic } = useContext(GameContext);
-
-  controlMusic();
+  useEffect(() => {
+    controlMusic();
+    console.log("inside use effect");
+  }, [controlMusic]);
   return (
     <>
       <div

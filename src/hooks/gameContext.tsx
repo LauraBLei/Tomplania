@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { LocationList } from "../gameData/locations";
 import { NPCNames, Locations, QuestStages } from "../gameData/Enums";
 import { Media } from "../gameData/character/characters";
@@ -112,7 +112,6 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
     const musicPlayer = document.getElementById(
       "music-player"
     ) as HTMLAudioElement;
-
     if (musicPlayer) {
       if (fight && enemy === MonsterNames.SixthBoss) {
         musicPlayer.src = "./assets/music/dragonFight.mp3";
@@ -122,8 +121,9 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
         musicPlayer.src = "./assets/music/reg.mp3";
       }
     }
+    console.log("Current music source: ", musicPlayer.src);
 
-    musicPlayer.play;
+    musicPlayer.play();
   };
 
   const { addItem } = useContext(InventoryContext);
