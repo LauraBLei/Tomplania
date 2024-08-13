@@ -50,6 +50,14 @@ const ShowQuestInfo = ({ activeQuest }: ShowQuestInfoProps) => {
           </div>
           <h3 className="TextDark"> {activeQuest?.reward} XP</h3>
         </div>
+        <div>
+          <h3 className="TextDark">Quest Item:</h3>
+          <div className="flex flex-wrap gap-3">
+            {activeQuest.questItem.map((item) => {
+              return <p className="TextDark">{item}</p>;
+            })}
+          </div>
+        </div>
         <button onClick={() => abandonQuest(activeQuest)} className="button">
           Abandon Quest
         </button>
