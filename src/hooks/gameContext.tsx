@@ -176,8 +176,10 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
     setCurrentMana((prevMana) => Math.max(prevMana - mana, 0));
     setCurrentHP(newCurrentHp);
     setMonsterHP(newMonsterHP);
-    if (newMonsterHP === 0) {
+    if (newMonsterHP === 0 && newCurrentHp > 0) {
       enemyDefeated(enemy);
+      console.log("Player check");
+
       setSkill(null);
     }
     if (newCurrentHp === 0) {

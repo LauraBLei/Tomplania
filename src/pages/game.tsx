@@ -162,7 +162,8 @@ const NormalTop = () => {
 };
 
 const Location = () => {
-  const { name, lvl, setCurrentHP, MaxHP } = useContext(CharacterContext);
+  const { name, lvl, setCurrentHP, MaxHP, setCurrentMana, MaxMana } =
+    useContext(CharacterContext);
   const {
     setFighting,
     setMonsterHP,
@@ -180,6 +181,7 @@ const Location = () => {
   };
   if (location === Locations.RestRoom) {
     setCurrentHP(MaxHP);
+    setCurrentMana(MaxMana);
   }
   const { controlMusic } = useContext(GameContext);
   return (
