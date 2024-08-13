@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { GameContext } from "../hooks/gameContext";
+import { MonsterNames } from "../gameData/Enemies/enemies";
 
 export const MusicControl = () => {
-  const [volume, setVolume] = useState(25);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const { isPlaying, setIsPlaying, volume, setVolume, fighting, enemy } =
+    useContext(GameContext);
 
   useEffect(() => {
     const musicPlayer = document.getElementById(
@@ -10,14 +12,21 @@ export const MusicControl = () => {
     ) as HTMLAudioElement;
 
     if (musicPlayer) {
-      musicPlayer.volume = volume / 100; // Convert percentage to a 0-1 scale for audio element
+      musicPlayer.volume = volume / 100;
       if (isPlaying) {
         musicPlayer.play();
+        if (fighting && enemy === MonsterNames.SixthBoss) {
+          musicPlayer.src = "./assets/music/dragonFight.mp3";
+        } else if (fighting) {
+          musicPlayer.src = "./assets/music/combat.mp3";
+        } else {
+          musicPlayer.src = "./assets/music/reg.mp3";
+        }
       } else {
         musicPlayer.pause();
       }
     }
-  }, [volume, isPlaying]); // Effect runs when the volume or isPlaying state changes
+  }, [volume, isPlaying, fighting, enemy]);
 
   const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setVolume(parseInt(event.target.value, 10));

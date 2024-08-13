@@ -23,6 +23,8 @@ type GameContextType = {
   acceptedQuest: boolean;
   deliveredQuest: boolean;
   enemy: MonsterNames;
+  isPlaying: boolean;
+  volume: number;
 
   setLocation: React.Dispatch<React.SetStateAction<Locations>>;
   setEnemy: React.Dispatch<React.SetStateAction<MonsterNames>>;
@@ -35,6 +37,8 @@ type GameContextType = {
   setItem: React.Dispatch<React.SetStateAction<Item | null>>;
   setAcceptedQuest: React.Dispatch<React.SetStateAction<boolean>>;
   setDeliveredQuest: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
+  setVolume: React.Dispatch<React.SetStateAction<number>>;
 
   startQuest: (quest: Quest) => void;
   removeQuest: (quest: Quest) => void;
@@ -81,6 +85,8 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
   const [acceptedQuest, setAcceptedQuest] = useState(false);
   const [deliveredQuest, setDeliveredQuest] = useState(false);
   const [enemy, setEnemy] = useState(MonsterNames.AbyssalSeahorse);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [volume, setVolume] = useState(25);
 
   const {
     setCurrentHP,
@@ -120,10 +126,8 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
       } else {
         musicPlayer.src = "./assets/music/reg.mp3";
       }
+      console.log("Current music source: ", musicPlayer.src);
     }
-    console.log("Current music source: ", musicPlayer.src);
-
-    musicPlayer.play();
   };
 
   const { addItem } = useContext(InventoryContext);
@@ -187,6 +191,7 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
     setGold(Math.floor(gold * 0.9));
     setCurrentHP(MaxHP);
     setCurrentMana(MaxMana);
+    setFighting(false);
   };
 
   const leave = () => {
@@ -389,6 +394,10 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
         saveAndExit,
         save,
         controlMusic,
+        isPlaying,
+        setIsPlaying,
+        volume,
+        setVolume,
       }}
     >
       {children}

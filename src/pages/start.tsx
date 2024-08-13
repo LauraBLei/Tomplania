@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { GameContext } from "../hooks/gameContext";
 import { MusicControl } from "../components/musicControl";
@@ -8,10 +8,8 @@ export const StartPage = () => {
     backgroundImage: `url("./assets/bg-images/GameWorld.png")`,
   };
   const saveFile = localStorage.getItem("characterStats");
-  const { startSavedGame, newGame, controlMusic } = useContext(GameContext);
-  useEffect(() => {
-    controlMusic();
-  }, [controlMusic]);
+  const { startSavedGame, newGame } = useContext(GameContext);
+
   return (
     <>
       <div
