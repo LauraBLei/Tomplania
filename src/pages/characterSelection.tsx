@@ -7,7 +7,7 @@ import { Locations } from "../gameData/Enums";
 
 export const CharacterSelection = () => {
   const { setName, defaultName } = useContext(CharacterContext);
-  const { setLocation } = useContext(GameContext);
+  const { setLocation, newGame } = useContext(GameContext);
   const bgText = {
     backgroundImage: `url("./assets/bg-images/GameWorld.png")`,
   };
@@ -41,7 +41,7 @@ export const CharacterSelection = () => {
               className="play"
               onClick={() => {
                 defaultName();
-                setLocation(Locations.BlackVoid);
+                newGame();
               }}
             >
               Play

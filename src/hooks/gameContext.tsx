@@ -304,6 +304,9 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
     const userConfirmed = confirm("Are you sure you wanna save and exit?");
     if (userConfirmed) {
       save();
+      setLocation(Locations.BlackVoid);
+      setFighting(false);
+      setBgImg(LocationList[Locations.BlackVoid].media);
     }
   };
 
@@ -345,6 +348,8 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
         setActiveQuests([]);
         setInventory(new Map());
         setLocation(Locations.BlackVoid);
+        setFighting(false);
+        setBgImg(LocationList[Locations.BlackVoid].media);
       }
     } else {
       setXP(0);
@@ -353,6 +358,9 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
       setActiveQuests([]);
       setInventory(new Map());
       setLocation(Locations.BlackVoid);
+      setLocation(Locations.BlackVoid);
+      setFighting(false);
+      setBgImg(LocationList[Locations.BlackVoid].media);
     }
   };
   return (
