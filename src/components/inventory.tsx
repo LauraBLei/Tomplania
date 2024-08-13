@@ -52,6 +52,8 @@ export const Inventory = () => {
                 <ShowStat text="Attack bonus" stats={item.attack} />
                 <ShowStat text="Healing" stats={item.heal} />
                 <ShowStat text="Mana" stats={item.mana} />
+                <ShowStat text="Price" stats={item.cost} />
+
                 <div key={i + 21} className="flex gap-6">
                   {location.includes("Shop") && (
                     <button
