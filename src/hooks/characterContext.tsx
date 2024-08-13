@@ -64,7 +64,7 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
   const [name, setName] = useState("Tompe");
   const [character, setCharacter] = useState(listOfCharacters[0]);
   const [characterAttack, setCharacterAttack] = useState(10);
-  const [gold, setGold] = useState(10);
+  const [gold, setGold] = useState(1000);
   const [chest, setChest] = useState<Item | null>(null);
   const [headPiece, setHeadPiece] = useState<Item | null>(null);
   const [weapon, setWeapon] = useState<Item | null>(null);
@@ -95,32 +95,33 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
       setName("Tompe");
     }
   };
+
   const equipItem = (item: Item) => {
-    const hpBoost = item.hp ? item.hp : 0;
-    const attackBoost = item.attack ? item.attack : 0;
-    const manaBoost = item.mana ? item.mana : 0;
+    unEquipItem(item);
+
+    const hpBoost = item.hp || 0;
+    const attackBoost = item.attack || 0;
+    const manaBoost = item.mana || 0;
+
     switch (item.type) {
       case "Head":
-        unEquipItem(headPiece);
         setHeadPiece(item);
         break;
       case "Chest":
-        unEquipItem(chest);
         setChest(item);
         break;
       case "Weapon":
-        unEquipItem(weapon);
         setWeapon(item);
         break;
       default:
         console.error("Item type not found: ", item);
     }
-    setMaxHP(maxHP + hpBoost);
-    setCharacterAttack(characterAttack + attackBoost);
-    setMaxMana(MaxMana + manaBoost);
+
+    setMaxHP((prevHP) => prevHP + hpBoost);
+    setCharacterAttack((prevAttack) => prevAttack + attackBoost);
+    setMaxMana((prevMana) => prevMana + manaBoost);
     removeItem(item);
   };
-
   const consumeItem = (item: Item) => {
     // Check that the properties exists, and if not use a default value (0)
     const attackBoost = item.attack ? item.attack : 0;
@@ -138,32 +139,37 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
     removeItem(item);
   };
 
-  const unEquipItem = (item: Item | null) => {
-    // If no item is equipped, just return
-    if (item === null) {
-      return;
-    }
+  const unEquipItem = (itemType: Item) => {
+    let item: Item | null = null;
+    console.log(itemType);
 
-    const hpBoost = item.hp ? item.hp : 0;
-    const attackBoost = item.attack ? item.attack : 0;
-    const mana = item.mana ? item.mana : 0;
-
-    switch (item.type) {
+    switch (itemType.type) {
       case "Head":
+        item = headPiece;
         setHeadPiece(null);
         break;
       case "Chest":
+        item = chest;
         setChest(null);
         break;
       case "Weapon":
+        item = weapon;
         setWeapon(null);
         break;
       default:
-        console.error("Could not find item type: ", item);
+        console.error("Could not find item type: ", itemType);
+        return;
     }
-    setCharacterAttack(characterAttack - attackBoost);
-    setMaxHP(maxHP - hpBoost);
-    setMaxMana(MaxMana - mana);
+
+    if (!item) return;
+
+    const hpBoost = item.hp || 0;
+    const attackBoost = item.attack || 0;
+    const manaBoost = item.mana || 0;
+
+    setCharacterAttack((prevAttack) => prevAttack - attackBoost);
+    setMaxHP((prevHP) => prevHP - hpBoost);
+    setMaxMana((prevMana) => prevMana - manaBoost);
     addItem(item);
   };
 

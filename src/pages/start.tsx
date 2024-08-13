@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { GameContext } from "../hooks/gameContext";
-import { MusicControl } from "../components/musicControl";
 
 export const StartPage = () => {
   const bgText = {
