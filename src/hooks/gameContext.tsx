@@ -342,6 +342,7 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
         localStorage.removeItem("characterStats");
         localStorage.removeItem("Quests");
         setXP(0);
+        setMaxXP(50);
         setGold(10);
         setLvl(1);
         setActiveQuests([]);
@@ -352,6 +353,7 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
       }
     } else {
       setXP(0);
+      setMaxXP(50);
       setGold(10);
       setLvl(1);
       setActiveQuests([]);
@@ -361,6 +363,15 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
       setFighting(false);
       setBgImg(LocationList[Locations.BlackVoid].media);
     }
+    // NPCList.map((npc) => {
+    //   npc.hasVisited = false;
+    //   return npc;
+    // });
+
+    NPCList.forEach((npc) => {
+      npc.hasVisited = false;
+      return npc;
+    });
   };
   return (
     <GameContext.Provider
