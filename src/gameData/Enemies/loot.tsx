@@ -27,7 +27,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Siren Skull",
     type: "loot",
-    cost: 2,
+    cost: 4,
     description: "description",
     dropChance: 1,
     media: {
@@ -49,7 +49,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Eagle Queen Skull",
     type: "loot",
-    cost: 2,
+    cost: 5,
     description: "description",
     dropChance: 1,
     media: {
@@ -60,7 +60,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Mirewalker skull",
     type: "loot",
-    cost: 2,
+    cost: 5,
     description: "description",
     dropChance: 1,
     media: {
@@ -71,7 +71,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Grim Lurker Poison",
     type: "loot",
-    cost: 2,
+    cost: 5,
     description: "description",
     dropChance: 1,
     media: {
@@ -82,7 +82,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Marasnake Skull",
     type: "loot",
-    cost: 2,
+    cost: 5,
     description: "description",
     dropChance: 1,
     media: {
@@ -93,7 +93,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Dragon Skull",
     type: "loot",
-    cost: 10,
+    cost: 5,
     description: "description",
     dropChance: 1,
     media: {
@@ -115,7 +115,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Zu Skull",
     type: "loot",
-    cost: 1,
+    cost: 5,
     description: "The skull of a Zu",
     dropChance: 1,
     media: {
@@ -137,7 +137,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Glowfin Minnow Meat",
     type: "loot",
-    cost: 1,
+    cost: 5,
     description: "Meat from a Glowfin Minnow Fish",
     dropChance: 1,
     media: {
@@ -148,7 +148,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Hellmaw Piranha Meat",
     type: "loot",
-    cost: 1,
+    cost: 5,
     description: "Meat from a Glowfin Minnow Fish",
     dropChance: 1,
     media: {
@@ -192,7 +192,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Silver Ring ",
     type: "loot",
-    cost: 12,
+    cost: 20,
     description: "Silver Ring",
     dropChance: 0.4,
     media: {
