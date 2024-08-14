@@ -350,6 +350,7 @@ const ItemInfo = () => {
       <ShowStat text="Attack Bonus" stats={item?.attack} />
       <ShowStat text="Class:" stats={item?.job} />
       <ShowStat text="Healing:" stats={item?.heal} />
+      <ShowStat text="Mana:" stats={item?.mana} />
 
       <p className="TextDark border-2 border-black p-2">{`${item?.description}`}</p>
 
