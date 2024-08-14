@@ -106,7 +106,7 @@ export const ArmorShopInventory: Item[] = [
     name: "Arcane Robe",
     type: "Chest",
     job: "Sorcerer",
-    mana: 20,
+    hp: 20,
     cost: 60,
     media: {
       src: "./assets/items/gear/Sorcerer/arcaneRope.png",
@@ -130,7 +130,7 @@ export const ArmorShopInventory: Item[] = [
     name: "Mystic Mantle Robe",
     type: "Chest",
     job: "Sorcerer",
-    mana: 30,
+    hp: 30,
     cost: 90,
     media: {
       src: "./assets/items/gear/Sorcerer/mysticMantle.png",
