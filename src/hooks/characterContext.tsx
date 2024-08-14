@@ -181,8 +181,8 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
       if (newXp >= MaxXP) {
         const newLvl = lvl + 1;
         const overFlowXp = newXp - MaxXP;
-        const newMaxHp = maxHP + 10;
-        const newMaxMana = MaxMana + 5;
+        const newMaxHp = maxHP + 20;
+        const newMaxMana = MaxMana + 10;
 
         const newMaxXP = xpThresholds[newLvl - 1] || MaxXP;
 
