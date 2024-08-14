@@ -5,7 +5,7 @@ export const MonsterLootList: Item[] = [
   {
     name: "Feather Leaf Skeleton",
     type: "loot",
-    cost: 5,
+    cost: 2,
     description: "description",
     dropChance: 1,
     media: {
