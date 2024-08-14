@@ -102,6 +102,7 @@ export const Inventory = () => {
             alt={character.media.src}
           />
           <h2 className="Headline text-blue">{name}</h2>
+          <h2 className="Headline text-blue">{character.job}</h2>
         </div>
         <div className="flex flex-col gap-5 mt-5 items-center">
           <Popup
