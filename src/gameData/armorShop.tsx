@@ -154,7 +154,7 @@ export const ArmorShopInventory: Item[] = [
 
   {
     name: "Cotton Robe",
-    type: "chest",
+    type: "Chest",
     job: "Wizard",
     hp: 15,
     cost: 35,
@@ -167,7 +167,7 @@ export const ArmorShopInventory: Item[] = [
   },
   {
     name: "Cotton Hood",
-    type: "head",
+    type: "Head",
     job: "Wizard",
     mana: 15,
     cost: 30,
@@ -179,7 +179,7 @@ export const ArmorShopInventory: Item[] = [
   },
   {
     name: "Enchanted Cloak",
-    type: "chest",
+    type: "Chest",
     job: "Wizard",
     hp: 25,
     cost: 65,
@@ -192,7 +192,7 @@ export const ArmorShopInventory: Item[] = [
   },
   {
     name: "Enchanted Hood",
-    type: "head",
+    type: "Head",
     job: "Wizard",
     mana: 25,
     cost: 55,
@@ -204,7 +204,7 @@ export const ArmorShopInventory: Item[] = [
   },
   {
     name: "Supreme Robe",
-    type: "chest",
+    type: "Chest",
     job: "Wizard",
     hp: 35,
     cost: 95,
@@ -216,7 +216,7 @@ export const ArmorShopInventory: Item[] = [
   },
   {
     name: "Supreme Hood",
-    type: "head",
+    type: "Head",
     job: "Wizard",
     mana: 35,
     cost: 85,
