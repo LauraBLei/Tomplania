@@ -203,8 +203,7 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
   };
 
   const removeQuest = (quest: Quest) => {
-    activeQuests.filter;
-    setActiveQuests(activeQuests.filter((q) => q.name != quest.name));
+    setActiveQuests(activeQuests.filter((q) => q.name !== quest.name));
   };
 
   const deliverQuest = (quest: Quest) => {
@@ -311,9 +310,9 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
   };
 
   const startSavedGame = () => {
-    const fromLocal = localStorage.getItem("characterStats");
-    if (fromLocal) {
-      const stats = JSON.parse(fromLocal);
+    const saveFile = localStorage.getItem("characterStats");
+    if (saveFile) {
+      const stats = JSON.parse(saveFile);
       const deserializedInventory = new Map<Item, number>(
         stats.inventory.map((entry: [Item, number]) => [entry[0], entry[1]])
       );
