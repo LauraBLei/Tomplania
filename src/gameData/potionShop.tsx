@@ -6,7 +6,7 @@ export const PotionShopInventory: Item[] = [
   {
     name: "Healing",
     type: "Potion",
-    cost: 20,
+    cost: 5,
     hp: 0,
     heal: 50,
     attack: 0,
@@ -14,12 +14,12 @@ export const PotionShopInventory: Item[] = [
       src: "./assets/items/potions/healing.png",
       alt: "Image of a blue potion bottle",
     },
-    description: "That is a standard healing potion! It will heal you 100 HP!",
+    description: "That is a standard healing potion! It will heal you 50 HP!",
   },
   {
     name: "Valor Vial",
     type: "Potion",
-    cost: 250,
+    cost: 25,
     hp: 10,
     heal: 100,
     attack: 10,
@@ -33,9 +33,9 @@ export const PotionShopInventory: Item[] = [
   {
     name: "Wrath's Elixir",
     type: "Potion",
-    cost: 100,
-    hp: -50,
-    heal: -50,
+    cost: 30,
+    hp: -10,
+    heal: -10,
     attack: 30,
     media: {
       src: "./assets/items/potions/greenPotion.png",
@@ -47,7 +47,7 @@ export const PotionShopInventory: Item[] = [
   {
     name: "Life Essence",
     type: "Potion",
-    cost: 150,
+    cost: 15,
     hp: 5,
     heal: 150,
     attack: 0,
@@ -61,7 +61,7 @@ export const PotionShopInventory: Item[] = [
   {
     name: "Mana Potion",
     type: "Potion",
-    cost: 50,
+    cost: 5,
     mana: 100,
     media: {
       src: "./assets/items/potions/Elixir.png",
