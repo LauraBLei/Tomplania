@@ -58,7 +58,7 @@ export const MonsterLootList: Item[] = [
     },
   },
   {
-    name: "Mirewalker skull",
+    name: "Mirewalker Skull",
     type: "loot",
     cost: 5,
     description: "description",
