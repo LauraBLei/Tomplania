@@ -7,7 +7,7 @@ import { MonsterLootList } from "../gameData/Enemies/loot";
 import { NewQuestItems } from "../gameData/quests/questItems";
 import { Skill } from "../gameData/character/skills";
 
-const xpThresholds = [100, 300, 600, 1000, 1500, 2100];
+const xpThresholds = [100, 300, 500, 850, 1200, 1800];
 
 type characterContextType = {
   name: string;
