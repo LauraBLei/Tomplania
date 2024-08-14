@@ -122,6 +122,7 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
     setMaxMana((prevMana) => prevMana + manaBoost);
     removeItem(item);
   };
+
   const consumeItem = (item: Item) => {
     // Check that the properties exists, and if not use a default value (0)
     const attackBoost = item.attack ? item.attack : 0;

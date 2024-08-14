@@ -137,15 +137,20 @@ const NormalTop = () => {
             alt="icon of a settings wheel"
           />
         </summary>
-        <div className="InformationUI flex flex-col gap-4 text-center overflow-y-auto w-full bg-beige px-9 py-4 border-8 border-blue h-auto ">
+        <div className="InformationUI max-h-[600px] flex flex-col gap-4 text-center overflow-y-auto w-full bg-beige px-9 py-4 border-8 border-blue h-auto ">
           <div className="flex items-center justify-center gap-5">
             <img
-              className="icon"
+              className="w-8"
               src="./assets/bg-images/musicBlue.png"
               alt="Music Icon"
             />
             <MusicControl />
           </div>
+
+          <details>
+            <summary className="button list-none">Tips & Hints</summary>
+            <TipsAndHints />
+          </details>
           <button className="button" onClick={() => saveGame()}>
             Save Game
           </button>
@@ -367,5 +372,85 @@ const ItemInfo = () => {
         </button>
       </div>
     </div>
+  );
+};
+
+const TipsAndHints = () => {
+  return (
+    <div className="mx-5 my-4 flex flex-col gap-4">
+      <details>
+        <InfoBox summary="Tavern" />
+        <div className="mx-4 text-left flex flex-col gap-4 mt-3">
+          <p className="TextDark">
+            In the tavern you will find 3 different NPC's, other than that it is
+            the place you will respawn if you die.
+          </p>
+          <p className="TextDark">
+            The Tavern has a room, if you go to that room, you will heal up, and
+            regain your mana.
+          </p>
+        </div>
+      </details>
+      <details>
+        <InfoBox summary="Combat" />
+        <div className="mx-4 text-left flex flex-col gap-4 mt-3">
+          <p className="TextDark">You will gain one skill per level.</p>
+          <p className="TextDark">
+            You will gain mana, hp and attack bonus when levelling.
+          </p>
+          <p className="TextDark">
+            As you level the fights will get harder and you might need potions
+            to get through the fights. These can be bought at the potion shop in
+            Eldervale, Willowbrook Lane.
+          </p>
+        </div>
+      </details>
+      <details>
+        <InfoBox summary="Shops" />
+        <div className="mx-4 text-left flex flex-col gap-4 mt-3">
+          <p className="TextDark">Potion Shop: Eldervale - Willowbrook Lane</p>
+          <p className="TextDark">Armor Shop: Aranthria City - Emerald Plaza</p>
+          <p className="TextDark">Blacksmith Shop: Riverbend Harbor - Harbor</p>
+        </div>
+      </details>
+      <details>
+        <InfoBox summary="NPC" />
+        <div className="mx-4 text-left flex flex-col gap-4 mt-3">
+          <p className="TextDark">Janus: Circle Of The Gods</p>
+          <p className="TextDark">Frederik: Eldervale - Willowbrook Lane</p>
+          <p className="TextDark">
+            Esther Willow: Aranthria City - Emerald Plaza
+          </p>
+          <p className="TextDark">Eloween: Whispering Woods - Eloweens Cabin</p>
+          <p className="TextDark">
+            Dorian Blackwood: Aranthria City - Ironwood Avenue - Tavern
+          </p>
+          <p className="TextDark">
+            Bård: Aranthria City - Ironwood Avenue - Tavern
+          </p>
+          <p className="TextDark">
+            Ella: Aranthria City - Ironwood Avenue - Tavern
+          </p>
+          <p className="TextDark">Lums: Harbor Path </p>
+        </div>
+      </details>
+    </div>
+  );
+};
+
+interface InfoBox {
+  summary: string;
+}
+
+const InfoBox = ({ summary }: InfoBox) => {
+  return (
+    <summary className="flex cursor-pointer transition-transform scale-95 ease-in-out duration-150 hover:scale-100 ">
+      <img
+        className=""
+        src="./assets/bg-images/locationDot.png"
+        alt="location dot"
+      />
+      <p className="Headline text-blue">{summary}</p>{" "}
+    </summary>
   );
 };
