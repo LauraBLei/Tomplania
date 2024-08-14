@@ -64,7 +64,7 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
   const [name, setName] = useState("Tompe");
   const [character, setCharacter] = useState(listOfCharacters[0]);
   const [characterAttack, setCharacterAttack] = useState(10);
-  const [gold, setGold] = useState(1000);
+  const [gold, setGold] = useState(10);
   const [chest, setChest] = useState<Item | null>(null);
   const [headPiece, setHeadPiece] = useState<Item | null>(null);
   const [weapon, setWeapon] = useState<Item | null>(null);
