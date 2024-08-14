@@ -132,11 +132,12 @@ export const CharacterProvider = ({ children }: ContextProviderProps) => {
 
     const newHp = currentHP + heal;
     const newMaxHp = maxHP + MaxHpBoost;
+    const newMana = currentMana + mana;
 
     setMaxHP(newMaxHp);
     setCurrentHP(newHp >= newMaxHp ? newMaxHp : newHp);
     setCharacterAttack(characterAttack + attackBoost);
-    setCurrentMana(currentMana + mana);
+    setCurrentMana(newMana >= MaxMana ? MaxMana : newMana);
     removeItem(item);
   };
 

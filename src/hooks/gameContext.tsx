@@ -112,6 +112,7 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
     setSkill,
     name,
     setName,
+    characterAttack,
   } = useContext(CharacterContext);
 
   const controlMusic = (enemy?: MonsterNames, fight: boolean = false) => {
@@ -171,7 +172,7 @@ export const GameProvider = ({ children }: ContextProviderProps) => {
       alert("You do not have enough Mana");
       return;
     }
-    const newMonsterHP = Math.max(MonsterHP - attack, 0);
+    const newMonsterHP = Math.max(MonsterHP - (attack + characterAttack), 0);
     const newCurrentHp = Math.max(currentHP - damage, 0);
     setCurrentMana((prevMana) => Math.max(prevMana - mana, 0));
     setCurrentHP(newCurrentHp);
