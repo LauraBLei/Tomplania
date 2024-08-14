@@ -87,6 +87,10 @@ export const CreditPage = () => {
               <p className="TextDark">Panchi</p>
               <p className="TextDark">Ranta</p>
               <p className="TextDark">Raiyan</p>
+              <p className="TextDark">Anne</p>
+              <p className="TextDark">Herman</p>
+              <p className="TextDark">Vicktoria</p>
+              <p className="TextDark">Andreas</p>
             </div>
             <p className="TextDark">
               Your feedback and testing were crucial in refining the game.
