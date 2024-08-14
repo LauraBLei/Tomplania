@@ -7,11 +7,12 @@ import { ArmorShopInventory } from "../gameData/armorShop";
 import { PotionShopInventory } from "../gameData/potionShop";
 import { Item } from "../gameData/objects/Item";
 import { BlacksmithShopInventory } from "../gameData/blackSmith";
+import { CharacterContext } from "../hooks/characterContext";
 
 export const Shop = () => {
   const { location, PrevLocation, setLocation, setBgImg, setItem } =
     useContext(GameContext);
-
+  const { gold } = useContext(CharacterContext);
   const currentLocation = LocationList[location];
 
   return (
@@ -35,6 +36,14 @@ export const Shop = () => {
       </div>
       <div className="flex  flex-col justify-center items-center w-full max-h-[500px]">
         <p className="TextDark">{currentLocation.text}</p>
+        <div className="flex justify-center items-center">
+          <p className="Headline text-blue">{gold}</p>
+          <img
+            className="w-[30px] lg:w-[50px]"
+            src="./assets/items/coins/gold.png"
+            alt="gold coins"
+          />
+        </div>
         <div className="flex gap-4  mt-4 flex-wrap px-4 lg:px-9 py-4 overflow-y-auto border-2 border-black max-w-[850px] ">
           {location === Locations.ArmorShop ? (
             <MakeInventoryItems list={ArmorShopInventory} />
